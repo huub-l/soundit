@@ -5,8 +5,6 @@
         {!! $title !!}
       </a>
     </h2>
-
-    @include('partials/entry-meta')
   </header>
 
   <div class="entry-summary">

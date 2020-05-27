@@ -1,15 +1,7 @@
 @include('partials.header')
-
-<div class="container">
-  <main class="main">
-    @yield('content')
-  </main>
-
-  @hasSection('sidebar')
-    <aside class="sidebar">
-      @yield('sidebar')
-    </aside>
-  @endif
-</div>
-
+<main data-barba="container" class="main grid-container" data-barba-namespace="{{ $templateName }}">
+  <div data-scroll-container>
+     @yield('content')
+  </div>
+</main>
 @include('partials.footer')

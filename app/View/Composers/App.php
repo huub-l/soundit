@@ -24,6 +24,7 @@ class App extends Composer
     {
         return [
             'siteName' => $this->siteName(),
+            'templateName' => $this->templateName()
         ];
     }
 
@@ -35,5 +36,20 @@ class App extends Composer
     public function siteName()
     {
         return get_bloginfo('name', 'display');
+    }
+
+    public function templateName() {
+      global $template;
+      if (is_post_type_archive()) {
+          return 'archive_' .get_post_type();
+      } elseif (is_single()) {
+          return 'single_' . get_post_type();
+      } elseif (is_front_page()) {
+          return 'home';
+      } elseif(is_home()) {
+          return 'blog';
+      } else {
+          return basename( str_replace('-', '_', $template) ,'.blade.php' );
+      }
     }
 }

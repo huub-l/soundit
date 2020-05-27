@@ -1,5 +1,5 @@
 <header class="banner">
-  <div class="container">
+  <div class="grid-container">
     <a class="brand" href="{{ home_url('/') }}">
       {{ $siteName }}
     </a>

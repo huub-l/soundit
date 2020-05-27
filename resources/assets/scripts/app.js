@@ -1,9 +1,5 @@
-/**
- * External Dependencies
- */
-import 'jquery';
-import 'bootstrap';
+import barbaInit from './barba-setup';
 
-$(document).ready(() => {
-  // console.log('Hello world');
+document.addEventListener('DOMContentLoaded', () => {
+  barbaInit()
 });

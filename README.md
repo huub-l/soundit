@@ -22,9 +22,12 @@
 
 ## Libs incluídas
 
+- [Normalize CSS](https://necolas.github.io/normalize.css/) para reset dos estilos
 - [Foundation XY Grid](https://get.foundation/sites/docs/xy-grid.html) para Grid System
 - [Locomotive Scroll](https://github.com/locomotivemtl/locomotive-scroll) para Smooth Scroll
 - [Barba JS](https://barba.js.org/) para transição de páginas em PJAX
+- [GSAP](https://greensock.com/gsap/) para animações em JS
+- GSAP Plugins - SplitText
 
 ## Requirements
 
