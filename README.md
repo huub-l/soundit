@@ -1,7 +1,7 @@
 <p align="center">
   <span style="font-size:96px;">📦</span>
-  <h1 align="center">Warehouse</h1>
 </p>
+ <h1 align="center">Warehouse</h1>
 
 <p align="center">
   <strong>WordPress starter theme baseado no Sage 10</strong>
