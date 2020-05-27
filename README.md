@@ -84,7 +84,7 @@ Editar `app/setup.php` para habilitar ou desabilitar features do tema, como menu
 ## Desenvolvimento do tema
 
 - Correr `yarn` na pasta do tema para instalar dependências
-- atualizar `webpack.mix.js` com o URL de desenvolvimento local (ex: warehouse.test)
+- Atualizar `webpack.mix.js` com o URL de desenvolvimento local (ex: warehouse.test)
 
 ### Build commands
 
