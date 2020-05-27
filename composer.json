@@ -2,7 +2,7 @@
   "name": "roots/sage",
   "type": "wordpress-theme",
   "license": "MIT",
-  "description": "WordPress starter theme with a modern development workflow",
+  "description": "Armazém Criativo Wordpress Starter Theme ",
   "homepage": "https://roots.io/sage/",
   "authors": [
     {
@@ -40,6 +40,7 @@
   },
   "require": {
     "php": "^7.2.5",
+    "log1x/sage-directives": "^1.1",
     "roots/acorn": "^1.0.1"
   },
   "require-dev": {
