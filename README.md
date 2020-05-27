@@ -1,95 +1,40 @@
 <p align="center">
-  <a href="https://roots.io/sage/">
-    <img alt="Sage" src="https://cdn.roots.io/app/uploads/logo-sage.svg" height="100">
-  </a>
+  <span style="font-size:96px;">📦</span>
+  <h1 align="center">Warehouse</h1>
 </p>
 
 <p align="center">
-  <a href="LICENSE.md">
-    <img alt="MIT License" src="https://img.shields.io/github/license/roots/sage?color=%23525ddc&style=flat-square" />
-  </a>
-
-  <a href="https://packagist.org/packages/roots/sage">
-    <img alt="Packagist" src="https://img.shields.io/packagist/v/roots/sage.svg?style=flat-square" />
-  </a>
-
-  <a href="https://circleci.com/gh/roots/sage">
-    <img alt="Build Status" src="https://img.shields.io/circleci/build/gh/roots/sage?style=flat-square" />
-  </a>
-
-  <a href="https://twitter.com/rootswp">
-    <img alt="Follow Roots" src="https://img.shields.io/twitter/follow/rootswp.svg?style=flat-square&color=1da1f2" />
-  </a>
+  <strong>WordPress starter theme baseado no Sage 10</strong>
 </p>
 
 <p align="center">
-  <strong>WordPress starter theme with a modern development workflow</strong>
-  <br />
-  Built with ❤️
+  <a href="https://roots.io/docs/sage/9.x/installation/">Documentação Sage 9</a></a>
 </p>
-
-<p align="center">
-  <a href="https://roots.io">Official Website</a> | <a href="https://roots.io/docs/sage/9.x/installation/">Documentation</a> | <a href="CHANGELOG.md">Change Log</a>
-</p>
-
-## Supporting
-
-**Sage** is an open source project and completely free to use.
-
-However, the amount of effort needed to maintain and develop new features and products within the Roots ecosystem is not sustainable without proper financial backing. If you have the capability, please consider donating using the links below:
-
-<div align="center">
-
-[![Donate via Patreon](https://img.shields.io/badge/donate-patreon-orange.svg?style=flat-square&logo=patreon")](https://www.patreon.com/rootsdev)
-[![Donate via PayPal](https://img.shields.io/badge/donate-paypal-blue.svg?style=flat-square&logo=paypal)](https://www.paypal.me/rootsdev)
-
-</div>
-
-## Overview
-
-Sage is a WordPress starter theme with a modern development workflow.
-
-**Sage 10 is in active development and is currently in alpha. The `master` branch tracks Sage 10 development. If you want a stable version, use the [latest Sage 9 release](https://github.com/roots/sage/releases/latest).**
 
 ## Features
 
-* Sass for stylesheets
-* Modern JavaScript
-* [Laravel Mix](https://github.com/JeffreyWay/laravel-mix) for compiling assets and concatenating and minifying files
-* [Browsersync](http://www.browsersync.io/) for synchronized browser testing
-* [Blade](https://laravel.com/docs/5.8/blade) as a templating engine
-* [Bootstrap 4](https://getbootstrap.com/) (optional)
+- SCSS
+- ES6
+- [Laravel Mix](https://github.com/JeffreyWay/laravel-mix) para compilar assets e concatenating e minificar ficheiros
+- [Browsersync](http://www.browsersync.io/) para browser testing sincronizado
+- [Blade](https://laravel.com/docs/5.8/blade) como template engine
+- [Sage Directives](https://github.com/Log1x/sage-directives) Blade Directives para WordPress, ACF e utilidades
 
-See a working example at [roots-example-project.com](https://roots-example-project.com/).
+## Libs incluídas
+
+- [Foundation XY Grid](https://get.foundation/sites/docs/xy-grid.html) para Grid System
+- [Locomotive Scroll](https://github.com/locomotivemtl/locomotive-scroll) para Smooth Scroll
+- [Barba JS](https://barba.js.org/) para transição de páginas em PJAX
 
 ## Requirements
 
-Make sure all dependencies have been installed before moving on:
+- [WordPress](https://wordpress.org/) >= 5.4
+- [PHP](https://secure.php.net/manual/en/install.php) >= 7.2.0 (with [`php-mbstring`](https://secure.php.net/manual/en/book.mbstring.php) enabled)
+- [Composer](https://getcomposer.org/download/)
+- [Node.js](http://nodejs.org/) >= 8.0.0
+- [Yarn](https://yarnpkg.com/en/docs/install)
 
-* [WordPress](https://wordpress.org/) >= 5.4
-* [PHP](https://secure.php.net/manual/en/install.php) >= 7.2.0 (with [`php-mbstring`](https://secure.php.net/manual/en/book.mbstring.php) enabled)
-* [Composer](https://getcomposer.org/download/)
-* [Node.js](http://nodejs.org/) >= 8.0.0
-* [Yarn](https://yarnpkg.com/en/docs/install)
-
-## Theme installation
-
-Install Sage using Composer from your WordPress themes directory (replace `your-theme-name` below with the name of your theme):
-
-```sh
-# @ app/themes/ or wp-content/themes/
-$ composer create-project roots/sage your-theme-name
-```
-
-To install the latest development version of Sage, add `dev-master` to the end of the command:
-
-```shell
-$ composer create-project roots/sage your-theme-name dev-master
-```
-
-During theme installation you will have options to update `style.css` theme headers, select a CSS framework, and configure Browsersync.
-
-## Theme structure
+## Estrutura do tema
 
 ```sh
 themes/your-theme-name/   # → Root of your Sage based theme
@@ -129,41 +74,21 @@ themes/your-theme-name/   # → Root of your Sage based theme
 └── webpack.mix.js        # → Laravel Mix configuration
 ```
 
-## Theme setup
+## Setup
 
-Edit `app/setup.php` to enable or disable theme features, setup navigation menus, post thumbnail sizes, and sidebars.
+Editar `app/setup.php` para habilitar ou desabilitar features do tema, como menus, tamanhos de thumbnail, etc.
 
-## Theme development
+## Desenvolvimento do tema
 
-* Run `yarn` from the theme directory to install dependencies
-* Update `webpack.mix.js` with your local dev URL
+- Correr `yarn` na pasta do tema para instalar dependências
+- atualizar `webpack.mix.js` com o URL de desenvolvimento local (ex: warehouse.test)
 
 ### Build commands
 
-* `yarn start` — Compile assets when file changes are made, start Browsersync session
-* `yarn build` — Compile and optimize the files in your assets directory
-* `yarn build:production` — Compile assets for production
+- `yarn start` — Compila assets quando são feitas atualizações nos ficheiros e começa uma sessão do Browsersync
+- `yarn build` — Compila e optimiza os ficheiros na pasta assets
+- `yarn build:production` — Compila os assets para produção
 
-## Documentation
+## Documentação
 
-* [Sage documentation](https://roots.io/sage/docs/)
-
-## Contributing
-
-Contributions are welcome from everyone. We have [contributing guidelines](https://github.com/roots/guidelines/blob/master/CONTRIBUTING.md) to help you get started.
-
-## Sage sponsors
-
-Help support our open-source development efforts by [becoming a patron](https://www.patreon.com/rootsdev).
-
-<a href="https://kinsta.com/?kaid=OFDHAJIXUDIV"><img src="https://cdn.roots.io/app/uploads/kinsta.svg" alt="Kinsta" width="200" height="150"></a> <a href="https://k-m.com/"><img src="https://cdn.roots.io/app/uploads/km-digital.svg" alt="KM Digital" width="200" height="150"></a> <a href="https://carrot.com/"><img src="https://cdn.roots.io/app/uploads/carrot.svg" alt="Carrot" width="200" height="150"></a>
-
-## Community
-
-Keep track of development and community news.
-
-* Participate on the [Roots Discourse](https://discourse.roots.io/)
-* Follow [@rootswp on Twitter](https://twitter.com/rootswp)
-* Read and subscribe to the [Roots Blog](https://roots.io/blog/)
-* Subscribe to the [Roots Newsletter](https://roots.io/subscribe/)
-* Listen to the [Roots Radio podcast](https://roots.io/podcast/)
+- [Sage 9](https://roots.io/sage/docs/) (a ser atualizado para a v10)
