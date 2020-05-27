@@ -29,7 +29,7 @@
 - [GSAP](https://greensock.com/gsap/) para animações em JS
 - GSAP Plugins - SplitText
 
-## Requirements
+## Requisitos
 
 - [WordPress](https://wordpress.org/) >= 5.4
 - [PHP](https://secure.php.net/manual/en/install.php) >= 7.2.0 (with [`php-mbstring`](https://secure.php.net/manual/en/book.mbstring.php) enabled)
