@@ -19,15 +19,16 @@
 - [Browsersync](http://www.browsersync.io/) para browser testing sincronizado
 - [Blade](https://laravel.com/docs/5.8/blade) como template engine
 - [Sage Directives](https://github.com/Log1x/sage-directives) Blade Directives para WordPress, ACF e utilidades
+- [Clean Up](https://github.com/roots/soil/blob/master/modules/clean-up.php) de várias features do WordPress
 
 ## Libs incluídas
 
 - [Normalize CSS](https://necolas.github.io/normalize.css/) para reset dos estilos
-- [Foundation XY Grid](https://get.foundation/sites/docs/xy-grid.html) para Grid System
+- [Foundation for Sites](https://get.foundation/sites/docs/)
 - [Locomotive Scroll](https://github.com/locomotivemtl/locomotive-scroll) para Smooth Scroll
-- [Barba JS](https://barba.js.org/) para transição de páginas em PJAX
+- [Highway JS](https://highway.js.org/) para transição de páginas em PJAX
 - [GSAP](https://greensock.com/gsap/) para animações em JS
-- GSAP Plugins - SplitText
+- GSAP Bonus Plugins (Todos)
 
 ## Requirements
 
@@ -92,6 +93,6 @@ Editar `app/setup.php` para habilitar ou desabilitar features do tema, como menu
 - `yarn build` — Compila e optimiza os ficheiros na pasta assets
 - `yarn build:production` — Compila os assets para produção
 
-## Documentação
+## Documentação Sage
 
 - [Sage 9](https://roots.io/sage/docs/) (a ser atualizado para a v10)

@@ -1,9 +1,8 @@
-<header class="banner">
+<header data-scroll-section>
   <div class="grid-container">
     <a class="brand" href="{{ home_url('/') }}">
       {{ $siteName }}
     </a>
-
     <nav class="nav-primary">
       @if (has_nav_menu('primary_navigation'))
         {!! wp_nav_menu(['theme_location' => 'primary_navigation', 'menu_class' => 'nav', 'echo' => false]) !!}

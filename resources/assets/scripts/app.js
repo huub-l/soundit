@@ -1,5 +1,5 @@
-import barbaInit from './barba-setup';
+import H from './highwayjs'
 
-document.addEventListener('DOMContentLoaded', () => {
-  barbaInit()
+window.addEventListener('DOMContentLoaded', () => {
+  new H()
 });

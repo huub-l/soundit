@@ -10,7 +10,6 @@ module.exports = {
     es6: true,
     amd: true,
     browser: true,
-    jquery: true
   },
   parserOptions: {
     ecmaFeatures: {

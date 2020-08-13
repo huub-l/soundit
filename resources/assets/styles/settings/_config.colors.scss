@@ -4,22 +4,23 @@
 
 // Palette
 // =============================================================================
-$white: #FFFFFF;
+$white: #ffffff;
 $black: #000000;
+$color-primary: #3860ff;
 
 // Specific
 // =============================================================================
 // Link
-$link-color:       #1A0DAB;
-$link-focus-color: #1A0DAB;
-$link-hover-color: darken(#1A0DAB, 10%);
+$link-color: $color-primary;
+$link-focus-color: $color-primary;
+$link-hover-color: darken($color-primary, 10%);
 // Selection
-$selection-text-color:       #3297FD;
-$selection-background-color: #FFFFFF;
+$selection-text-color: $color-primary;
+$selection-background-color: #ffffff;
 
 // Social Colors
 // =============================================================================
-$facebook-color:  #3B5998;
-$instagram-color: #E1306C;
-$youtube-color:   #CD201F;
-$twitter-color:   #1DA1F2;
+$facebook-color: #3b5998;
+$instagram-color: #e1306c;
+$youtube-color: #cd201f;
+$twitter-color: #1da1f2;

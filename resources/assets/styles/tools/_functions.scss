@@ -9,23 +9,23 @@
 // @return {Number} Scalable pixel value in EMs.
 //
 @function em($size, $base: $font-size) {
-    @if (type-of($size) == number) {
-        @if (unit($size) != "px") {
-            @error "`#{$size}` needs to be a pixel value.";
-        }
-    } @else {
-        @error "`#{$size}` needs to be a number.";
+  @if (type-of($size) == number) {
+    @if (unit($size) != "px") {
+      @error "`#{$size}` needs to be a pixel value.";
     }
+  } @else {
+    @error "`#{$size}` needs to be a number.";
+  }
 
-    @if (type-of($base) == number) {
-        @if (unit($base) != "px") {
-            @error "`#{$base}` needs to be a pixel value.";
-        }
-    } @else {
-        @error "`#{$base}` needs to be a number.";
+  @if (type-of($base) == number) {
+    @if (unit($base) != "px") {
+      @error "`#{$base}` needs to be a pixel value.";
     }
+  } @else {
+    @error "`#{$base}` needs to be a number.";
+  }
 
-    @return ($size / $base) * 1em;
+  @return ($size / $base) * 1em;
 }
 
 //
@@ -36,23 +36,23 @@
 // @return {Number} Scalable pixel value in REMs.
 //
 @function rem($size, $base: $font-size) {
-    @if (type-of($size) == number) {
-        @if (unit($size) != "px") {
-            @error "`#{$size}` needs to be a pixel value.";
-        }
-    } @else {
-        @error "`#{$size}` needs to be a number.";
+  @if (type-of($size) == number) {
+    @if (unit($size) != "px") {
+      @error "`#{$size}` needs to be a pixel value.";
     }
+  } @else {
+    @error "`#{$size}` needs to be a number.";
+  }
 
-    @if (type-of($base) == number) {
-        @if (unit($base) != "px") {
-            @error "`#{$base}` needs to be a pixel value.";
-        }
-    } @else {
-        @error "`#{$base}` needs to be a number.";
+  @if (type-of($base) == number) {
+    @if (unit($base) != "px") {
+      @error "`#{$base}` needs to be a pixel value.";
     }
+  } @else {
+    @error "`#{$base}` needs to be a number.";
+  }
 
-    @return ($size / $base) * 1rem;
+  @return ($size / $base) * 1rem;
 }
 
 //
@@ -64,7 +64,7 @@
 // @return {Number} A percentage.
 //
 @function span($number) {
-    @return percentage($number);
+  @return percentage($number);
 }
 
 //
@@ -76,17 +76,14 @@
 // @return {Boolean}
 // @access private
 //
-@function list-contains(
-    $list,
-    $values...
-) {
-    @each $value in $values {
-        @if type-of(index($list, $value)) != "number" {
-            @return false;
-        }
+@function list-contains($list, $values...) {
+  @each $value in $values {
+    @if type-of(index($list, $value)) != "number" {
+      @return false;
     }
+  }
 
-    @return true;
+  @return true;
 }
 
 //
@@ -96,13 +93,14 @@
 // @return {String|Null} Returns `!important` or NULL.
 //
 @function important($flag: false) {
-    @if ($flag == true) {
-        @return !important;
-    } @elseif ($important == false) {
-        @return null;
-    } @else {
-        @error "`#{$flag}` needs to be `true` or `false`."
-    }
+  @if ($flag == true) {
+    @return !important;
+  }
+  @elseif ($important == false) {
+    @return null;
+  } @else {
+    @error "`#{$flag}` needs to be `true` or `false`.";
+  }
 }
 
 //
@@ -112,7 +110,7 @@
 // @return   {Boolean} If the $context is set to "editor".
 //
 @function is-editor() {
-    @return ('editor' == $context);
+  @return ("editor" == $context);
 }
 
 //
@@ -122,7 +120,7 @@
 // @return   {Boolean} If the $context is set to "frontend".
 //
 @function is-frontend() {
-    @return ('frontend' == $context);
+  @return ("frontend" == $context);
 }
 
-$context: 'frontend' !default;
+$context: "frontend" !default;

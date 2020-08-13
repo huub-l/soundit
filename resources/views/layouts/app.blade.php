@@ -1,7 +1,10 @@
-@include('partials.header')
-<main data-barba="container" class="main grid-container" data-barba-namespace="{{ $templateName }}">
-  <div data-scroll-container>
-     @yield('content')
-  </div>
-</main>
-@include('partials.footer')
+<div id="transition"></div>
+<div data-scroll-container>
+  @include('partials.header')
+  <main class="grid-container" data-scroll-section data-router-wrapper>
+    <div data-router-view="{{ $templateName }}">
+      @yield('content')
+    </div>
+  </main>
+  @include('partials.footer')
+</div>

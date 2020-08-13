@@ -7,13 +7,11 @@
     <?php wp_head(); ?>
   </head>
 
-  <body data-barba="wrapper" <?php body_class(); ?>>
+  <body <?php body_class(); ?>>
     <?php wp_body_open(); ?>
     <?php do_action('get_header'); ?>
 
-    <div id="app">
-      <?php echo \Roots\view(\Roots\app('sage.view'), \Roots\app('sage.data'))->render(); ?>
-    </div>
+    <?php echo \Roots\view(\Roots\app('sage.view'), \Roots\app('sage.data'))->render(); ?>
 
     <?php do_action('get_footer'); ?>
     <?php wp_footer(); ?>
