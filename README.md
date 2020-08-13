@@ -1,7 +1,7 @@
 <p align="center">
   <span style="font-size:96px;">📦</span>
-  <h1 align="center">Warehouse</h1>
 </p>
+ <h1 align="center">Warehouse</h1>
 
 <p align="center">
   <strong>WordPress starter theme baseado no Sage 10</strong>
@@ -30,7 +30,7 @@
 - [GSAP](https://greensock.com/gsap/) para animações em JS
 - GSAP Bonus Plugins (Todos)
 
-## Requirements
+## Requisitos
 
 - [WordPress](https://wordpress.org/) >= 5.4
 - [PHP](https://secure.php.net/manual/en/install.php) >= 7.2.0 (with [`php-mbstring`](https://secure.php.net/manual/en/book.mbstring.php) enabled)
@@ -85,7 +85,7 @@ Editar `app/setup.php` para habilitar ou desabilitar features do tema, como menu
 ## Desenvolvimento do tema
 
 - Correr `yarn` na pasta do tema para instalar dependências
-- atualizar `webpack.mix.js` com o URL de desenvolvimento local (ex: warehouse.test)
+- Atualizar `webpack.mix.js` com o URL de desenvolvimento local (ex: warehouse.test)
 
 ### Build commands
 
