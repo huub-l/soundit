@@ -51,6 +51,8 @@ function disable_emoji_feature() {
 
 }
 
+add_action('init', 'disable_emoji_feature');
+
 function disable_emojis_tinymce( $plugins ) {
 	if( is_array($plugins) ) {
 		$plugins = array_diff( $plugins, array( 'wpemoji' ) );
@@ -58,7 +60,7 @@ function disable_emojis_tinymce( $plugins ) {
 	return $plugins;
 }
 
-add_action('init', 'disable_emoji_feature');
+
 
 function head_cleanup() {
   // Originally from https://wpengineer.com/1438/wordpress-header/
@@ -132,22 +134,6 @@ function clean_style_tag($input) {
   return '<link rel="stylesheet" href="' . $matches[2][0] . '"' . $media . '>' . "\n";
 }
 add_filter('style_loader_tag', 'clean_style_tag');
-
-/**
- * Clean up output of <script> tags
- */
-function clean_script_tag($input) {
-  $input = str_replace("type='text/javascript' ", '', $input);
-  $input = \preg_replace_callback(
-    '/document.write\(\s*\'(.+)\'\s*\)/is',
-    function ($m) {
-      return str_replace($m[1], addcslashes($m[1], '"'), $m[0]);
-    },
-    $input
-  );
-  return str_replace("'", '"', $input);
-}
-add_filter('script_loader_tag', 'clean_script_tag');
 
 /**
  * Add and remove body_class() classes
