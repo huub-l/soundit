@@ -49,7 +49,7 @@ class App extends Composer
       } elseif(is_home()) {
           return 'blog';
       } else {
-          return basename( str_replace('-', '_', $template) ,'.blade.php' );
+          return basename( str_replace('-', '_', get_page_template()) ,'.blade.php' );
       }
     }
 }
