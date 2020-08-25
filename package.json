@@ -48,7 +48,7 @@
   "dependencies": {
     "@dogstudio/highway": "^2.2.1",
     "foundation-sites": "^6.6.3",
-    "gsap": "file:gsap-bonus.tgz",
+    "gsap": "./gsap-bonus.tgz",
     "locomotive-scroll": "https://github.com/locomotivemtl/locomotive-scroll.git#v4",
     "whatwg-fetch": "^3.4.0"
   }
