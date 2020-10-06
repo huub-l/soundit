@@ -6,13 +6,14 @@
 // Vendor
 // ==========================================================================
 @import "~locomotive-scroll/dist/locomotive-scroll.css";
-@import "settings/foundation-settings";
-@import "vendors/foundation";
+@import "~normalize-scss/sass/normalize";
 
 // Settings
 // ==========================================================================
 @import "settings/config.colors";
 @import "settings/config";
+@import "settings/breakpoints";
+@import "utilities/vwSize";
 
 // ==========================================================================
 // Tools
@@ -24,6 +25,7 @@
 
 // Generic
 // ==========================================================================
+@import "generic/grid";
 @import "generic/generic";
 @import "generic/media";
 @import "generic/form";

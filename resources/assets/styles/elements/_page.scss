@@ -9,6 +9,7 @@
 //    sourced from our default variables.
 // 2. Ensure the page always fills at least the entire height of the viewport.
 //
+@include normalize();
 
 html {
   min-height: 100%; /* [2] */

@@ -1,0 +1,659 @@
+// Max screen
+$xxlarge: 2560px; // --- iMac 27' (.ie) and other large desktops ---
+$xlarge: 1650px; // --- Macbook Pro 15' (.ie) ---
+$large: 1440px; // --- Macbook Pro 13' (.ie) ---
+$largeMax: 1370px;
+$medium: 1024px; // --- iPad landscape ---
+$small: 1023px;
+$xsmall: 767px;
+$xxsmall: 361px;
+
+$col_number: 24;
+$gutter: 1.25; // ---> VW
+$max_width: 100;
+$row_margin: 60;
+
+$col_width: 100 / $col_number;
+
+
+
+// ROW
+.row {
+    max-width: #{$max_width}rem;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include vw('padding-left', $row_margin);
+    @include vw('padding-right', $row_margin);
+    // @include padding-left($row_margin);
+    // @include padding-right($row_margin);
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    -ms-flex-flow: row wrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-flow: row wrap;
+
+
+    @include max-screen($xlarge) {
+        @include vw('padding-left', $row_margin/2);
+        @include vw('padding-right', $row_margin/2);
+        // @include padding-left($row_margin/2);
+        // @include padding-right($row_margin/2);
+    }
+
+    @include max-screen($xsmall) {
+        @include vw('padding-left', $row_margin/3);
+        @include vw('padding-right', $row_margin/3);
+        // @include padding-left($row_margin/3);
+        // @include padding-right($row_margin/3);
+    }
+}
+
+.row .row {
+    // margin-left: -#{$gutter/2}vw;
+    // margin-right: -#{$gutter/2}vw;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.row.expanded {
+    max-width: none;
+}
+
+.row.collapse>.column,.row.collapse>.columns {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.row.collapse>.column>.row,.row.collapse>.columns>.row,.row.is-collapse-child {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.column,.columns {
+    -ms-flex: 1 1 0px;
+    -webkit-box-flex: 1;
+    flex: 1 1 0px;
+    padding-left: #{$gutter/2}vw;
+    padding-right: #{$gutter/2}vw;
+    min-width: 0;
+
+    &.no-gutter {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.column.row.row,.row.row.columns {
+    float: none;
+    display: block
+}
+
+.row .column.row.row,.row .row.row.columns {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0
+}
+
+
+
+//XXLARGE
+@for $i from 1 through $col_number {
+    $prev_i: $i - 1;
+
+    .xxlarge-#{$i} {
+        -webkit-flex: 0 0 #{1% * $col_width * $i};
+        -ms-flex: 0 0 #{1% * $col_width * $i};
+        flex: 0 0 #{1% * $col_width * $i};
+        max-width: #{1% * $col_width * $i};
+    }
+
+    .xxlarge-offset-#{$prev_i} {
+        margin-left: #{1% * $col_width * $prev_i};
+    }
+
+    .xxlarge-order-#{$i} {
+        -webkit-order: $i;
+        -ms-flex-order: $i;
+        order: $i;
+    }
+
+    .xxlarge-up-#{$i} {
+        -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    }
+
+    .xxlarge-up-#{$i} > .column,
+    .xxlarge-up-#{$i} > .columns {
+        -webkit-flex: 0 0 #{1% * 100 / $i};
+        -ms-flex: 0 0 #{1% * 100 / $i};
+        flex: 0 0 #{1% * 100 / $i};
+        max-width: #{1% * 100 / $i};;
+    }
+}
+
+
+.xxlarge-collapse>.column,.xxlarge-collapse>.columns {
+    padding-left: 0;
+    padding-right: 0
+}
+
+.xxlarge-uncollapse>.column,.xxlarge-uncollapse>.columns {
+    padding-left: #{$gutter/2}vw;
+    padding-right: #{$gutter/2}vw
+}
+
+
+
+// XLARGE
+@include max-screen($xlarge) {
+    @for $i from 1 through $col_number {
+        $prev_i: $i - 1;
+
+        .xlarge-#{$i} {
+            -webkit-flex: 0 0 #{1% * $col_width * $i};
+            -ms-flex: 0 0 #{1% * $col_width * $i};
+            flex: 0 0 #{1% * $col_width * $i};
+            max-width: #{1% * $col_width * $i};
+        }
+
+        .xlarge-offset-#{$prev_i} {
+            margin-left: #{1% * $col_width * $prev_i};
+        }
+
+        .xlarge-order-#{$i} {
+            -webkit-order: $i;
+            -ms-flex-order: $i;
+            order: $i;
+        }
+
+        .xlarge-up-#{$i} {
+            -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
+
+        .xlarge-up-#{$i} > .column,
+        .xlarge-up-#{$i} > .columns {
+            -webkit-flex: 0 0 #{1% * 100 / $i};
+            -ms-flex: 0 0 #{1% * 100 / $i};
+            flex: 0 0 #{1% * 100 / $i};
+            max-width: #{1% * 100 / $i};;
+        }
+    }
+
+    .xlarge-collapse>.column,.xlarge-collapse>.columns {
+        padding-left: 0;
+        padding-right: 0
+    }
+
+    .xlarge-uncollapse>.column,.xlarge-uncollapse>.columns {
+        padding-left: .625rem;
+        padding-right: .625rem
+    }
+}
+
+
+
+// LARGE
+@include max-screen($large) {
+    @for $i from 1 through $col_number {
+        $prev_i: $i - 1;
+
+        .large-#{$i} {
+            -webkit-flex: 0 0 #{1% * $col_width * $i};
+            -ms-flex: 0 0 #{1% * $col_width * $i};
+            flex: 0 0 #{1% * $col_width * $i};
+            max-width: #{1% * $col_width * $i};
+        }
+
+        .large-offset-#{$prev_i} {
+            margin-left: #{1% * $col_width * $prev_i};
+        }
+
+        .large-order-#{$i} {
+            -webkit-order: $i;
+            -ms-flex-order: $i;
+            order: $i;
+        }
+
+        .large-up-#{$i} {
+            -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
+
+        .large-up-#{$i} > .column,
+        .large-up-#{$i} > .columns {
+            -webkit-flex: 0 0 #{1% * 100 / $i};
+            -ms-flex: 0 0 #{1% * 100 / $i};
+            flex: 0 0 #{1% * 100 / $i};
+            max-width: #{1% * 100 / $i};;
+        }
+    }
+
+    .large-collapse>.column,.large-collapse>.columns {
+        padding-left: 0;
+        padding-right: 0
+    }
+
+    .large-uncollapse>.column,.large-uncollapse>.columns {
+        padding-left: .625rem;
+        padding-right: .625rem
+    }
+}
+
+
+
+// LARGE MAX
+@include max-screen($largeMax) {
+    @for $i from 1 through $col_number {
+        $prev_i: $i - 1;
+
+        .largeMax-#{$i} {
+            -webkit-flex: 0 0 #{1% * $col_width * $i};
+            -ms-flex: 0 0 #{1% * $col_width * $i};
+            flex: 0 0 #{1% * $col_width * $i};
+            max-width: #{1% * $col_width * $i};
+        }
+
+        .largeMax-offset-#{$prev_i} {
+            margin-left: #{1% * $col_width * $prev_i};
+        }
+
+        .largeMax-order-#{$i} {
+            -webkit-order: $i;
+            -ms-flex-order: $i;
+            order: $i;
+        }
+
+        .largeMax-up-#{$i} {
+            -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
+
+        .largeMax-up-#{$i} > .column,
+        .largeMax-up-#{$i} > .columns {
+            -webkit-flex: 0 0 #{1% * 100 / $i};
+            -ms-flex: 0 0 #{1% * 100 / $i};
+            flex: 0 0 #{1% * 100 / $i};
+            max-width: #{1% * 100 / $i};;
+        }
+    }
+
+    .largeMax-collapse>.column,.largeMax-collapse>.columns {
+        padding-left: 0;
+        padding-right: 0
+    }
+
+    .largeMax-uncollapse>.column,.largeMax-uncollapse>.columns {
+        padding-left: .625rem;
+        padding-right: .625rem
+    }
+}
+
+
+
+// MEDIUM
+@include max-screen($medium) {
+    @for $i from 1 through $col_number {
+        $prev_i: $i - 1;
+
+        .medium-#{$i} {
+            -webkit-flex: 0 0 #{1% * $col_width * $i};
+            -ms-flex: 0 0 #{1% * $col_width * $i};
+            flex: 0 0 #{1% * $col_width * $i};
+            max-width: #{1% * $col_width * $i};
+        }
+
+        .medium-offset-#{$prev_i} {
+            margin-left: #{1% * $col_width * $prev_i};
+        }
+
+        .medium-order-#{$i} {
+            -webkit-order: $i;
+            -ms-flex-order: $i;
+            order: $i;
+        }
+
+        .medium-up-#{$i} {
+            -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
+
+        .medium-up-#{$i} > .column,
+        .medium-up-#{$i} > .columns {
+            -webkit-flex: 0 0 #{1% * 100 / $i};
+            -ms-flex: 0 0 #{1% * 100 / $i};
+            flex: 0 0 #{1% * 100 / $i};
+            max-width: #{1% * 100 / $i};;
+        }
+    }
+
+    .medium-collapse>.column,.medium-collapse>.columns {
+        padding-left: 0;
+        padding-right: 0
+    }
+
+    .medium-uncollapse>.column,.medium-uncollapse>.columns {
+        padding-left: .625rem;
+        padding-right: .625rem
+    }
+}
+
+
+
+// SMALL
+@include max-screen($small) {
+    @for $i from 1 through $col_number {
+        $prev_i: $i - 1;
+
+        .small-#{$i} {
+            -webkit-flex: 0 0 #{1% * $col_width * $i};
+            -ms-flex: 0 0 #{1% * $col_width * $i};
+            flex: 0 0 #{1% * $col_width * $i};
+            max-width: #{1% * $col_width * $i};
+        }
+
+        .small-offset-#{$prev_i} {
+            margin-left: #{1% * $col_width * $prev_i};
+        }
+
+        .small-order-#{$i} {
+            -webkit-order: $i;
+            -ms-flex-order: $i;
+            order: $i;
+        }
+
+        .small-up-#{$i} {
+            -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
+
+        .small-up-#{$i} > .column,
+        .small-up-#{$i} > .columns {
+            -webkit-flex: 0 0 #{1% * 100 / $i};
+            -ms-flex: 0 0 #{1% * 100 / $i};
+            flex: 0 0 #{1% * 100 / $i};
+            max-width: #{1% * 100 / $i};;
+        }
+    }
+
+    .small-collapse>.column,.small-collapse>.columns {
+        padding-left: 0;
+        padding-right: 0
+    }
+
+    .small-uncollapse>.column,.small-uncollapse>.columns {
+        padding-left: .625rem;
+        padding-right: .625rem
+    }
+}
+
+
+
+// XSMALL
+@include max-screen($xsmall) {
+    @for $i from 1 through $col_number {
+        $prev_i: $i - 1;
+
+        .xsmall-#{$i} {
+            -webkit-flex: 0 0 #{1% * $col_width * $i};
+            -ms-flex: 0 0 #{1% * $col_width * $i};
+            flex: 0 0 #{1% * $col_width * $i};
+            max-width: #{1% * $col_width * $i};
+        }
+
+        .xsmall-offset-#{$prev_i} {
+            margin-left: #{1% * $col_width * $prev_i};
+        }
+
+        .xsmall-order-#{$i} {
+            -webkit-order: $i;
+            -ms-flex-order: $i;
+            order: $i;
+        }
+
+        .xsmall-up-#{$i} {
+            -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
+
+        .xsmall-up-#{$i} > .column,
+        .xsmall-up-#{$i} > .columns {
+            -webkit-flex: 0 0 #{1% * 100 / $i};
+            -ms-flex: 0 0 #{1% * 100 / $i};
+            flex: 0 0 #{1% * 100 / $i};
+            max-width: #{1% * 100 / $i};;
+        }
+    }
+
+    .xsmall-collapse>.column,.xsmall-collapse>.columns {
+        padding-left: 0;
+        padding-right: 0
+    }
+
+    .xsmall-uncollapse>.column,.xsmall-uncollapse>.columns {
+        padding-left: .625rem;
+        padding-right: .625rem
+    }
+}
+
+
+
+
+// XXSMAL
+@include max-screen($xxsmall) {
+    @for $i from 1 through $col_number {
+        $prev_i: $i - 1;
+
+        .xxsmall-#{$i} {
+            -webkit-flex: 0 0 #{1% * $col_width * $i};
+            -ms-flex: 0 0 #{1% * $col_width * $i};
+            flex: 0 0 #{1% * $col_width * $i};
+            max-width: #{1% * $col_width * $i};
+        }
+
+        .xxsmall-offset-#{$prev_i} {
+            margin-left: #{1% * $col_width * $prev_i};
+        }
+
+        .xxsmall-order-#{$i} {
+            -webkit-order: $i;
+            -ms-flex-order: $i;
+            order: $i;
+        }
+
+        .xxsmall-up-#{$i} {
+            -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
+
+        .xxsmall-up-#{$i} > .column,
+        .xxsmall-up-#{$i} > .columns {
+            -webkit-flex: 0 0 #{1% * 100 / $i};
+            -ms-flex: 0 0 #{1% * 100 / $i};
+            flex: 0 0 #{1% * 100 / $i};
+            max-width: #{1% * 100 / $i};;
+        }
+    }
+
+    .xxsmall-collapse>.column,.xxsmall-collapse>.columns {
+        padding-left: 0;
+        padding-right: 0
+    }
+
+    .xxsmall-uncollapse>.column,.xxsmall-uncollapse>.columns {
+        padding-left: .625rem;
+        padding-right: .625rem
+    }
+}
+
+
+
+// HELPERS
+.shrink {
+    -ms-flex: 0 0 auto;
+    -webkit-box-flex: 0;
+    flex: 0 0 auto;
+    max-width: 100%
+}
+
+.align-top.columns,.column.align-top {
+    -webkit-align-self: flex-start;
+    -ms-flex-item-align: start;
+    align-self: flex-start
+}
+
+.align-bottom.columns,.column.align-bottom {
+    -webkit-align-self: flex-end;
+    -ms-flex-item-align: end;
+    align-self: flex-end
+}
+
+.align-middle.columns,.column.align-middle {
+    -webkit-align-self: center;
+    -ms-flex-item-align: center;
+    align-self: center
+}
+
+.align-stretch.columns,.column.align-stretch {
+    -webkit-align-self: stretch;
+    -ms-flex-item-align: stretch;
+    align-self: stretch
+}
+
+.align-right {
+    -ms-flex-pack: end;
+    -webkit-box-pack: end;
+    justify-content: flex-end
+}
+
+.align-center {
+    -ms-flex-pack: center;
+    -webkit-box-pack: center;
+    justify-content: center
+}
+
+.align-justify {
+    -ms-flex-pack: justify;
+    -webkit-box-pack: justify;
+    justify-content: space-between
+}
+
+.align-spaced {
+    -ms-flex-pack: distribute;
+    justify-content: space-around
+}
+
+.align-top {
+    -ms-flex-align: start;
+    -webkit-box-align: start;
+    align-items: flex-start
+}
+
+.align-self-top {
+    -webkit-align-self: flex-start;
+    -ms-flex-item-align: start;
+    align-self: flex-start
+}
+
+.align-bottom {
+    -ms-flex-align: end;
+    -webkit-box-align: end;
+    align-items: flex-end
+}
+
+.align-self-bottom {
+    -webkit-align-self: flex-end;
+    -ms-flex-item-align: end;
+    align-self: flex-end
+}
+
+.align-middle {
+    -ms-flex-align: center;
+    -webkit-box-align: center;
+    align-items: center
+}
+
+.align-self-middle {
+    -webkit-align-self: center;
+    -ms-flex-item-align: center;
+    align-self: center
+}
+
+.align-stretch {
+    -ms-flex-align: stretch;
+    -webkit-box-align: stretch;
+    align-items: stretch
+}
+
+.align-self-stretch {
+    -webkit-align-self: stretch;
+    -ms-flex-item-align: stretch;
+    align-self: stretch
+}
+
+
+
+// DEBUG
+
+#grid-debug {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: .15;
+
+    &.visible {
+        display: flex;
+    }
+
+    #grid {
+        width: 100%;
+        height: 100%;
+
+        .row {
+            height: 100%;
+            div {
+                position: relative;
+                height: 100%;
+                @extend .column;
+                @extend .xxlarge-1;
+
+                &:before, &:after {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    width: .625vw;
+                    height: 100%;
+                }
+
+                &:before {
+                    left: 0;
+                    background: #000;
+                }
+
+                &:after {
+                    right: 0;
+                    background: #c19384;
+                }
+            }
+        }
+
+    }
+}

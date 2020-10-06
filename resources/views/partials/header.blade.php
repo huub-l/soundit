@@ -1,5 +1,5 @@
 <header data-scroll-section>
-  <div class="grid-container">
+  <div class="row expanded">
     <a class="brand" href="{{ home_url('/') }}">
       {{ $siteName }}
     </a>
