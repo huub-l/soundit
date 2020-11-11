@@ -6,16 +6,17 @@
 // =============================================================================
 $white: #ffffff;
 $black: #000000;
-$color-primary: #3860ff;
+$dark-grey: #17171D;
+$grey: #343436;
 
 // Specific
 // =============================================================================
 // Link
-$link-color: $color-primary;
-$link-focus-color: $color-primary;
-$link-hover-color: darken($color-primary, 10%);
+$link-color: $dark-grey;
+$link-focus-color: $dark-grey;
+$link-hover-color: darken($dark-grey, 10%);
 // Selection
-$selection-text-color: $color-primary;
+$selection-text-color: $dark-grey;
 $selection-background-color: #ffffff;
 
 // Social Colors

@@ -1,11 +1,10 @@
-<header data-scroll-section>
+<header id="siteHeader" data-scroll-section>
   <div class="row expanded">
-    <a class="brand" href="{{ home_url('/') }}">
-      {{ $siteName }}
-    </a>
-    <nav class="nav-primary">
-      @if (has_nav_menu('primary_navigation'))
-        {!! wp_nav_menu(['theme_location' => 'primary_navigation', 'menu_class' => 'nav', 'echo' => false]) !!}
+    <a class="brand" href="{{ home_url('/') }}"> @include('svg.logo') </a>
+
+    <nav class="nav-header">
+      @if (has_nav_menu('header_navigation'))
+        {!! wp_nav_menu(['theme_location' => 'header_navigation', 'menu_class' => 'nav', 'echo' => false]) !!}
       @endif
     </nav>
   </div>

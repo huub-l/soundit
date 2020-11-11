@@ -5,60 +5,62 @@
 // ==========================================================================
 // Vendor
 // ==========================================================================
-@import "~locomotive-scroll/dist/locomotive-scroll.css";
-@import "~normalize-scss/sass/normalize";
+@import '~locomotive-scroll/dist/locomotive-scroll.css';
+@import '~normalize-scss/sass/normalize';
 
 // Settings
 // ==========================================================================
-@import "settings/config.colors";
-@import "settings/config";
-@import "settings/breakpoints";
-@import "utilities/vwSize";
+@import 'settings/config.colors';
+@import 'settings/config';
+@import 'settings/breakpoints';
+@import 'utilities/vwSize';
 
 // ==========================================================================
 // Tools
 // ==========================================================================
-@import "tools/functions";
-@import "tools/mixins";
-@import "tools/fonts";
-// @import "tools/family";
+@import 'tools/functions';
+@import 'tools/mixins';
+@import 'tools/fonts';
+// @import 'tools/family';
 
 // Generic
 // ==========================================================================
-@import "generic/grid";
-@import "generic/generic";
-@import "generic/media";
-@import "generic/form";
-@import "generic/button";
+@import 'generic/grid';
+@import 'generic/generic';
+@import 'generic/media';
+@import 'generic/form';
+@import 'generic/button';
 
 // Elements
 // ==========================================================================
-@import "elements/fonts";
-@import "elements/page";
+@import 'elements/fonts';
+@import 'elements/page';
 
 // Objects
 // ==========================================================================
-@import "objects/ratio";
+@import 'objects/ratio';
 
 // Vendors
 // ==========================================================================
-// @import "vendors/vendor";
+// @import 'vendors/vendor';
 
 // Components
 // ==========================================================================
-@import "components/scrollbar";
-@import "components/heading";
-@import "components/button";
-@import "components/form";
-@import "components/transition";
+@import 'components/scrollbar';
+@import 'components/heading';
+@import 'components/button';
+@import 'components/form';
+@import 'components/transition';
+@import 'components/header';
+@import 'components/footer';
 
 // Utilities
 // ==========================================================================
-@import "utilities/ratio";
-@import "utilities/states";
-@import "utilities/spacing";
-@import "utilities/print";
+@import 'utilities/ratio';
+@import 'utilities/states';
+@import 'utilities/spacing';
+@import 'utilities/print';
 
 // Templates
 // ==========================================================================
-// @import "templates/template";
+// @import 'templates/template';

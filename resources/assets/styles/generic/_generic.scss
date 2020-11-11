@@ -87,3 +87,44 @@ hr {
     border: 0;
     border-top: 1px solid #CCCCCC;
 }
+
+
+// *** Global Styles ***
+
+// 1 Headings 
+
+.heading-one {
+    @include vw ('font-size', 120);
+    color: $white;
+}
+
+.heading-two-white {
+    @include vw ('font-size', 39);
+    color: $white;
+}
+
+.heading-two-grey {
+    @include vw ('font-size', 39);
+    color: $grey;
+}
+
+.heading-three-white {
+    @include vw ('font-size', 16);
+    color: $white;
+}
+
+.heading-three-grey {
+    @include vw ('font-size', 16);
+    color: $grey;
+}
+
+p {
+    @include vw ('font-size', 24);
+    color: $grey;
+}
+
+// 2 Buttons 
+
+.btn {
+
+}
