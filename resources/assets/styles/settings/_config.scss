@@ -13,14 +13,15 @@ $assets-path: "../" !default;
 
 // Typefaces
 // =============================================================================
-$font-sans-serif: sans-serif;
+$font-circular: 'CircularStd', sans-serif;
+$font-lyyra: 'LyyraExtended', sans-serif;
 
 // Typography
 // =============================================================================
 // Base
 $font-size: 16px;
 $line-height: 24px / $font-size;
-$font-family: $font-sans-serif;
+$font-family: $font-circular;
 $color: #222222;
 // Headings
 $font-size-h1: 36px !default;
@@ -43,5 +44,6 @@ $easing: linear;
 
 // Spacing Units
 // =============================================================================
-$unit: 60px;
-$unit-small: 30px;
+$unit: 24px;
+$unit-small: 12px;
+

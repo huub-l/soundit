@@ -34,6 +34,7 @@ html {
 }
 
 body {
+  background: $black;
   .has-scroll-smooth & {
     overflow: hidden;
   }

@@ -95,17 +95,29 @@ hr {
 
 .heading-one {
     @include vw ('font-size', 120);
+    @include vw ('line-height', 130);
     color: $white;
 }
 
 .heading-two-white {
     @include vw ('font-size', 39);
+    font-family: $font-lyyra;
     color: $white;
+    text-transform: uppercase;
 }
 
 .heading-two-grey {
     @include vw ('font-size', 39);
+    font-family: $font-lyyra;;
     color: $grey;
+    text-transform: uppercase;
+}
+
+.heading-two-black {
+    @include vw ('font-size', 39);
+    font-family: $font-lyyra;;
+    color: $black;
+    text-transform: uppercase;
 }
 
 .heading-three-white {
@@ -120,11 +132,6 @@ hr {
 
 p {
     @include vw ('font-size', 24);
-    color: $grey;
+    color: $light-grey;
 }
 
-// 2 Buttons 
-
-.btn {
-
-}

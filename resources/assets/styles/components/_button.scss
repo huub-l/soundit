@@ -6,3 +6,21 @@
         background-color: darkgray;
     }
 }
+
+// ** Global Buttons **
+
+.btn {
+    @include vw('font-size', 18);
+    @include vw('padding-top', 8);
+    @include vw('padding-bottom', 8);
+    @include vw('padding-left', 36);
+    @include vw('padding-right', 36);
+    display: block;
+    width: fit-content;
+    border-radius: 8px;
+
+    &.btn-white {
+        color: $white;
+        border: 1px solid $white;
+    }
+}

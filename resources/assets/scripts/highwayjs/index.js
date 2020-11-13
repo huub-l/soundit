@@ -3,6 +3,7 @@ import Highway from '@dogstudio/highway/build/highway.min.js'
 
 import DefaultRenderer from './renderers/Default'
 import DefaultTransition from './transitions/Default'
+import Home from './renderers/home';
 
 export default class H extends Highway.Core {
 
@@ -10,7 +11,7 @@ export default class H extends Highway.Core {
 
         super({
             renderers: {
-              home: DefaultRenderer,
+              home: Home,
               single_post: DefaultRenderer
             },
             transitions: {

@@ -23,6 +23,23 @@ export default class DefaultRenderer extends Highway.Renderer {
               el: document.querySelector('[data-scroll-container]'),
               smooth: true
             });
+
+            // Viewport vh
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+            // Header fixed
+            this.scroll.on('scroll', function(instance) {
+                let y = instance.scroll.y,
+                  header = document.querySelector('#siteHeader'),
+                  heroHeight = document.querySelector('#siteHeader').offsetHeight;
+              
+                if (y >= heroHeight) {
+                  header.classList.add('fixed');
+                } else {
+                  header.classList.remove('fixed');
+                }    
+            });
         })
     }
 

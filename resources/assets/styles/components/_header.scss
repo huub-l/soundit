@@ -1,14 +1,41 @@
-#siteHeader .row {
+#siteHeader {
     @include vw ('padding', 48);
     width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background: $black;
+    z-index: 10;
+    transition: all 0.3s ease-in-out;
+
+    .brand {
+        @include vw('height', 24);
+        transform: translateY(0);
+        transition: opacity 0.3s ease-in-out, transition 0.3s ease-in-out, height 0.3s ease-in-out;
+        transition: height 0.3s ease-in-out;
+        
+        svg { height: 100%; }
+    }
+
+    .brand-icon {
+        height: 50%;
+        position: absolute;
+        top: 50%;
+        left: 2.5vw;
+        transform: translateY(-50%);
+        opacity: 0;
+        transition: all 0.3s ease-in-out;
+
+        svg { height: 100%; }
+    }
 
     .nav-header {
         @include vw ('margin-top', 36);
+        transition: all 0.3s ease-in-out;
 
         ul li {
             @include vw ('font-size', 18);
@@ -18,5 +45,21 @@
 
             a { color: $white; }
         }
+    }
+
+    &.fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        
+        .brand {
+            opacity: 0;
+            transform: translateY(-100%);
+            height: 0;
+        }
+
+        .brand-icon { opacity: 1; }
+
+        .nav-header { margin-top: 0; }
     }
 }
