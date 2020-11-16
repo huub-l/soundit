@@ -16,6 +16,8 @@
     <?php wp_body_open(); ?>
     <?php do_action('get_header'); ?>
 
+    <span id="cursor"></span>
+
     <?php echo \Roots\view(\Roots\app('sage.view'), \Roots\app('sage.data'))->render(); ?>
 
     <?php do_action('get_footer'); ?>

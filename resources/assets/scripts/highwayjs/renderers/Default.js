@@ -40,6 +40,15 @@ export default class DefaultRenderer extends Highway.Renderer {
                   header.classList.remove('fixed');
                 }    
             });
+
+            // Margin for footer
+
+            let footer = document.querySelector('#siteFooter'),
+                footerHeight = footer.offsetHeight,
+                main = document.querySelector('.grid-container');
+
+            main.style.padding = '0 0 '+footerHeight+'px';
+            this.scroll.update();
         })
     }
 

@@ -25,7 +25,11 @@
     </section>
 
     <section class="home--about">
-       <div class="about-logo">@include('svg.logo-extended')</div>
+       <div class="about-logo" data-scroll data-scroll-direction="horizontal" data-scroll-speed="2">
+           @include('svg.logo-extended')
+           @include('svg.logo-extended')
+           @include('svg.logo-extended')
+        </div>
 
        <div class="row expanded">
            <div class="large-8 large-offset-2">
@@ -67,7 +71,10 @@
     </section>
 
     <section class="video--banner-one">
-        <div class="video-background"><img src="@field('video_one_background', 'url')" alt=""></div>
+        <div class="video-background">
+        
+            <video src="@field('video_one_background', 'url')" loop autoplay muted>
+        </div>
         @hasfield('video_one_title')<h2 class="heading-one">@field('video_one_title')</h2>@endfield
     </section>
 
@@ -119,14 +126,11 @@
                     @hasfield('team_members')
                     <ul class="team__members">
                         @fields('team_members')
-                        <li class="accordion-content-wrapper">
-                            <div class="accordion-content">
-                                @group('team_member')
-                                <h3 class="heading-three-grey">@sub('name')</h3>
-                                <span class="heading-three-grey">@sub('role')</span>
-                                <p>@sub('description')</p>
-                                @endgroup
-                            </div>
+                        <li>
+                            @group('team_member')
+                            <h3 class="heading-three-grey">@sub('name')</h3>
+                            <p>@sub('description')</p>
+                            @endgroup 
                         </li>
                         @endfields
                     </ul>
@@ -136,4 +140,24 @@
         </div>
     </section>
 
+    <section class="home--form">
+        <div class="row expanded">
+            <div class="large-4 large-offset-2">
+                <div class="form__hero">
+                    <span class="heading-three-white">@field('form_uppertitle')</span>
+                    <h2 class="heading-two-white">@field('form_title')</h2>
+                    <p>@field('form_text')</p>
+                </div>
+            </div>
+            <div class="large-4">
+                <div class="form__wrapper">
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="video--banner-three">
+        <div class="video-background"><img src="@field('video_three_background', 'url')" alt=""></div>
+    </section>
 @endsection

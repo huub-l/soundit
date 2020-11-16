@@ -4,6 +4,12 @@
 
 html {
     box-sizing: border-box;
+
+    @include min-screen($small) {
+        cursor: none ;
+
+        a, button { cursor: none; }
+    }
 }
 
 //

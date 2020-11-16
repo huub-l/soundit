@@ -2,7 +2,7 @@
     background: #080808;
 
     .hero-wrapper {
-        @include vw('padding-bottom', 400);
+        @include vw('padding-bottom', 460);
         width: 100%;
         min-height: 100vh;
         position: relative;
@@ -11,7 +11,7 @@
             display: block;
             width: 100%;
             height: 100vh;
-            background: rgba(red, 0.3);
+            background: transparent;
             position: relative;
             z-index: 2;
         }
@@ -19,7 +19,7 @@
         .hero__background {
             @include vw('margin-bottom', 400);
             width: 100%;
-            height: auto;
+            height: 100vh;
             position: absolute;
             top: -1px;
             left: 0;
@@ -43,6 +43,8 @@
             z-index: 2;
             margin: auto;
         }
+
+        .btn { @include vw('margin-top', 24); }
     }
 }
 
@@ -52,11 +54,15 @@
 
     .about-logo {
         margin-top: -12px;
+        margin-left: -10%;
+        display: inline-block;
+        white-space: nowrap;
+
         svg { width: 100%; }
     }
 
     .about-wrapper {
-        @include vw('padding-top', 260);
+        @include vw('padding-top', 210);
         @include vw('padding-bottom', 210);
 
         .heading-three-white, .heading-two-white { 
@@ -125,7 +131,7 @@
         width: 100%;
         height: 100%;
       
-        img { 
+        video, img { 
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -227,8 +233,6 @@
                     margin-left: 5%;
                 }
 
-                
-              
                 .heading-three-grey {
                     @include vw('font-size', 20);
                     color: $black;
@@ -240,5 +244,35 @@
             }
         }
 
+    }
+}
+
+.home--form {
+    @include vw('padding-top', 160);
+    @include vw('padding-bottom', 160);
+    background: #343436;
+
+    .form__hero {
+        width: 90%;
+      
+        .heading-three-white, .heading-two-white {
+            @include vw('margin-bottom', 36);
+            display: block
+        }  
+    }
+}
+
+.video--banner-three {
+    @include vw('padding-top', 215);
+    @include vw('padding-bottom', 215);
+    background: #121217; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    .video-background {
+        @include vw('width', 460);
+
+        img {   width: 100%; }
     }
 }
