@@ -36,6 +36,11 @@ html {
 body {
   background: $black;
 
+  .data-scroll-section {
+    position: relative;
+    z-index: 10;
+  }
+
   main {
     position: relative;
     z-index: 10;

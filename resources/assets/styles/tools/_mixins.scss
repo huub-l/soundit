@@ -213,3 +213,16 @@
   display: $display $important;
   visibility: visible $important;
 }
+
+
+// Cols inside cols
+
+@mixin create-cols($span, $total) {
+  width: (($span/$total)*100%);
+  max-width: (($span/$total)*100%);
+  flex: 0 0 (($span/$total)*100%);
+}
+
+@mixin create-cols-offset($span, $total) {
+  margin-left: (($span/$total)*100%);
+}

@@ -5,6 +5,7 @@
 // ==========================================================================
 // Vendor
 // ==========================================================================
+@import '~swiper/swiper-bundle.css';
 @import '~locomotive-scroll/dist/locomotive-scroll.css';
 @import '~normalize-scss/sass/normalize';
 
@@ -65,3 +66,4 @@
 // Templates
 // ==========================================================================
 @import 'templates/home';
+@import 'templates/page';

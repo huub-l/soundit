@@ -11,8 +11,8 @@
 
 .btn {
     @include vw('font-size', 18);
-    @include vw('padding-top', 8);
-    @include vw('padding-bottom', 8);
+    @include vw('padding-top', 12);
+    @include vw('padding-bottom', 12);
     @include vw('padding-left', 36);
     @include vw('padding-right', 36);
     display: block;
@@ -22,5 +22,16 @@
     &.btn-white {
         color: $white;
         border: 1px solid $white;
+    }
+
+    &.btn-black {
+        color: $white;
+        background: $black;
+    }
+
+    &.btn-subscribe {
+        background: $white;
+        color: $light-grey;
+        font-weight: 500;
     }
 }

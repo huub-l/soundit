@@ -14,6 +14,14 @@
             background: transparent;
             position: relative;
             z-index: 2;
+
+            svg {
+                @include vw('width', 24);
+                position: absolute;
+                top: 85vh;
+                left: 50%;
+                transform: translateX(-50%);
+            }
         }
 
         .hero__background {
@@ -49,7 +57,7 @@
 }
 
 .home--about {
-    background: $black;
+    background: #121217;
     overflow: hidden;
 
     .about-logo {
@@ -91,35 +99,102 @@
     }
 }
 
-.home--experience {
-    @include vw('padding-top', 700);
-    @include vw('padding-bottom', 700);
-    background: #121217;
-    position: relative;
-    z-index: 0;
+.home--infographics {
+    @include vw('padding-top', 320);
+    @include vw('padding-bottom', 320);
+    background: $dark-grey;
 
-    .experience-background {
-        height: 100%;
-        width: auto;
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: -1 ;
+    .infographic__slideshow {
+        width: 100%;
+        position: relative;
+        overflow: visible;
 
-        img {
-            height: 100%;
-            object-fit: cover;
+        .swiper-container { 
 
+            .swiper-slide .slide__wrapper {
+                @include vw('height', 650);
+                display: flex;
+                justify-content: space-between;
+                
+                .slide__text { width: 25%; }
+                .slide__image { width: 65%; }
+            }
+        }
+
+        .swiper-navigation {
+            display: flex;
+            position: absolute;
+            top: 105%;
+            left: 0;
+            color: $white;
+
+            .swiper-pagination {
+                position: relative;
+            }
         }
     }
+}
 
-    .heading-three-white, .heading-two-white { 
-        @include vw('margin-bottom', 24);
+.home--services {
+    @include vw('padding-top', 280);
+    @include vw('padding-bottom', 98);
+    background: $black;
+    text-align: center;
+
+    .heading-three-white {
+        @include vw('margin-bottom', 72);
         display: block;
     }
 
-    p { width: 80%; }
+    .service__wrapper {
+        @include vw('padding-top', 24);
+        @include vw('padding-bottom', 24);
+        height: 100%;
+        display: flex;
+        border: 1px solid $light-grey;
+        
+        h2 {
+            margin: auto;
+            color: $light-grey;
+        }
+    }
+}
+
+.home--experience {
+    @include vw('padding-top', 500);
+    @include vw('padding-bottom', 500);
+    background: $black;
+    position: relative;
+     
+    .experience-background {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        
+        canvas {
+            width: auto;
+            height: 100%;
+            position: absolute;
+            left: 60%;
+            top: 0;
+            transform: translateX(-60%);
+        }
+    }
+
+    .experience-wrapper {
+        position: relative;
+        z-index: 2;
+
+        .heading-three-white, .heading-two-white { 
+            @include vw('margin-bottom', 24);
+            display: block;
+        }
+
+        p { width: 80%; }
+    }
 }
 
 .video--banner-one , .video--banner-two {
@@ -159,7 +234,7 @@
         height: 80%;
         position: absolute;
         top: 50%;
-        right: 0;
+        right: -10%;
         transform: translateY(-50%);
         z-index: -1;
 
@@ -259,6 +334,28 @@
             @include vw('margin-bottom', 36);
             display: block
         }  
+    }
+
+    .form__wrapper {
+        input {  display: inline-block; }
+
+        .row {
+            .column {
+                @include vw('margin-bottom', 12);
+                @include create-cols(2, 4); 
+
+                &:nth-of-type(1) { padding-left: 0; }
+                &:nth-of-type(2) { padding-right: 0; }
+
+                input { width: 100%; }
+            }
+        }
+        
+        .btn {
+            @include vw('margin-top', 24);
+            @include vw('padding-top', 20);
+            @include vw('padding-bottom', 20);
+        }       
     }
 }
 

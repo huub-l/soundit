@@ -1,4 +1,4 @@
-<footer id="siteFooter">
+<footer id="siteFooter" >
     <div class="row expanded">
         <div class="large-2">
             @include('svg.logo-icon')
@@ -6,11 +6,17 @@
 
         <div class="large-5">
             <div class="footer__nav">
+                @if ($footerNav)
                 <nav class="nav-footer">
-                    @if (has_nav_menu('footer_navigation'))
-                    {!! wp_nav_menu(['theme_location' => 'footer_navigation', 'menu_class' => 'nav', 'echo' => false]) !!}
-                    @endif
-                </nav>
+                    <ul class="nav">
+                    @foreach ($footerNav as $item)
+                        <li class="menu-item {{ $item->classes ?? '' }}">
+                            <a href="{{ $item->url }}" data-scroll-to @if ( strpos($item->classes, 'internal-link') !== false ) data-router-disabled @endif> {{ $item->label }} </a>
+                        </li>
+                    @endforeach
+                    </ul>
+                </nav> 
+                @endif
     
                 @hasoption('social_links')
                 <ul class="nav-social">
@@ -25,7 +31,13 @@
 
         <div class="large-4 large-offset-1">
             <div class="newsletter">
-
+                <form>
+                    <label for="newsletter">Stay up to date with our latest innovations</label>
+                    <div class="input__wrapper">
+                        <input type="email" id="newsletter" name="newsletter" placeholder="Your@Mail.Here">
+                        <button class="btn btn-subscribe">Subscribe</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

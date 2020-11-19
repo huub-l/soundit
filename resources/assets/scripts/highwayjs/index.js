@@ -12,6 +12,7 @@ export default class H extends Highway.Core {
         super({
             renderers: {
               home: Home,
+              template_page: DefaultRenderer,
               single_post: DefaultRenderer
             },
             transitions: {

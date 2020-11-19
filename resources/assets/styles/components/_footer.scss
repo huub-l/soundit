@@ -1,5 +1,6 @@
 #siteFooter {
     @include vw ('padding', 48);
+    @include vw ('padding-top', 92);
     width: 100%;
     position: absolute;
     bottom: 0;
@@ -37,6 +38,24 @@
                 display: inline-block;
             }
 
+        }
+    }
+
+    .newsletter {
+        form {
+            label {
+                @include vw('font-size', 18);
+                @include vw('margin-bottom', 12);
+                display: block;
+                color: $white;
+            }
+
+            .input__wrapper {
+                display: flex;
+                justify-content: space-between;
+  
+                input { width: 70%; }
+            }
         }
     }
     

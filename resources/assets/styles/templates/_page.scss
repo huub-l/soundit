@@ -1,0 +1,24 @@
+.page--hero {
+    @include vw('padding-top', 212);
+    @include vw('padding-bottom', 92);
+    background: $black;
+    color: $white;
+    text-align: center;
+}
+
+.page--content {
+    @include vw('padding-top', 190);
+    @include vw('padding-bottom', 190);
+    background: $dark-grey;
+
+    h2 {
+        @extend .heading-two-white;
+        font-family: $font-circular;
+        text-transform: none;
+    }
+
+    h3 { @extend .heading-three-white; }
+
+    h2, h3 { @include vw('margin-bottom', 24); }
+
+}

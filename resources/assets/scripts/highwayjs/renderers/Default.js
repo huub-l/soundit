@@ -1,4 +1,4 @@
-import LocomotiveScroll from 'locomotive-scroll';
+import MainController from '../MainController';
 import Highway from '@dogstudio/highway/build/highway.min.js'
 
 import AssetLoader from '../AssetLoader'
@@ -10,26 +10,51 @@ export default class DefaultRenderer extends Highway.Renderer {
     super(properties);
 
     // initialize class variables
-    this.scroll
+    this.MainController = new MainController();
+    this.themeUrl = site_info.templateUrl;
   }
 
     onEnter() {
         this.loadScripts()
 
+        this.MainController.init();
+
         AssetLoader.load( { element: this.properties.view } ).then( () => {
 
             console.log('assets loaded')
-            this.scroll = new LocomotiveScroll({
-              el: document.querySelector('[data-scroll-container]'),
-              smooth: true
-            });
 
+            let mainScroll = this.MainController.getScroll();
+        
             // Viewport vh
             let vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
 
+
+            //cursor 
+
+            const cursor = document.querySelector('#cursor');
+            let links = document.querySelectorAll('a, button, .triggers-hover');
+
+            document.addEventListener('mousemove', e => {
+                cursor.style.left = e.pageX + 'px';
+                cursor.style.top = e.pageY + 'px';
+            });
+
+            links.forEach(function(link) {
+                link.addEventListener('mouseover', function hover() {
+                    cursor.classList.add('cursor-link')
+                    return false;
+                });
+                
+                link.addEventListener('mouseleave', function leave() {
+                    cursor.classList.remove('cursor-link')
+                    return false;
+                });
+            });
+
+
             // Header fixed
-            this.scroll.on('scroll', function(instance) {
+            mainScroll.on('scroll', function(instance) {
                 let y = instance.scroll.y,
                   header = document.querySelector('#siteHeader'),
                   heroHeight = document.querySelector('#siteHeader').offsetHeight;
@@ -48,7 +73,25 @@ export default class DefaultRenderer extends Highway.Renderer {
                 main = document.querySelector('.grid-container');
 
             main.style.padding = '0 0 '+footerHeight+'px';
-            this.scroll.update();
+            mainScroll.update();
+
+
+            // ScrollTo Internal Links
+
+            let internalLinks = document.querySelectorAll('.internal-link a');
+
+            for (var i = 0; i < internalLinks.length; i++) {
+                var item = internalLinks[i];
+
+                item.onclick = function (event) {
+                    event.preventDefault();
+
+                    let url = this.getAttribute('href'),
+                        target = document.querySelector(url);
+
+                    mainScroll.scrollTo(target, {offset: -50});
+                };
+            }
         })
     }
 
@@ -69,7 +112,7 @@ export default class DefaultRenderer extends Highway.Renderer {
     }
 
     onLeave() {
-      this.scroll.destroy()
+        this.MainController.destroy()
     }
 
     onLeaveCompleted() {

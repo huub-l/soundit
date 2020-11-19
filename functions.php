@@ -73,3 +73,18 @@ new Roots\Acorn\Bootloader();
 if( function_exists('acf_add_options_page') ) {
 	acf_add_options_page();
 }
+
+// // Read More
+// function readmore($fullText){
+//     $moreString = '<!--more-->';
+//     if(@strpos($fullText, $moreString)){
+//         $morePos = strpos($fullText, $moreString);
+//         $excerpt = substr($fullText,0,$morePos);
+//         $text_left = substr($fullText, $morePos);
+//         echo $excerpt;
+//         echo "<div class=\"block-read-more-wrapper\"><div class=\"block-read-more-content\">" . $text_left . "</div></div>";
+//         echo "<button class=\"btn block-read-more\" data-text-original=\"". __('Ler mais', 'base') . "\" data-text-replace=\"" . __('Fechar', 'base') . "\">" . __('Ler mais', 'base') . "</button>";
+//     } else {
+//         echo $fullText;
+//     }
+// }

@@ -621,6 +621,7 @@ $col_width: 100 / $col_number;
 
     &.visible {
         display: flex;
+        z-index: 1000;
     }
 
     #grid {
@@ -654,6 +655,5 @@ $col_width: 100 / $col_number;
                 }
             }
         }
-
     }
 }
