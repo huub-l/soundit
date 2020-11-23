@@ -82,9 +82,9 @@
                     </div>
 
                     <div class="swiper-navigation">
-                        <div class="swiper-prev-text"> < </div>
+                        <div class="swiper-prev triggers-hover"> @include('svg.icon-arrow') </div>
                         <div class="swiper-pagination"></div>
-                        <div class="swiper-next-text"> > </div>
+                        <div class="swiper-next triggers-hover"> @include('svg.icon-arrow') </div>
                     </div>  
                 </div>
             </div>

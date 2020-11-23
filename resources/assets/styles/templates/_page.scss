@@ -21,4 +21,28 @@
 
     h2, h3 { @include vw('margin-bottom', 24); }
 
+
+    .readmore {
+        position: relative;
+        
+
+        .accordion_tab {
+            @include vw('font-size', 16);
+            margin-top: $unit;
+            color: $light-grey;
+            text-transform: uppercase;
+    
+            span {
+                @include vw('font-size', 24);
+                padding-right: 6px;
+                color: $white;
+            }   
+        }
+        
+        .readmore-wrapper {
+            height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
+        }
+    }
 }

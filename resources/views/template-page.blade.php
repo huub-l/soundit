@@ -18,7 +18,7 @@
         <div class="row expanded">
             <div class="large-8 large-offset-2">
                 <div class="content__wrapper">
-                   
+                   @content
                 </div>
             </div>
         </div>

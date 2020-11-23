@@ -17,11 +17,15 @@ class Home extends DefaultRenderer {
     Swiper.use([Navigation, Pagination]);
 
     var infographicsSwiper = new Swiper('.infographic__slideshow > .swiper-container', { 
+      slidesPerView: 1,
+      spaceBetween: 48, 
+      autoHeight: true,
+
       pagination: {
         el: '.swiper-pagination',
         clickable: true,
-        renderBullet: function (index) {
-          return '<span>' + (index + 1) + '</span>';
+        renderBullet: function (index, className) {
+          return '<span class="' + className + ' triggers-hover">' + (index + 1) + '</span>';
         },
       },
     
@@ -29,6 +33,10 @@ class Home extends DefaultRenderer {
         nextEl: '.swiper-next',
         prevEl: '.swiper-prev',
       },
+    });
+
+    infographicsSwiper.on('slideChange', function () {
+      setTimeout( function() { mainScroll.update() }, 500)
     });
   
 
@@ -89,7 +97,7 @@ class Home extends DefaultRenderer {
         scroller: '[data-scroll-container]',
         scrub: true,
         pin: true,
-        start: '+=10%',
+        start: 'top top',
         end: '+=100%',
         onUpdate: (self) => {
           console.log(

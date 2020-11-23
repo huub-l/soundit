@@ -24,12 +24,14 @@ export default class DefaultRenderer extends Highway.Renderer {
             console.log('assets loaded')
 
             let mainScroll = this.MainController.getScroll();
+
+            window.addEventListener('resize', function () { mainScroll.update() });
         
             // Viewport vh
             let vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
 
-
+        
             //cursor 
 
             const cursor = document.querySelector('#cursor');
@@ -66,6 +68,7 @@ export default class DefaultRenderer extends Highway.Renderer {
                 }    
             });
 
+
             // Margin for footer
 
             let footer = document.querySelector('#siteFooter'),
@@ -87,8 +90,9 @@ export default class DefaultRenderer extends Highway.Renderer {
                     event.preventDefault();
 
                     let url = this.getAttribute('href'),
-                        target = document.querySelector(url);
-
+                        id = url.substring(url.lastIndexOf('/') + 1),
+                        target = document.querySelector(id);
+                        
                     mainScroll.scrollTo(target, {offset: -50});
                 };
             }
