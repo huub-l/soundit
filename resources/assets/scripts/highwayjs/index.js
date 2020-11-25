@@ -27,8 +27,13 @@ export default class H extends Highway.Core {
     }
 
     onNavigateIn({ to, location }) {
-
-        const menuItems = document.querySelectorAll('.menu-item')
+        if (!to.page.body.classList.contains('home')) {
+            document.querySelectorAll('[data-anchor]').forEach(anchor => {
+                anchor.href = window.location.origin + '/' + anchor.dataset.anchor
+            });
+        }
+       
+        const menuItems = document.querySelectorAll('.menu-item a')
 
         // Update Active Nav Link
         for( let i = 0; i < menuItems.length; i++ ) {
@@ -38,9 +43,9 @@ export default class H extends Highway.Core {
             if( menuItems[i].href === location.href ) {
                 menuItems[i].classList.add('active')
             }
-
         }
 
+    
         // Update body classes
         document.body.className = to.page.body.className
     }

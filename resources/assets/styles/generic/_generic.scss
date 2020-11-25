@@ -100,44 +100,73 @@ hr {
 // 1 Headings 
 
 .heading-one {
-    @include vw ('font-size', 120);
-    @include vw ('line-height', 130);
+    @include vw ('font-size', 42, 420);
+    @include vw ('line-height', 56, 420);
     color: $white;
+
+    @include min-screen($small) {
+        @include vw ('font-size', 120);
+        @include vw ('line-height', 130);
+    } 
 }
 
 .heading-two-white {
-    @include vw ('font-size', 39);
+    @include vw ('font-size', 24, 420);
     font-family: $font-lyyra;
     color: $white;
     text-transform: uppercase;
+
+    @include min-screen($small) {
+        @include vw ('font-size', 39);
+    }
 }
 
 .heading-two-grey {
-    @include vw ('font-size', 39);
+    @include vw ('font-size', 24, 420);
     font-family: $font-lyyra;;
     color: $grey;
     text-transform: uppercase;
+
+    @include min-screen($small) {
+        @include vw ('font-size', 39);
+    }
 }
 
 .heading-two-black {
-    @include vw ('font-size', 39);
+    @include vw ('font-size', 24, 420);
     font-family: $font-lyyra;;
     color: $black;
     text-transform: uppercase;
+
+    @include min-screen($small) {
+        @include vw ('font-size', 39);
+    }
 }
 
 .heading-three-white {
-    @include vw ('font-size', 16);
+    @include vw ('font-size', 14, 420);
     color: $white;
+
+    @include min-screen($small) {
+        @include vw ('font-size', 16);
+    }
 }
 
 .heading-three-grey {
-    @include vw ('font-size', 16);
+    @include vw ('font-size', 14, 420);
     color: $grey;
+
+    @include min-screen($small) {
+        @include vw ('font-size', 16);
+    }
 }
 
 p {
-    @include vw ('font-size', 24);
+    @include vw ('font-size', 16, 420);
     color: $light-grey;
+
+    @include min-screen($small) {
+        @include vw ('font-size', 24);
+    }
 }
 

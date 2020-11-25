@@ -79,28 +79,20 @@ export default class DefaultRenderer extends Highway.Renderer {
             mainScroll.update();
 
 
-            // ScrollTo Internal Links
-
-            let internalLinks = document.querySelectorAll('.internal-link a');
-
-            for (var i = 0; i < internalLinks.length; i++) {
-                var item = internalLinks[i];
-
-                item.onclick = function (event) {
-                    event.preventDefault();
-
-                    let url = this.getAttribute('href'),
-                        id = url.substring(url.lastIndexOf('/') + 1),
-                        target = document.querySelector(id);
-                        
-                    mainScroll.scrollTo(target, {offset: -50});
-                };
-            }
+            document.querySelectorAll('[data-anchor').forEach(anchor => {
+                anchor.addEventListener('click', (ev) => {
+                  ev.preventDefault()
+          
+                  let url = anchor.dataset.anchor;
+          
+                  mainScroll.scrollTo(url, {offset: -50})
+                  mainScroll.update()
+                })
+            })
         })
     }
 
     onFirstLoad() {
-
         this.loadScripts(true)
         this.onEnter()
         AssetLoader.loaded.then(() => {

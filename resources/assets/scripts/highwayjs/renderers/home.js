@@ -2,7 +2,6 @@
 import DefaultRenderer from './Default';
 import Swiper, { Navigation, Pagination } from 'swiper';
 
-
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
@@ -35,10 +34,6 @@ class Home extends DefaultRenderer {
       },
     });
 
-    infographicsSwiper.on('slideChange', function () {
-      setTimeout( function() { mainScroll.update() }, 500)
-    });
-  
 
     // ** Frames Animation ** 
 
@@ -129,6 +124,15 @@ class Home extends DefaultRenderer {
     ScrollTrigger.refresh();
 
     preloadImages();
+
+
+    // ** on slideChange **
+    infographicsSwiper.on('slideChangeTransitionEnd', function () {
+      setTimeout(function() { 
+        mainScroll.update()
+        ScrollTrigger.refresh();
+      }, 50);
+    });
   }
 
   onFirstLoad() {

@@ -177,6 +177,7 @@ input {
     @include vw('font-size', 16);
     background: $white;
     color: $black;
+    border-radius: 8px;
     
     &::placeholder { color: $light-grey; }
 }

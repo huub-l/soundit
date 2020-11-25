@@ -21,8 +21,12 @@
             column-gap: 24px;
 
             li {
-                @include vw('padding-bottom', 12);
-                a { color: $white; }
+                @include vw('padding-bottom', 6);
+                
+                a {
+                    @include vw('padding-bottom', 6);
+                    color: $white;
+                }
             }
         }
 
@@ -54,7 +58,10 @@
                 display: flex;
                 justify-content: space-between;
   
-                input { width: 70%; }
+                input {
+                    width: 70%;
+                    margin-right: $unit;
+                }
             }
         }
     }

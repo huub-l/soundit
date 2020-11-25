@@ -1,17 +1,17 @@
 <footer id="siteFooter" >
     <div class="row expanded">
-        <div class="large-2">
+        <div class="xxlarge-2">
             @include('svg.logo-icon')
         </div>
 
-        <div class="large-5">
+        <div class="xxlarge-5">
             <div class="footer__nav">
                 @if ($footerNav)
                 <nav class="nav-footer">
                     <ul class="nav">
                     @foreach ($footerNav as $item)
                         <li class="menu-item {{ $item->classes ?? '' }}">
-                            <a href="{{ $item->url }}" data-scroll-to @if ( strpos($item->classes, 'internal-link') !== false ) data-router-disabled @endif> {{ $item->label }} </a>
+                            <a @if($item->classes ?? 'internal-link') data-anchor="{{ $item->url }}" data-scroll-to @else href="{{ $item->url }}" @endif > {{ $item->label }} </a>
                         </li>
                     @endforeach
                     </ul>
@@ -29,7 +29,7 @@
             </div>    
         </div>
 
-        <div class="large-4 large-offset-1">
+        <div class="xxlarge-4 xxlarge-offset-1">
             <div class="newsletter">
                 <form>
                     <label for="newsletter">Stay up to date with our latest innovations</label>
@@ -43,7 +43,7 @@
     </div>
 
     <div class="row expanded">
-        <div class="large-12">
+        <div class="xxlarge-12">
             <div class="site-copyright" id="gridToggle">Soundid Ldt. Copyright © {{date('Y')}}</div>
         </div>
     </div>

@@ -7,7 +7,7 @@
     <ul class="nav">
       @foreach ($headerNav as $item)
         <li class="menu-item {{ $item->classes ?? '' }}">
-          <a href="{{ $item->url }}" data-scroll-to  @if ( strpos($item->classes, 'internal-link') !== false ) data-router-disabled @endif> {{ $item->label }} </a>
+          <a data-anchor="{{ $item->url }}" data-scroll-to> {{ $item->label }} </a>
         </li>
       @endforeach
     </ul>

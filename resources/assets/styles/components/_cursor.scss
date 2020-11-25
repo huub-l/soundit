@@ -1,23 +1,23 @@
 #cursor {
-    display: none;
-    width: 20px;
-    height: 20px;
-    position: fixed;
-    left: 0;
-    top: 0;
-    border-radius: 50%;
-    background: transparent;
-    border: 2px solid #136DFC;
-    pointer-events: none;
-    transition: width 0.3s ease-in-out, height 0.3s ease-in-out, background-color 0.3s ease-in-out;
-    z-index: 9999;
-    overflow: visible;
+  display: none;
+  width: 20px;
+  height: 20px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  border-radius: 50%;
+  background: transparent;
+  border: 2px solid #136DFC;
+  pointer-events: none;
+  transition: width 0.3s ease-in-out, height 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  z-index: 9999;
+  overflow: visible;
 
-    @include min-screen($small) {  display: block; }
+  @include min-screen($small) {  display: block; }
 
-    &.cursor-link {
-      width: 10px;
-      height: 10px;
-      background: #136DFC;
-    }
+  &.cursor-link {
+    width: 10px;
+    height: 10px;
+    background: #136DFC;
+  }
 }

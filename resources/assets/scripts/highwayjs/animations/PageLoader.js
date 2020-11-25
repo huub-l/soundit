@@ -8,7 +8,7 @@ const PageLoader = {
         .fromTo( '#transition', {
             autoAlpha: 0
         }, {
-            duration: 0.3,
+            duration: 0.5,
             autoAlpha: 1,
             immediateRender: false
         }

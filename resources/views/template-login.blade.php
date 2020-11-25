@@ -14,7 +14,7 @@
 
     <section class="login--wrapper">
         <div class="row expanded">
-            <div class="large-6 large-offset-3">
+            <div class="xxlarge-6 xxlarge-offset-3">
                 <div class="login__content">
                     <h2 class="heading-two-white">@field('login_title')</h2>
 
