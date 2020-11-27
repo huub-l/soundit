@@ -10,14 +10,23 @@
 // ** Global Buttons **
 
 .btn {
-    @include vw('font-size', 18);
-    @include vw('padding-top', 12);
-    @include vw('padding-bottom', 12);
-    @include vw('padding-left', 36);
-    @include vw('padding-right', 36);
+    @include vw('font-size', 12, 420);
+    @include vw('padding-top', 12, 420);
+    @include vw('padding-bottom', 12, 420);
+    @include vw('padding-left', 36, 420);
+    @include vw('padding-right', 36, 420);
     display: block;
     width: fit-content;
-    border-radius: 8px;
+    border-radius: 12px;
+
+    @include min-screen ($small) {
+        @include vw('font-size', 18);
+        @include vw('padding-top', 12);
+        @include vw('padding-bottom', 12);
+        @include vw('padding-left', 36);
+        @include vw('padding-right', 36);
+        border-radius: 8px;
+    }
 
     &.btn-white {
         color: $white;
@@ -31,7 +40,7 @@
 
     &.btn-subscribe {
         background: $white;
-        color: $light-grey;
+        color: $black;
         font-weight: 500;
     }
 }

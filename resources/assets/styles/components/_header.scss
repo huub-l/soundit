@@ -1,7 +1,7 @@
 #siteHeader {
-    @include vw ('padding', 48);
+    @include vw ('padding', 24, 420);
     width: 100%;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     display: flex;
@@ -11,14 +11,26 @@
     background: $black;
     z-index: 20;
     transition: all 0.3s ease-in-out;
+
+    @include min-screen($small) {
+        @include vw ('padding', 48);
+        position: absolute;
+    }
     
     .brand {
-        @include vw('height', 24);
-        transform: translateY(0);
-        transition: opacity 0.3s ease-in-out, transition 0.3s ease-in-out, height 0.3s ease-in-out;
-        transition: height 0.3s ease-in-out;
-        
-        svg { height: 100%; }
+        @include vw('height', 12, 420);
+    
+        svg {
+            height: 100%;
+            vertical-align: top;
+        }
+
+        @include min-screen($small) {
+            @include vw('height', 24);
+            transform: translateY(0);
+            transition: opacity 0.3s ease-in-out, transition 0.3s ease-in-out, height 0.3s ease-in-out;
+            transition: height 0.3s ease-in-out;
+        }
     }
 
     .brand-icon {
@@ -35,7 +47,10 @@
 
     .nav-header {
         @include vw ('margin-top', 36);
+        display: none;
         transition: all 0.3s ease-in-out;
+
+        @include min-screen($small) { display: block; }
 
         ul li {
             @include vw ('font-size', 18);
@@ -68,5 +83,25 @@
         .brand-icon { opacity: 1; }
 
         .nav-header { margin-top: 0; }
+    }
+
+    .burger-menu {
+        width: 16px;
+        height: $unit-small;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: absolute;
+        top: 50%;
+        left: $unit;
+        transform: translateY(-50%);
+
+        span {
+            width: 100%;
+            height: 1px;
+            background: $light-grey;
+        }
+
+        @include min-screen($small) { display: none; }
     }
 }

@@ -35,6 +35,43 @@ class Home extends DefaultRenderer {
     });
 
 
+    // ** Team Mobile Slideshow ** 
+
+    let members = document.querySelectorAll('.team__members li'),
+      membersIndex = document.querySelectorAll('[data-row]'),
+      navPrev = document.querySelector('.team-prev');
+
+    members.forEach(member => {
+      if ( member.getAttribute('data-row') == '1' ) {
+       member.classList.add('active-member')
+      }
+    })
+    
+    function forward() {
+      document.querySelector('.team-next').addEventListener('click', function() {
+        let currentEl = document.querySelector('.active-member'),
+          nextEl = currentEl.nextElementSibling;
+          
+        currentEl.classList.remove('active-member');
+        nextEl.classList.add('active-member');
+      })
+    }
+
+    forward();
+          
+    function previous() {
+      document.querySelector('.team-prev').addEventListener('click', function() {
+        let currentEl = document.querySelector('.active-member'),
+          prevEl = currentEl.previousElementSibling;
+          
+        currentEl.classList.remove('active-member');
+        prevEl.classList.add('active-member');
+      })
+    }
+
+    previous();
+
+    
     // ** Frames Animation ** 
 
     gsap.registerPlugin(ScrollTrigger);

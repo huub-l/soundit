@@ -1,36 +1,68 @@
 #siteFooter {
-    @include vw ('padding', 48);
-    @include vw ('padding-top', 92);
+    @include vw ('padding-top', 48, 420);
+    @include vw ('padding-bottom', 48, 420);
     width: 100%;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     background: $black;
     z-index: 2;
-    
-    svg {  @include vw('width', 22); }
 
+    svg {  @include vw('width', 22, 420); }
+
+    @include min-screen($small) {
+        @include vw ('padding', 48);
+        @include vw ('padding-top', 92);
+        position: absolute;
+
+        svg {  @include vw('width', 22); }
+    }
+    
     .footer__nav {
-        @include vw('font-size', 18);
+        @include vw('font-size', 14, 420);
         display: flex;
+        flex-direction: column;
         align-items: flex-start;
         justify-content: space-between;
 
-        .nav-footer ul {
-            column-count: 3;
-            column-gap: 24px;
+        @include min-screen($small) {
+            @include vw('font-size', 18);
+            flex-direction: row;
+        }
 
-            li {
-                @include vw('padding-bottom', 6);
-                
-                a {
+        .nav-footer {
+            @include vw('padding-top', 48, 420);
+            @include vw('padding-bottom', 24, 420);
+            width: 100%;
+            border-bottom: 1px solid #707070;
+
+            @include min-screen($small) {
+                width: fit-content;
+                padding: 0;
+                border: none;
+            }
+            
+            ul {
+                column-count: 3;
+                column-gap: 24px;
+
+                li {
                     @include vw('padding-bottom', 6);
-                    color: $white;
+                    
+                    a {
+                        @include vw('padding-bottom', 6);
+                        color: $white;
+                    }
                 }
             }
         }
 
         .nav-social {
+            @include vw('padding-top', 24, 420);
+            @include vw('padding-bottom', 24, 420);
+           
+            @include min-screen($small) { padding: 0; }
+
             span {
                 display: block;
                 color: $white;
@@ -46,31 +78,59 @@
     }
 
     .newsletter {
+        @include vw('padding-top', 24, 420);
+        border-top: 1px solid #707070;
+
+        @include min-screen($small) {
+            padding: 0;
+            border: none;
+        }
+
         form {
             label {
-                @include vw('font-size', 18);
-                @include vw('margin-bottom', 12);
+                @include vw('font-size', 14, 420);
+                @include vw('margin-bottom', 12, 420);
                 display: block;
                 color: $white;
+
+                @include min-screen($small) {
+                    @include vw('font-size', 18);
+                    @include vw('margin-bottom', 12);
+                }
             }
 
             .input__wrapper {
                 display: flex;
-                justify-content: space-between;
+                flex-direction: column;
+       
+                @include min-screen($small) {
+                    flex-direction: row;
+                    justify-content: space-between;
+                }
   
                 input {
-                    width: 70%;
-                    margin-right: $unit;
+                    @include vw('margin-bottom', 12, 420);
+                    width: 100%;
+
+                    @include min-screen($small) {
+                        width: 70%;
+                        margin: 0 $unit 0 0;
+                    }
                 }
             }
         }
     }
     
     .site-copyright {
-        @include vw('font-size', 12);
-        @include vw('margin-top', 72);
+        @include vw('font-size', 10, 420);
+        @include vw('margin-top', 72, 420);
         width: 100%;
         color: $white;
         text-align: center;
+
+        @include min-screen ($small) {
+            @include vw('font-size', 12);
+            @include vw('margin-top', 72);
+        }
     }
 }

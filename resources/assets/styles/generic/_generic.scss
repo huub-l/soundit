@@ -112,52 +112,67 @@ hr {
 
 .heading-two-white {
     @include vw ('font-size', 24, 420);
+    @include vw ('margin-bottom', 24, 420);
+    display: block;
     font-family: $font-lyyra;
     color: $white;
     text-transform: uppercase;
 
     @include min-screen($small) {
         @include vw ('font-size', 39);
+        @include vw ('margin-bottom', 24);
     }
 }
 
 .heading-two-grey {
     @include vw ('font-size', 24, 420);
+    @include vw ('margin-bottom', 24, 420);
+    display: block;
     font-family: $font-lyyra;;
     color: $grey;
     text-transform: uppercase;
 
     @include min-screen($small) {
         @include vw ('font-size', 39);
+        @include vw ('margin-bottom', 24);
     }
 }
 
 .heading-two-black {
     @include vw ('font-size', 24, 420);
+    @include vw ('margin-bottom', 24, 420);
+    display: block;
     font-family: $font-lyyra;;
     color: $black;
     text-transform: uppercase;
 
     @include min-screen($small) {
         @include vw ('font-size', 39);
+        @include vw ('margin-bottom', 24);
     }
 }
 
 .heading-three-white {
     @include vw ('font-size', 14, 420);
+    @include vw ('margin-bottom', 24, 420);
+    display: block;
     color: $white;
 
     @include min-screen($small) {
         @include vw ('font-size', 16);
+        @include vw('margin-bottom', 24);
     }
 }
 
 .heading-three-grey {
     @include vw ('font-size', 14, 420);
+    @include vw ('margin-bottom', 24, 420);
+    display: block;
     color: $grey;
 
     @include min-screen($small) {
         @include vw ('font-size', 16);
+        @include vw('margin-bottom', 24);
     }
 }
 
@@ -170,3 +185,47 @@ p {
     }
 }
 
+
+// Accordion 
+
+.accordion-wrapper {
+    .accordion-content {
+        @include vw('height', 250, 420);
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease-in-out;
+
+        &:after {
+            content: '';
+            height: 40%;
+            width: 100%;
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            opacity: 1;
+        }
+
+        &.hide {
+            &:after { opacity: 0; }
+        }
+    }
+
+    .accordion-tab { 
+        @include vw('font-size', 16, 420);
+        margin-top: $unit;
+        color: $light-grey;
+        text-transform: uppercase;
+
+        span {
+            @include vw('font-size', 24, 420);
+            padding-right: 6px;
+            color: $white;
+        } 
+
+        @include min-screen($small) {
+            @include vw('font-size', 16);
+        
+            span { @include vw('font-size', 24); }
+        }
+    }
+}

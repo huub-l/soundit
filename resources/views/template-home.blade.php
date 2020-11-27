@@ -11,16 +11,17 @@
 
         <section class="home--hero" id="home-hero">
             <div class="row expanded">
-                <div class="column xxlarge-12">
+                <div class="column small-12 xxlarge-12">
                     <div class="hero-wrapper" id="sticky-background">
                         <span> @include('svg.icon-scroll') </span>
                         <div class="hero__background" data-scroll data-scroll-sticky data-scroll-target="#sticky-background">
                             <img src="@field('hero_background', 'url')" alt="@field('hero_background', 'alt')">
                         </div>
 
-                        <h1 class="heading-one">@field('hero_title')</h1>
-                        <a class="btn btn-white" href="@field('hero_link', 'url')" target="@field('hero_link', 'target')">@field('hero_link', 'title')</a>
-                        <span></span>
+                        <div class="hero__title">
+                            <h1 class="heading-one">@field('hero_title')</h1>
+                            <a class="btn btn-white" href="@field('hero_link', 'url')" target="@field('hero_link', 'target')">@field('hero_link', 'title')</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -34,11 +35,17 @@
             </div>
 
         <div class="row expanded">
-            <div class="column xxlarge-8 xxlarge-offset-2">
+            <div class="column small-10 small-offset-1 xxlarge-8 xxlarge-offset-2">
                 <div class="about-wrapper">
                         <span class="heading-three-white">@field('about_uppertitle')</span>
                         <h2 class="heading-two-white">@field('about_title')</h2>
-                        <p>@field('about_text')</p>
+                        <div class="accordion-wrapper js-accordion">
+                            <div class="accordion-content">
+                                <p>@field('about_text')</p>
+                            </div>
+                            <button class="accordion-tab"><span>+</span>Read More</button>
+                        </div>
+                        
 
                         @hasfield('about_bullets')
                         <ul class="about__bullets">
@@ -61,7 +68,7 @@
         @hasfield('infographic_slideshow')
         <section class="home--infographics">
             <div class="row expanded">
-                <div class="xxlarge-12">
+                <div class="small-12 xxlarge-12">
                     <div class="infographic__slideshow">
                         <div class="swiper-container">
                             <div class="swiper-wrapper">
@@ -74,7 +81,8 @@
                                             <p>@sub('text')</p>
                                         </div>
                                         <div class="slide__image">
-                                            <img src="@sub('image', 'url')" alt="@sub('image', 'alt')">
+                                            <img class="img_desktop" src="@sub('image_desktop', 'url')" alt="@sub('image_desktop', 'alt')">
+                                            <img class="img_mobile" src="@sub('image_mobile', 'url')" alt="@sub('image_mobile', 'alt')">
                                         </div>
                                     </div>
                                     @endfields
@@ -99,7 +107,7 @@
             @hasfield('services_list')
             <div class="row expanded">
                 @fields('services_list')
-                <div class="column xxlarge-3">
+                <div class="column small-12 xxlarge-3">
                     <div class="service__wrapper">
                         <h2 class="heading-two-grey">@sub('service')</h2>
                     </div>
@@ -116,7 +124,7 @@
 
             <div class="experience-wrapper">
                 <div class="row expanded">
-                    <div class="column xxlarge-5">
+                    <div class="column small-10 small-offset-1 xxlarge-5 xxlarge-offset-0">
                         <span class="heading-three-white">@field('experience_uppertitle')</span>
                         <h2 class="heading-two-white">@field('experience_title')</h2>
                         <p>@field('experience_text')</p>
@@ -137,7 +145,7 @@
             <div class="technology-background"><img src="@field('technology_background', 'url')" alt=""></div>
 
             <div class="row expanded">
-                <div class="column xxlarge-6">
+                <div class="column small-10 small-offset-1 xxlarge-6 xxlarge-offset-0">
                     <div class="technology-wrapper">
                         <span class="heading-three-white">@field('technology_uppertitle')</span>
                         <h2 class="heading-two-white">@field('technology_title')</h2>
@@ -172,16 +180,21 @@
 
         <section class="home--team" id="home-team">
             <div class="row expanded">
-                <div class="column xxlarge-8 xxlarge-offset-2">
+                <div class="column small-10 small-offset-1 xxlarge-8 xxlarge-offset-2">
                     <div class="team-wrapper">
                         <span class="heading-three-grey">@field('team_uppertitle')</span>
                         <h2 class="heading-two-black">@field('team_title')</h2>
                         <p>@field('team_text')</p>
 
                         @hasfield('team_members')
+                        <div class="team__nav">
+                            <span class="team-prev">@include('svg.icon-arrow')</span>
+                            <span class="team-next">@include('svg.icon-arrow')</span>
+                        </div>
+
                         <ul class="team__members">
                             @fields('team_members')
-                            <li>
+                            <li data-row="{{ get_row_index() }}">
                                 @group('team_member')
                                 <h3 class="heading-three-grey">@sub('name')</h3>
                                 <p>@sub('description')</p>
@@ -197,14 +210,14 @@
 
         <section class="home--form" id="home-form">
             <div class="row expanded align-bottom">
-                <div class="column xxlarge-4 xxlarge-offset-2">
+                <div class="column small-10 small-offset-1 xxlarge-4 xxlarge-offset-2">
                     <div class="form__hero">
                         <span class="heading-three-white">@field('form_uppertitle')</span>
                         <h2 class="heading-two-white">@field('form_title')</h2>
                         <p>@field('form_text')</p>
                     </div>
                 </div>
-                <div class="column xxlarge-4">
+                <div class="column small-10 small-offset-1 xxlarge-4 xxlarge-offset-0">
                     <div class="form__wrapper">
                         <div class="row expanded">
                             <div class="column">

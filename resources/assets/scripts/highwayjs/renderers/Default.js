@@ -56,18 +56,19 @@ export default class DefaultRenderer extends Highway.Renderer {
 
 
             // Header fixed
-            mainScroll.on('scroll', function(instance) {
-                let y = instance.scroll.y,
-                  header = document.querySelector('#siteHeader'),
-                  heroHeight = document.querySelector('#siteHeader').offsetHeight;
-              
-                if (y >= heroHeight) {
-                  header.classList.add('fixed');
-                } else {
-                  header.classList.remove('fixed');
-                }    
-            });
-
+            if (window.matchMedia('(min-width: 1023px)').matches) {
+                mainScroll.on('scroll', function(instance) {
+                    let y = instance.scroll.y,
+                    header = document.querySelector('#siteHeader'),
+                    heroHeight = document.querySelector('#siteHeader').offsetHeight;
+                
+                    if (y >= heroHeight) {
+                    header.classList.add('fixed');
+                    } else {
+                    header.classList.remove('fixed');
+                    }    
+                });
+            }
 
             // Margin for footer
 
@@ -89,6 +90,46 @@ export default class DefaultRenderer extends Highway.Renderer {
                   mainScroll.update()
                 })
             })
+
+            
+            // Accordion
+
+            const accordions = document.querySelectorAll('.js-accordion');
+            const tabs = document.querySelectorAll('.accordion-tab');
+
+            const openAccordion = (accordion) => {
+                const wrapper = accordion.querySelector('.accordion-content'), 
+                    content = accordion.querySelector('.accordion-content > p');
+
+                accordion.querySelector('.accordion-tab').innerHTML = '<span>-</span> Close';
+                wrapper.classList.add('hide');
+                wrapper.style.height = content.offsetHeight + "px";
+            };
+
+            const closeAccordion = (accordion) => {
+                const wrapper = accordion.querySelector('.accordion-content');
+
+                accordion.querySelector('.accordion-tab').innerHTML = '<span>+</span> Read More';
+                wrapper.classList.remove('hide');
+                wrapper.style.height = null;
+            };
+
+            accordions.forEach((accordion) => {
+                const intro = accordion.querySelector('.accordion-tab');
+                const wrapper = accordion.querySelector('.accordion-content');
+
+                intro.onclick = () => {
+                    console.log('clicked')
+                    if (wrapper.style.height) {
+                    closeAccordion(accordion);
+                    } else {
+                    accordions.forEach((accordion) => closeAccordion(accordion));
+                    openAccordion(accordion);
+                    }
+
+                    setTimeout( function() { mainScroll.update() }, 300)
+                };
+            });
         })
     }
 

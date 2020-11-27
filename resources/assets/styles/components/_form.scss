@@ -170,14 +170,19 @@
 // }
 
 input {
-    @include vw('padding-top', 20);
-    @include vw('padding-bottom', 20);
-    @include vw('padding-left', 12);
-    @include vw('padding-right', 12);
-    @include vw('font-size', 16);
+    @include vw('padding', 12, 420);
+    @include vw('font-size', 14, 420);
     background: $white;
     color: $black;
     border-radius: 8px;
     
     &::placeholder { color: $light-grey; }
+
+    @include min-screen ($small) {
+        @include vw('padding-top', 20);
+        @include vw('padding-bottom', 20);
+        @include vw('padding-left', 12);
+        @include vw('padding-right', 12);
+        @include vw('font-size', 16);
+    }
 }

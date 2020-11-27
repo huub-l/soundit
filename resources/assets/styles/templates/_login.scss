@@ -47,11 +47,7 @@
         text-align: center;
         z-index: 2;
 
-        .heading-three-white {
-            @include vw('margin-bottom', 24);
-            @include vw ('font-size', 18);
-            display: block;
-        }
+        .heading-three-white { @include vw ('font-size', 18); }
 
         .login__form {
             width: 50%;
