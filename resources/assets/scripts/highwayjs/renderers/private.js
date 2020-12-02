@@ -5,12 +5,54 @@ import Swiper, { Navigation, Pagination } from 'swiper';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
-class Home extends DefaultRenderer {
+class Private extends DefaultRenderer {
 
   onEnter() {
     super.onEnter();
     
     let mainScroll = this.MainController.getScroll();
+
+    // ** Infographics Slideshow ** 
+    Swiper.use([Navigation, Pagination]);
+
+    var infographicsDesktop = new Swiper('.infographic-desktop > .swiper-container', { 
+      slidesPerView: 1,
+      spaceBetween: 48, 
+      autoHeight: true,
+
+      pagination: {
+        el: '.infographic-desktop .swiper-pagination',
+        clickable: true,
+        renderBullet: function (index, className) {
+          return '<span class="' + className + ' triggers-hover">' + (index + 1) + '</span>';
+        },
+      },
+    
+      navigation: {
+        nextEl: '.infographic-desktop .swiper-next',
+        prevEl: '.infographic-desktop .swiper-prev',
+      },
+    });
+
+    var infographicsMobile = new Swiper('.infographic-mobile > .swiper-container', { 
+      slidesPerView: 1,
+      spaceBetween: 48, 
+      autoHeight: true,
+
+      pagination: {
+        el: '.infographic-mobile .swiper-pagination',
+        clickable: true,
+        renderBullet: function (index, className) {
+          return '<span class="' + className + ' triggers-hover">' + (index + 1) + '</span>';
+        },
+      },
+    
+      navigation: {
+        nextEl: '.infographic-mobile .swiper-next',
+        prevEl: '.infographic-mobile .swiper-prev',
+      },
+    });
+
 
     // ** Team Mobile Slideshow ** 
 
@@ -156,6 +198,22 @@ class Home extends DefaultRenderer {
     ScrollTrigger.refresh();
 
     preloadImages();
+
+
+    // ** on slideChange **
+    infographicsDesktop.on('slideChangeTransitionEnd', function () {
+      setTimeout(function() { 
+        mainScroll.update()
+        ScrollTrigger.refresh();
+      }, 50);
+    });
+
+    infographicsMobile.on('slideChangeTransitionEnd', function () {
+      setTimeout(function() { 
+        mainScroll.update()
+        ScrollTrigger.refresh();
+      }, 50);
+    });
   }
 
   onFirstLoad() {
@@ -171,4 +229,4 @@ class Home extends DefaultRenderer {
   }
 }
 
-export default Home;
+export default Private;

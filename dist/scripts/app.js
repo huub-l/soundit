@@ -267,6 +267,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _renderers_Default__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./renderers/Default */ "./resources/assets/scripts/highwayjs/renderers/Default.js");
 /* harmony import */ var _transitions_Default__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./transitions/Default */ "./resources/assets/scripts/highwayjs/transitions/Default.js");
 /* harmony import */ var _renderers_home__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./renderers/home */ "./resources/assets/scripts/highwayjs/renderers/home.js");
+/* harmony import */ var _renderers_private__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./renderers/private */ "./resources/assets/scripts/highwayjs/renderers/private.js");
 
 
 
@@ -383,6 +384,7 @@ function _isNativeReflectConstruct() {
 
 
 
+
 var H = /*#__PURE__*/function (_Highway$Core) {
   _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_2___default()(H, _Highway$Core);
 
@@ -396,6 +398,7 @@ var H = /*#__PURE__*/function (_Highway$Core) {
     _this = _super.call(this, {
       renderers: {
         home: _renderers_home__WEBPACK_IMPORTED_MODULE_9__["default"],
+        template_private: _renderers_private__WEBPACK_IMPORTED_MODULE_10__["default"],
         template_page: _renderers_Default__WEBPACK_IMPORTED_MODULE_7__["default"],
         template_login: _renderers_Default__WEBPACK_IMPORTED_MODULE_7__["default"],
         single_post: _renderers_Default__WEBPACK_IMPORTED_MODULE_7__["default"]
@@ -616,22 +619,31 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
           });
         }); // Accordion
 
-        var accordions = document.querySelectorAll('.js-accordion');
-        var tabs = document.querySelectorAll('.accordion-tab');
+        var accordions = document.querySelectorAll('.js-accordion'),
+            tabs = document.querySelectorAll('.accordion-tab'),
+            parent = document.querySelector('.js-parent');
 
         var openAccordion = function openAccordion(accordion) {
           var wrapper = accordion.querySelector('.accordion-content'),
-              content = accordion.querySelector('.accordion-content > p');
+              content = accordion.querySelector('.accordion-child');
           accordion.querySelector('.accordion-tab').innerHTML = '<span>-</span> Close';
-          wrapper.classList.add('hide');
+          wrapper.classList.add('visible');
           wrapper.style.height = content.offsetHeight + "px";
+
+          if (parent) {
+            parent.style.height = content.offsetHeight + "px";
+          }
         };
 
         var closeAccordion = function closeAccordion(accordion) {
           var wrapper = accordion.querySelector('.accordion-content');
           accordion.querySelector('.accordion-tab').innerHTML = '<span>+</span> Read More';
-          wrapper.classList.remove('hide');
+          wrapper.classList.remove('visible');
           wrapper.style.height = null;
+
+          if (parent) {
+            parent.style.height = '120px';
+          }
         };
 
         accordions.forEach(function (accordion) {
@@ -639,8 +651,6 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
           var wrapper = accordion.querySelector('.accordion-content');
 
           intro.onclick = function () {
-            console.log('clicked');
-
             if (wrapper.style.height) {
               closeAccordion(accordion);
             } else {
@@ -833,23 +843,280 @@ var Home = /*#__PURE__*/function (_DefaultRenderer) {
 
       _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(Home.prototype), "onEnter", this).call(this);
 
+      var mainScroll = this.MainController.getScroll(); // ** Team Mobile Slideshow ** 
+
+      var members = document.querySelectorAll('.team__members li'),
+          membersIndex = document.querySelectorAll('[data-row]'),
+          navPrev = document.querySelector('.team-prev');
+      members.forEach(function (member) {
+        if (member.getAttribute('data-row') == '1') {
+          member.classList.add('active-member');
+        }
+      });
+
+      function forward() {
+        document.querySelector('.team-next').addEventListener('click', function () {
+          var currentEl = document.querySelector('.active-member'),
+              nextEl;
+
+          if (currentEl.dataset.row == membersIndex.length) {
+            nextEl = members[0];
+          } else {
+            nextEl = currentEl.nextElementSibling;
+          }
+
+          currentEl.classList.remove('active-member');
+          nextEl.classList.add('active-member');
+
+          if (currentEl.getElementsByClassName('accordion-content')[0].classList.contains('visible')) {
+            currentEl.getElementsByClassName('accordion-tab')[0].click();
+          }
+        });
+      }
+
+      forward();
+
+      function previous() {
+        document.querySelector('.team-prev').addEventListener('click', function () {
+          var currentEl = document.querySelector('.active-member'),
+              prevEl;
+
+          if (currentEl.dataset.row == 1) {
+            prevEl = members[members.length - 1];
+          } else {
+            prevEl = currentEl.previousElementSibling;
+          }
+
+          currentEl.classList.remove('active-member');
+          prevEl.classList.add('active-member');
+
+          if (currentEl.getElementsByClassName('accordion-content')[0].classList.contains('visible')) {
+            currentEl.getElementsByClassName('accordion-tab')[0].click();
+          }
+        });
+      }
+
+      previous(); // ** Frames Animation ** 
+
+      gsap__WEBPACK_IMPORTED_MODULE_8__["default"].registerPlugin(gsap_dist_ScrollTrigger__WEBPACK_IMPORTED_MODULE_9__["ScrollTrigger"]);
+      mainScroll.on('scroll', gsap_dist_ScrollTrigger__WEBPACK_IMPORTED_MODULE_9__["ScrollTrigger"].update);
+      gsap_dist_ScrollTrigger__WEBPACK_IMPORTED_MODULE_9__["ScrollTrigger"].scrollerProxy('[data-scroll-container]', {
+        scrollTop: function scrollTop(value) {
+          return arguments.length ? mainScroll.scrollTo(value, 0, 0) : mainScroll.scroll.instance.scroll.y;
+        },
+        // we don't have to define a scrollLeft because we're only scrolling vertically.
+        getBoundingClientRect: function getBoundingClientRect() {
+          return {
+            top: 0,
+            left: 0,
+            width: window.innerWidth,
+            height: window.innerHeight
+          };
+        },
+        // LocomotiveScroll handles things completely differently on mobile devices - it doesn't even transform the container at all! So to get the correct behavior and avoid jitters, we should pin things with position: fixed on mobile. We sense it by checking to see if there's a transform applied to the container (the LocomotiveScroll-controlled element).
+        pinType: document.querySelector('[data-scroll-container]').style.transform ? 'transform' : 'fixed'
+      });
+      var canvas = document.getElementById('videoCanvas');
+      var context = canvas.getContext('2d');
+      var frameCount = 110;
+
+      var currentFrame = function currentFrame(index) {
+        return "".concat(_this.themeUrl, "/resources/assets/images/frames/soundit-").concat(index.toString().padStart(5, '0'), ".jpg");
+      };
+
+      var preloadImages = function preloadImages() {
+        for (var i = 1; i < frameCount; i++) {
+          var _img = new Image();
+
+          _img.src = currentFrame(i);
+        }
+      };
+
+      var img = new Image();
+      img.src = currentFrame(1);
+      canvas.width = 590;
+      canvas.height = 1080;
+
+      img.onload = function () {
+        context.drawImage(img, 0, 0);
+      };
+
+      var updateImage = function updateImage(index) {
+        img.src = currentFrame(index);
+        context.drawImage(img, 0, 0);
+      };
+
+      gsap__WEBPACK_IMPORTED_MODULE_8__["default"].from('.video', {
+        scrollTrigger: {
+          trigger: '.video',
+          scroller: '[data-scroll-container]',
+          scrub: true,
+          pin: true,
+          start: 'top top',
+          end: '+=100%',
+          onUpdate: function onUpdate(self) {
+            console.log('progress:', self.progress.toFixed(3), 'direction:', self.direction, 'velocity', self.getVelocity()); //const frameIndex = Math.ceil(self.progress * frameCount);
+
+            var frameIndex = Math.min(frameCount - 1, Math.ceil(self.progress * frameCount));
+            console.log(frameIndex);
+            requestAnimationFrame(function () {
+              return updateImage(frameIndex + 1);
+            });
+          }
+        },
+        ease: 'none'
+      }); // each time the window updates, we should refresh ScrollTrigger and then update LocomotiveScroll.
+
+      gsap_dist_ScrollTrigger__WEBPACK_IMPORTED_MODULE_9__["ScrollTrigger"].addEventListener('refresh', function () {
+        return mainScroll.update();
+      }); // after everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
+
+      gsap_dist_ScrollTrigger__WEBPACK_IMPORTED_MODULE_9__["ScrollTrigger"].refresh();
+      preloadImages();
+    }
+  }, {
+    key: "onFirstLoad",
+    value: function onFirstLoad() {
+      _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(Home.prototype), "onFirstLoad", this).call(this);
+    }
+  }, {
+    key: "onLeave",
+    value: function onLeave() {
+      _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(Home.prototype), "onLeave", this).call(this);
+    }
+  }, {
+    key: "onEnterCompleted",
+    value: function onEnterCompleted() {
+      _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(Home.prototype), "onEnterCompleted", this).call(this);
+    }
+  }]);
+
+  return Home;
+}(_Default__WEBPACK_IMPORTED_MODULE_6__["default"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (Home);
+
+/***/ }),
+
+/***/ "./resources/assets/scripts/highwayjs/renderers/private.js":
+/*!*****************************************************************!*\
+  !*** ./resources/assets/scripts/highwayjs/renderers/private.js ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/get */ "./node_modules/@babel/runtime/helpers/get.js");
+/* harmony import */ var _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _Default__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Default */ "./resources/assets/scripts/highwayjs/renderers/Default.js");
+/* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! swiper */ "./node_modules/swiper/swiper.esm.js");
+/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
+/* harmony import */ var gsap_dist_ScrollTrigger__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! gsap/dist/ScrollTrigger */ "./node_modules/gsap/dist/ScrollTrigger.js");
+/* harmony import */ var gsap_dist_ScrollTrigger__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(gsap_dist_ScrollTrigger__WEBPACK_IMPORTED_MODULE_9__);
+
+
+
+
+
+
+
+function _createSuper(Derived) {
+  return function () {
+    var Super = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(Derived),
+        result;
+
+    if (_isNativeReflectConstruct()) {
+      var NewTarget = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(this).constructor;
+
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+
+    return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4___default()(this, result);
+  };
+}
+
+function _isNativeReflectConstruct() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+
+  try {
+    Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+
+
+
+
+
+var Private = /*#__PURE__*/function (_DefaultRenderer) {
+  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3___default()(Private, _DefaultRenderer);
+
+  var _super = _createSuper(Private);
+
+  function Private() {
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, Private);
+
+    return _super.apply(this, arguments);
+  }
+
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(Private, [{
+    key: "onEnter",
+    value: function onEnter() {
+      var _this = this;
+
+      _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(Private.prototype), "onEnter", this).call(this);
+
       var mainScroll = this.MainController.getScroll(); // ** Infographics Slideshow ** 
 
       swiper__WEBPACK_IMPORTED_MODULE_7__["default"].use([swiper__WEBPACK_IMPORTED_MODULE_7__["Navigation"], swiper__WEBPACK_IMPORTED_MODULE_7__["Pagination"]]);
-      var infographicsSwiper = new swiper__WEBPACK_IMPORTED_MODULE_7__["default"]('.infographic__slideshow > .swiper-container', {
+      var infographicsDesktop = new swiper__WEBPACK_IMPORTED_MODULE_7__["default"]('.infographic-desktop > .swiper-container', {
         slidesPerView: 1,
         spaceBetween: 48,
         autoHeight: true,
         pagination: {
-          el: '.swiper-pagination',
+          el: '.infographic-desktop .swiper-pagination',
           clickable: true,
           renderBullet: function renderBullet(index, className) {
             return '<span class="' + className + ' triggers-hover">' + (index + 1) + '</span>';
           }
         },
         navigation: {
-          nextEl: '.swiper-next',
-          prevEl: '.swiper-prev'
+          nextEl: '.infographic-desktop .swiper-next',
+          prevEl: '.infographic-desktop .swiper-prev'
+        }
+      });
+      var infographicsMobile = new swiper__WEBPACK_IMPORTED_MODULE_7__["default"]('.infographic-mobile > .swiper-container', {
+        slidesPerView: 1,
+        spaceBetween: 48,
+        autoHeight: true,
+        pagination: {
+          el: '.infographic-mobile .swiper-pagination',
+          clickable: true,
+          renderBullet: function renderBullet(index, className) {
+            return '<span class="' + className + ' triggers-hover">' + (index + 1) + '</span>';
+          }
+        },
+        navigation: {
+          nextEl: '.infographic-mobile .swiper-next',
+          prevEl: '.infographic-mobile .swiper-prev'
         }
       }); // ** Team Mobile Slideshow ** 
 
@@ -865,9 +1132,20 @@ var Home = /*#__PURE__*/function (_DefaultRenderer) {
       function forward() {
         document.querySelector('.team-next').addEventListener('click', function () {
           var currentEl = document.querySelector('.active-member'),
-              nextEl = currentEl.nextElementSibling;
+              nextEl;
+
+          if (currentEl.dataset.row == membersIndex.length) {
+            nextEl = members[0];
+          } else {
+            nextEl = currentEl.nextElementSibling;
+          }
+
           currentEl.classList.remove('active-member');
           nextEl.classList.add('active-member');
+
+          if (currentEl.getElementsByClassName('accordion-content')[0].classList.contains('visible')) {
+            currentEl.getElementsByClassName('accordion-tab')[0].click();
+          }
         });
       }
 
@@ -876,9 +1154,20 @@ var Home = /*#__PURE__*/function (_DefaultRenderer) {
       function previous() {
         document.querySelector('.team-prev').addEventListener('click', function () {
           var currentEl = document.querySelector('.active-member'),
-              prevEl = currentEl.previousElementSibling;
+              prevEl;
+
+          if (currentEl.dataset.row == 1) {
+            prevEl = members[members.length - 1];
+          } else {
+            prevEl = currentEl.previousElementSibling;
+          }
+
           currentEl.classList.remove('active-member');
           prevEl.classList.add('active-member');
+
+          if (currentEl.getElementsByClassName('accordion-content')[0].classList.contains('visible')) {
+            currentEl.getElementsByClassName('accordion-tab')[0].click();
+          }
         });
       }
 
@@ -960,7 +1249,13 @@ var Home = /*#__PURE__*/function (_DefaultRenderer) {
       gsap_dist_ScrollTrigger__WEBPACK_IMPORTED_MODULE_9__["ScrollTrigger"].refresh();
       preloadImages(); // ** on slideChange **
 
-      infographicsSwiper.on('slideChangeTransitionEnd', function () {
+      infographicsDesktop.on('slideChangeTransitionEnd', function () {
+        setTimeout(function () {
+          mainScroll.update();
+          gsap_dist_ScrollTrigger__WEBPACK_IMPORTED_MODULE_9__["ScrollTrigger"].refresh();
+        }, 50);
+      });
+      infographicsMobile.on('slideChangeTransitionEnd', function () {
         setTimeout(function () {
           mainScroll.update();
           gsap_dist_ScrollTrigger__WEBPACK_IMPORTED_MODULE_9__["ScrollTrigger"].refresh();
@@ -970,24 +1265,24 @@ var Home = /*#__PURE__*/function (_DefaultRenderer) {
   }, {
     key: "onFirstLoad",
     value: function onFirstLoad() {
-      _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(Home.prototype), "onFirstLoad", this).call(this);
+      _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(Private.prototype), "onFirstLoad", this).call(this);
     }
   }, {
     key: "onLeave",
     value: function onLeave() {
-      _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(Home.prototype), "onLeave", this).call(this);
+      _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(Private.prototype), "onLeave", this).call(this);
     }
   }, {
     key: "onEnterCompleted",
     value: function onEnterCompleted() {
-      _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(Home.prototype), "onEnterCompleted", this).call(this);
+      _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(Private.prototype), "onEnterCompleted", this).call(this);
     }
   }]);
 
-  return Home;
+  return Private;
 }(_Default__WEBPACK_IMPORTED_MODULE_6__["default"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (Home);
+/* harmony default export */ __webpack_exports__["default"] = (Private);
 
 /***/ }),
 

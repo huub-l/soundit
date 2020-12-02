@@ -1,5 +1,5 @@
 {{--
-  Template Name: Home
+  Template Name: Private
 --}}
 
 @extends('layouts.app')
@@ -16,13 +16,17 @@
         <section class="home--about" id="home-about">
            @include('partials.section-about')
         </section>
-       
-        <section class="home--services" id="home-services">
-            @include('partials.section-services')
-        </section>
 
+        <section class="home--infographics">
+            <div class="row expanded">
+                <div class="small-12 xxlarge-12">
+                   @include('partials.section-infographics')
+                </div>
+            </div>
+        </section>
+       
         <section class="home--experience panel video" id="home-experience">
-            @include('partials.section-experience')
+            @include('section-experience')
         </section>
 
         <section class="video--banner-one" id="video-one">
@@ -34,7 +38,7 @@
         </section>
 
         <section class="home--technology" id="home-technology">
-            @include('partials.section-technology')
+            @include('partials.template-home')
         </section>
 
         <section class="video--banner-two" id="home-two">
@@ -53,6 +57,6 @@
         <section class="video--banner-three" id="video-three">
             <div class="video-background"><img src="@field('video_three_background', 'url')" alt=""></div>
         </section>
-
+        
     </div>
 @endsection

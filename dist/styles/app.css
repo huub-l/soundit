@@ -600,6 +600,12 @@ html.has-scroll-dragging {
     bottom: 0; }
 @font-face {
   font-family: "CircularStd";
+  src: url("../fonts/CircularStd-Light.woff2") format("woff2"), url("../fonts/CircularStd-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "CircularStd";
   src: url("../fonts/CircularStd-Book.woff2") format("woff2"), url("../fonts/CircularStd-Book.woff") format("woff");
   font-weight: 400;
   font-style: normal;
@@ -3194,6 +3200,7 @@ hr {
   display: block;
   font-family: "LyyraExtended", sans-serif;
   color: #ffffff;
+  line-height: 1.2;
   text-transform: uppercase;
 }
 @media only screen and (min-width: 1023px) {
@@ -3209,6 +3216,7 @@ hr {
   display: block;
   font-family: "LyyraExtended", sans-serif;
   color: #343436;
+  line-height: 1.2;
   text-transform: uppercase;
 }
 @media only screen and (min-width: 1023px) {
@@ -3224,6 +3232,7 @@ hr {
   display: block;
   font-family: "LyyraExtended", sans-serif;
   color: #000000;
+  line-height: 1.2;
   text-transform: uppercase;
 }
 @media only screen and (min-width: 1023px) {
@@ -3238,10 +3247,11 @@ hr {
   margin-bottom: 5.71429vw;
   display: block;
   color: #ffffff;
+  font-weight: 400;
 }
 @media only screen and (min-width: 1023px) {
   .heading-three-white, .page--content h3 {
-    font-size: 0.83333vw;
+    font-size: 0.9375vw;
     margin-bottom: 1.25vw;
   }
 }
@@ -3251,10 +3261,11 @@ hr {
   margin-bottom: 5.71429vw;
   display: block;
   color: #343436;
+  font-weight: 400;
 }
 @media only screen and (min-width: 1023px) {
   .heading-three-grey {
-    font-size: 0.83333vw;
+    font-size: 0.9375vw;
     margin-bottom: 1.25vw;
   }
 }
@@ -3262,6 +3273,7 @@ hr {
 p {
   font-size: 3.80952vw;
   color: #919194;
+  font-weight: 300;
 }
 @media only screen and (min-width: 1023px) {
   p {
@@ -3284,7 +3296,7 @@ p {
   left: 0;
   opacity: 1;
 }
-.accordion-wrapper .accordion-content.hide:after {
+.accordion-wrapper .accordion-content.visible:after {
   opacity: 0;
 }
 .accordion-wrapper .accordion-tab {
@@ -4037,7 +4049,7 @@ a:focus, a:hover {
     padding-bottom: 0.625vw;
     padding-left: 1.875vw;
     padding-right: 1.875vw;
-    border-radius: 8px;
+    border-radius: 12px;
   }
 }
 .btn.btn-white {
@@ -4337,8 +4349,8 @@ input::placeholder {
 
 #cursor {
   display: none;
-  width: 20px;
-  height: 20px;
+  width: 26px;
+  height: 26px;
   position: fixed;
   left: 0;
   top: 0;
@@ -4866,6 +4878,19 @@ h3 {
   position: relative;
   overflow: visible;
 }
+@media only screen and (min-width: 1023px) {
+  .home--infographics .infographic__slideshow.infographic-mobile {
+    display: none;
+  }
+}
+.home--infographics .infographic__slideshow.infographic-desktop {
+  display: none;
+}
+@media only screen and (min-width: 1023px) {
+  .home--infographics .infographic__slideshow.infographic-desktop {
+    display: block;
+  }
+}
 .home--infographics .infographic__slideshow .swiper-container .swiper-slide .slide__wrapper {
   margin-bottom: 15vw;
   display: flex;
@@ -5119,7 +5144,7 @@ h3 {
     z-index: -1;
   }
 }
-.home--technology .technology-background img {
+.home--technology .technology-background video {
   height: 100%;
   width: 100%;
   object-fit: contain;
@@ -5231,9 +5256,9 @@ h3 {
 }
 .home--team .team-wrapper .team__members {
   margin-top: 5.71429vw;
-  position: relative;
   height: 120px;
-  overflow: hidden;
+  position: relative;
+  transition: all 0.3s ease-in-out;
 }
 @media only screen and (min-width: 1023px) {
   .home--team .team-wrapper .team__members {
@@ -5249,10 +5274,30 @@ h3 {
   top: 0;
   left: 0;
   opacity: 0;
+  pointer-events: none;
   transition: all 0.3s ease-in-out;
+}
+.home--team .team-wrapper .team__members li .accordion-content {
+  height: 120px;
+}
+.home--team .team-wrapper .team__members li .accordion-content:after {
+  background: linear-gradient(180deg, rgba(230, 228, 227, 0) 0%, #e6e4e3 100%);
+}
+.home--team .team-wrapper .team__members li .accordion-tab {
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease-in-out;
+}
+.home--team .team-wrapper .team__members li .accordion-tab span {
+  color: #000000;
 }
 .home--team .team-wrapper .team__members li.active-member {
   opacity: 1;
+  pointer-events: auto;
+}
+.home--team .team-wrapper .team__members li.active-member .accordion-tab {
+  opacity: 1;
+  pointer-events: auto;
 }
 .home--team .team-wrapper .team__members li .heading-three-grey {
   font-size: 3.80952vw;
@@ -5275,11 +5320,22 @@ h3 {
   .home--team .team-wrapper .team__members li:nth-of-type(2n+2) {
     margin-left: 5%;
   }
+  .home--team .team-wrapper .team__members li .accordion-content {
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+  }
+  .home--team .team-wrapper .team__members li .accordion-content:after {
+    display: none;
+  }
+  .home--team .team-wrapper .team__members li .accordion-tab {
+    display: none;
+  }
   .home--team .team-wrapper .team__members li .heading-three-grey {
     font-size: 1.04167vw;
   }
   .home--team .team-wrapper .team__members li p {
-    margin-top: 5.71429vw;
+    margin-top: 1.25vw;
   }
 }
 
@@ -5330,6 +5386,12 @@ h3 {
     width: 50%;
     max-width: 50%;
     flex: 0 0 50%;
+  }
+  .home--form .form__wrapper .row .column:nth-of-type(1), .home--form .form__wrapper #grid-debug #grid .row div:nth-of-type(1), #grid-debug #grid .home--form .form__wrapper .row div:nth-of-type(1) {
+    padding-right: 0.625vw;
+  }
+  .home--form .form__wrapper .row .column:nth-of-type(2), .home--form .form__wrapper #grid-debug #grid .row div:nth-of-type(2), #grid-debug #grid .home--form .form__wrapper .row div:nth-of-type(2) {
+    padding-left: 0.625vw;
   }
   .home--form .form__wrapper .btn {
     margin-top: 1.25vw;

@@ -175,6 +175,15 @@
         position: relative;
         overflow: visible;
 
+        &.infographic-mobile {
+            @include min-screen($small) { display: none; }
+        }
+
+        &.infographic-desktop {
+            display: none;
+            @include min-screen($small) { display: block; }
+        }
+
         .swiper-container { 
             .swiper-slide .slide__wrapper {
                 @include vw('margin-bottom', 48, 320);
@@ -421,7 +430,7 @@
             z-index: -1;
         }
 
-        img {
+        video {
             height: 100%;
             width: 100%;
             object-fit: contain;
@@ -529,12 +538,12 @@
 
         .team__members {
             @include vw('margin-top', 24, 420);
+            height: 120px; //ao mudar aqui tenho de mudar no script :')
             position: relative;
-            height: 120px;
-            overflow: hidden;
+            transition: all 0.3s ease-in-out;
             
             @include min-screen($small) {
-                @include vw('margin-top', 90);
+                @include vw('margin-top', 90); 
                 height: fit-content;
             }
 
@@ -544,9 +553,31 @@
                 top: 0;
                 left: 0;
                 opacity: 0;
+                pointer-events: none;
                 transition: all 0.3s ease-in-out;
 
-                &.active-member { opacity: 1; }
+                .accordion-content {
+                    height: 120px; 
+                    &:after { background: linear-gradient(180deg, rgba(230, 228, 227, 0) 0%, rgba(230, 228, 227, 1) 100%); }
+                }
+
+                .accordion-tab {
+                    opacity: 0;
+                    pointer-events: none;
+                    transition: all 0.3s ease-in-out;
+
+                    span { color: $black; }
+                }
+                
+                &.active-member {
+                    opacity: 1;
+                    pointer-events: auto;
+
+                    .accordion-tab {
+                        opacity: 1;
+                        pointer-events: auto;
+                    }
+                }
 
                 .heading-three-grey {
                     @include vw('font-size', 16, 420);
@@ -567,8 +598,14 @@
 
                     &:nth-of-type(2n+2) { margin-left: 5%; }
 
+                    .accordion-content {
+                        height: fit-content;
+                        &:after { display: none; }
+                    }
+                    .accordion-tab { display: none; }
+
                     .heading-three-grey { @include vw('font-size', 20); }
-                    p { @include vw('margin-top', 24, 420); }
+                    p { @include vw('margin-top', 24); }
                 }
             }
         }
@@ -618,6 +655,9 @@
             .row .column {
                 @include vw('margin-bottom', 12);
                 @include create-cols(2, 4); 
+
+                &:nth-of-type(1) {  padding-right: #{$gutter/2}vw; }
+                &:nth-of-type(2) {  padding-left: #{$gutter/2}vw; }
             }
 
             .btn {

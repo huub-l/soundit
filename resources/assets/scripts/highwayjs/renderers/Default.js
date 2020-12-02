@@ -94,24 +94,30 @@ export default class DefaultRenderer extends Highway.Renderer {
             
             // Accordion
 
-            const accordions = document.querySelectorAll('.js-accordion');
-            const tabs = document.querySelectorAll('.accordion-tab');
+            const accordions = document.querySelectorAll('.js-accordion'),
+                tabs = document.querySelectorAll('.accordion-tab'),
+                parent = document.querySelector('.js-parent');
+
 
             const openAccordion = (accordion) => {
                 const wrapper = accordion.querySelector('.accordion-content'), 
-                    content = accordion.querySelector('.accordion-content > p');
+                    content = accordion.querySelector('.accordion-child');
 
                 accordion.querySelector('.accordion-tab').innerHTML = '<span>-</span> Close';
-                wrapper.classList.add('hide');
+                wrapper.classList.add('visible');
                 wrapper.style.height = content.offsetHeight + "px";
+
+                if(parent) { parent.style.height = content.offsetHeight + "px"; }
             };
 
             const closeAccordion = (accordion) => {
                 const wrapper = accordion.querySelector('.accordion-content');
 
                 accordion.querySelector('.accordion-tab').innerHTML = '<span>+</span> Read More';
-                wrapper.classList.remove('hide');
+                wrapper.classList.remove('visible');
                 wrapper.style.height = null;
+
+                if(parent) { parent.style.height = '120px'; }
             };
 
             accordions.forEach((accordion) => {
@@ -119,12 +125,11 @@ export default class DefaultRenderer extends Highway.Renderer {
                 const wrapper = accordion.querySelector('.accordion-content');
 
                 intro.onclick = () => {
-                    console.log('clicked')
                     if (wrapper.style.height) {
-                    closeAccordion(accordion);
+                        closeAccordion(accordion);
                     } else {
-                    accordions.forEach((accordion) => closeAccordion(accordion));
-                    openAccordion(accordion);
+                        accordions.forEach((accordion) => closeAccordion(accordion));
+                        openAccordion(accordion);
                     }
 
                     setTimeout( function() { mainScroll.update() }, 300)

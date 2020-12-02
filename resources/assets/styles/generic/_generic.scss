@@ -116,6 +116,7 @@ hr {
     display: block;
     font-family: $font-lyyra;
     color: $white;
+    line-height: 1.2;
     text-transform: uppercase;
 
     @include min-screen($small) {
@@ -130,6 +131,7 @@ hr {
     display: block;
     font-family: $font-lyyra;;
     color: $grey;
+    line-height: 1.2;
     text-transform: uppercase;
 
     @include min-screen($small) {
@@ -144,6 +146,7 @@ hr {
     display: block;
     font-family: $font-lyyra;;
     color: $black;
+    line-height: 1.2;
     text-transform: uppercase;
 
     @include min-screen($small) {
@@ -157,9 +160,10 @@ hr {
     @include vw ('margin-bottom', 24, 420);
     display: block;
     color: $white;
+    font-weight: 400;
 
     @include min-screen($small) {
-        @include vw ('font-size', 16);
+        @include vw ('font-size', 18);
         @include vw('margin-bottom', 24);
     }
 }
@@ -169,9 +173,10 @@ hr {
     @include vw ('margin-bottom', 24, 420);
     display: block;
     color: $grey;
+    font-weight: 400;
 
     @include min-screen($small) {
-        @include vw ('font-size', 16);
+        @include vw ('font-size', 18);
         @include vw('margin-bottom', 24);
     }
 }
@@ -179,6 +184,7 @@ hr {
 p {
     @include vw ('font-size', 16, 420);
     color: $light-grey;
+    font-weight: 300;
 
     @include min-screen($small) {
         @include vw ('font-size', 24);
@@ -205,7 +211,7 @@ p {
             opacity: 1;
         }
 
-        &.hide {
+        &.visible {
             &:after { opacity: 0; }
         }
     }
