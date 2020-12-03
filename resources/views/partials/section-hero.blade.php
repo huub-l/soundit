@@ -8,7 +8,7 @@
 
             <div class="hero__title">
                 <h1 class="heading-one">@field('hero_title')</h1>
-                <a class="btn btn-white" href="@field('hero_link', 'url')" target="@field('hero_link', 'target')">@field('hero_link', 'title')</a>
+                <a data-scroll-to class="btn btn-white" href="@field('hero_link', 'url')" target="@field('hero_link', 'target')">@field('hero_link', 'title')</a>
             </div>
         </div>
     </div>

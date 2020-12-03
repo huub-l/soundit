@@ -5130,16 +5130,16 @@ h3 {
 }
 .home--technology .technology-background {
   width: 90%;
-  height: auto;
+  height: 100%;
   margin: auto;
 }
 @media only screen and (min-width: 1023px) {
   .home--technology .technology-background {
-    width: 65%;
-    height: 80%;
+    width: 60%;
+    height: 100%;
     position: absolute;
     top: 50%;
-    right: -10%;
+    right: -5%;
     transform: translateY(-50%);
     z-index: -1;
   }
@@ -5147,7 +5147,7 @@ h3 {
 .home--technology .technology-background video {
   height: 100%;
   width: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 .home--technology .technology-wrapper {
   padding-top: 28.57143vw;
@@ -5174,7 +5174,7 @@ h3 {
   .home--technology .technology-wrapper .technology__image {
     margin: 0;
     margin-top: 3.125vw;
-    width: 45%;
+    width: 40%;
   }
 }
 .home--technology .technology-wrapper .technology__image img {
@@ -5213,6 +5213,7 @@ h3 {
   }
   .home--technology .technology-wrapper .technology__characteristics .btn {
     margin-right: 1.5625vw;
+    margin-bottom: 0;
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;

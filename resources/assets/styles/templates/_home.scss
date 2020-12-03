@@ -417,15 +417,15 @@
 
     .technology-background {
         width: 90%;
-        height: auto;
+        height: 100%;
         margin: auto;
        
         @include min-screen($small) {
-            width: 65%;
-            height: 80%;
+            width: 60%;
+            height: 100%;
             position: absolute;
             top: 50%;
-            right: -10%;
+            right: -5%;
             transform: translateY(-50%);
             z-index: -1;
         }
@@ -433,7 +433,7 @@
         video {
             height: 100%;
             width: 100%;
-            object-fit: contain;
+            object-fit: cover;
         }
     }
 
@@ -457,7 +457,7 @@
             @include min-screen($small) {
                 margin: 0;
                 @include vw('margin-top', 60);
-                width: 45%;
+                width: 40%;
             }
 
             img {
@@ -496,6 +496,7 @@
                 
                 .btn {
                     @include vw('margin-right', 30); 
+                    margin-bottom: 0;
                     width: fit-content;
                     display: inline-block;
                 }

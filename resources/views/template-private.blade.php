@@ -26,7 +26,7 @@
         </section>
        
         <section class="home--experience panel video" id="home-experience">
-            @include('section-experience')
+            @include('partials.section-experience')
         </section>
 
         <section class="video--banner-one" id="video-one">
@@ -38,7 +38,7 @@
         </section>
 
         <section class="home--technology" id="home-technology">
-            @include('partials.template-home')
+            @include('partials.section-technology')
         </section>
 
         <section class="video--banner-two" id="home-two">
