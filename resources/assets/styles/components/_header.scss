@@ -47,23 +47,67 @@
 
     .nav-header {
         @include vw ('margin-top', 36);
-        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100%;
+        background: $black;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 10;
         transition: all 0.3s ease-in-out;
 
-        @include min-screen($small) { display: block; }
+        &.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
 
-        ul li {
-            @include vw ('font-size', 18);
-            @include vw ('padding-left', 24);
-            @include vw ('padding-right', 24);
-            display: inline-block;
+        @include min-screen($small) {
+            position: relative;
+            height: auto;
+            width: auto;
+            opacity: 1;
+            pointer-events: auto;
+        }
 
-            a {
-                @include vw ('padding-left', 24);
-                @include vw ('padding-right', 24);
-                @include vw ('padding-top', 12);
-                @include vw ('padding-bottom', 12);
-                color: $white;
+        ul {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            @include min-screen($small) {
+                height: auto;
+                flex-direction: row;
+            }
+
+            li {
+                @include vw ('font-size', 24, 420);
+                @include vw ('padding-top', 8, 420);
+                @include vw ('padding-bottom', 8, 420);
+
+                a {
+                    @include vw ('padding-top', 12, 420);
+                    @include vw ('padding-bottom', 12, 420);
+                    color: $white;
+                }
+
+                @include min-screen($small) {
+                    @include vw ('font-size', 18);
+                    @include vw ('padding-left', 24);
+                    @include vw ('padding-right', 24);
+                    padding-top: 0;
+                    padding-bottom: 0;
+
+                    a {
+                        @include vw ('padding-left', 24);
+                        @include vw ('padding-right', 24);
+                        @include vw ('padding-top', 12);
+                        @include vw ('padding-bottom', 12);
+                    }
+                }
             }
         }
     }
@@ -88,18 +132,30 @@
     .burger-menu {
         width: 16px;
         height: $unit-small;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
         position: absolute;
         top: 50%;
         left: $unit;
         transform: translateY(-50%);
+        z-index: 12;
 
         span {
             width: 100%;
             height: 1px;
+            position: absolute;
+            left: 0;
             background: $light-grey;
+            opacity: 1;
+            transition: all 0.3s ease-in-out;
+            z-index: 12;
+
+            &:first-child {  top: 0; }
+            &:nth-child(2) { top: 48%; }
+            &:last-child { bottom: 0; }
+        }
+
+        &.open {
+            span:first-child { top: 48%; opacity: 0; }
+            span:last-child { bottom: 52%; opacity: 0; }
         }
 
         @include min-screen($small) { display: none; }

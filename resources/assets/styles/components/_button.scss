@@ -17,15 +17,15 @@
     @include vw('padding-right', 36, 420);
     display: block;
     width: fit-content;
-    border-radius: 12px;
+    border-radius: 10px;
 
     @include min-screen ($small) {
         @include vw('font-size', 18);
-        @include vw('padding-top', 12);
-        @include vw('padding-bottom', 12);
+        @include vw('padding-top', 16);
+        @include vw('padding-bottom', 16);
         @include vw('padding-left', 36);
         @include vw('padding-right', 36);
-        border-radius: 12px;
+        border-radius: 10px;
     }
 
     &.btn-white {
@@ -40,7 +40,7 @@
 
     &.btn-subscribe {
         background: $white;
-        color: $black;
+        color: $light-grey;
         font-weight: 500;
     }
 }

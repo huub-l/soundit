@@ -491,6 +491,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _dogstudio_highway_build_highway_min_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_dogstudio_highway_build_highway_min_js__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _AssetLoader__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../AssetLoader */ "./resources/assets/scripts/highwayjs/AssetLoader.js");
 /* harmony import */ var _animations_PageLoader__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../animations/PageLoader */ "./resources/assets/scripts/highwayjs/animations/PageLoader.js");
+/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
 
 
 
@@ -526,6 +527,7 @@ function _isNativeReflectConstruct() {
     return false;
   }
 }
+
 
 
 
@@ -569,7 +571,7 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
         }); // Viewport vh
 
         var vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty('--vh', "".concat(vh, "px")); //cursor 
+        document.documentElement.style.setProperty('--vh', "".concat(vh, "px")); // Cursor 
 
         var cursor = document.querySelector('#cursor');
         var links = document.querySelectorAll('a, button, .triggers-hover');
@@ -599,6 +601,17 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
             } else {
               header.classList.remove('fixed');
             }
+          });
+        } // Burger menu 
+
+
+        if (window.matchMedia('(max-width: 1023px)').matches) {
+          var burger = document.querySelector('.burger-menu'),
+              nav = document.querySelector('.nav-header');
+          burger.addEventListener('click', function (ev) {
+            ev.preventDefault();
+            burger.classList.toggle('open');
+            nav.classList.toggle('visible');
           });
         } // Margin for footer
 
@@ -664,6 +677,92 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
               mainScroll.update();
             }, 300);
           };
+        }); // Team Mobile Slideshow 
+
+        var members = document.querySelectorAll('.team__members li'),
+            membersIndex = document.querySelectorAll('[data-row]'),
+            navPrev = document.querySelector('.team-prev');
+        members.forEach(function (member) {
+          if (member.getAttribute('data-row') == '1') {
+            member.classList.add('active-member');
+          }
+        });
+
+        function forward() {
+          document.querySelector('.team-next').addEventListener('click', function () {
+            var currentEl = document.querySelector('.active-member'),
+                nextEl;
+
+            if (currentEl.dataset.row == membersIndex.length) {
+              nextEl = members[0];
+            } else {
+              nextEl = currentEl.nextElementSibling;
+            }
+
+            currentEl.classList.remove('active-member');
+            nextEl.classList.add('active-member');
+
+            if (currentEl.getElementsByClassName('accordion-content')[0].classList.contains('visible')) {
+              currentEl.getElementsByClassName('accordion-tab')[0].click();
+            }
+          });
+        }
+
+        forward();
+
+        function previous() {
+          document.querySelector('.team-prev').addEventListener('click', function () {
+            var currentEl = document.querySelector('.active-member'),
+                prevEl;
+
+            if (currentEl.dataset.row == 1) {
+              prevEl = members[members.length - 1];
+            } else {
+              prevEl = currentEl.previousElementSibling;
+            }
+
+            currentEl.classList.remove('active-member');
+            prevEl.classList.add('active-member');
+
+            if (currentEl.getElementsByClassName('accordion-content')[0].classList.contains('visible')) {
+              currentEl.getElementsByClassName('accordion-tab')[0].click();
+            }
+          });
+        }
+
+        previous(); // Text Animation
+
+        mainScroll.on('call', function (value, way, obj) {
+          switch (value) {
+            case 'revealOpacity':
+              if (!obj.el.classList.contains('animated')) {
+                var element = obj.el;
+                gsap__WEBPACK_IMPORTED_MODULE_9__["default"].from(element, {
+                  duration: 1.5,
+                  y: 50,
+                  opacity: 0,
+                  ease: 'power3.out'
+                });
+                obj.el.classList.add('animated');
+              }
+
+              break;
+
+            case 'showVideo':
+              var videoA = document.querySelector('.experience__one'),
+                  videoB = document.querySelector('.experience__two');
+              gsap__WEBPACK_IMPORTED_MODULE_9__["default"].from(videoA, {
+                duration: 6,
+                opacity: 1,
+                ease: 'power3.out'
+              });
+              gsap__WEBPACK_IMPORTED_MODULE_9__["default"].from(videoB, {
+                duration: 6,
+                opacity: 0,
+                ease: 'power3.out'
+              });
+              break;
+          }
         });
       });
     }
@@ -839,140 +938,84 @@ var Home = /*#__PURE__*/function (_DefaultRenderer) {
   _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(Home, [{
     key: "onEnter",
     value: function onEnter() {
-      var _this = this;
-
       _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(Home.prototype), "onEnter", this).call(this);
 
-      var mainScroll = this.MainController.getScroll(); // ** Team Mobile Slideshow ** 
-
-      var members = document.querySelectorAll('.team__members li'),
-          membersIndex = document.querySelectorAll('[data-row]'),
-          navPrev = document.querySelector('.team-prev');
-      members.forEach(function (member) {
-        if (member.getAttribute('data-row') == '1') {
-          member.classList.add('active-member');
-        }
-      });
-
-      function forward() {
-        document.querySelector('.team-next').addEventListener('click', function () {
-          var currentEl = document.querySelector('.active-member'),
-              nextEl;
-
-          if (currentEl.dataset.row == membersIndex.length) {
-            nextEl = members[0];
-          } else {
-            nextEl = currentEl.nextElementSibling;
-          }
-
-          currentEl.classList.remove('active-member');
-          nextEl.classList.add('active-member');
-
-          if (currentEl.getElementsByClassName('accordion-content')[0].classList.contains('visible')) {
-            currentEl.getElementsByClassName('accordion-tab')[0].click();
-          }
-        });
-      }
-
-      forward();
-
-      function previous() {
-        document.querySelector('.team-prev').addEventListener('click', function () {
-          var currentEl = document.querySelector('.active-member'),
-              prevEl;
-
-          if (currentEl.dataset.row == 1) {
-            prevEl = members[members.length - 1];
-          } else {
-            prevEl = currentEl.previousElementSibling;
-          }
-
-          currentEl.classList.remove('active-member');
-          prevEl.classList.add('active-member');
-
-          if (currentEl.getElementsByClassName('accordion-content')[0].classList.contains('visible')) {
-            currentEl.getElementsByClassName('accordion-tab')[0].click();
-          }
-        });
-      }
-
-      previous(); // ** Frames Animation ** 
-
-      gsap__WEBPACK_IMPORTED_MODULE_8__["default"].registerPlugin(gsap_dist_ScrollTrigger__WEBPACK_IMPORTED_MODULE_9__["ScrollTrigger"]);
-      mainScroll.on('scroll', gsap_dist_ScrollTrigger__WEBPACK_IMPORTED_MODULE_9__["ScrollTrigger"].update);
-      gsap_dist_ScrollTrigger__WEBPACK_IMPORTED_MODULE_9__["ScrollTrigger"].scrollerProxy('[data-scroll-container]', {
-        scrollTop: function scrollTop(value) {
-          return arguments.length ? mainScroll.scrollTo(value, 0, 0) : mainScroll.scroll.instance.scroll.y;
-        },
-        // we don't have to define a scrollLeft because we're only scrolling vertically.
-        getBoundingClientRect: function getBoundingClientRect() {
-          return {
-            top: 0,
-            left: 0,
-            width: window.innerWidth,
-            height: window.innerHeight
-          };
-        },
-        // LocomotiveScroll handles things completely differently on mobile devices - it doesn't even transform the container at all! So to get the correct behavior and avoid jitters, we should pin things with position: fixed on mobile. We sense it by checking to see if there's a transform applied to the container (the LocomotiveScroll-controlled element).
-        pinType: document.querySelector('[data-scroll-container]').style.transform ? 'transform' : 'fixed'
-      });
-      var canvas = document.getElementById('videoCanvas');
-      var context = canvas.getContext('2d');
-      var frameCount = 110;
-
-      var currentFrame = function currentFrame(index) {
-        return "".concat(_this.themeUrl, "/resources/assets/images/frames/soundit-").concat(index.toString().padStart(5, '0'), ".jpg");
-      };
-
-      var preloadImages = function preloadImages() {
-        for (var i = 1; i < frameCount; i++) {
-          var _img = new Image();
-
-          _img.src = currentFrame(i);
-        }
-      };
-
-      var img = new Image();
-      img.src = currentFrame(1);
-      canvas.width = 590;
-      canvas.height = 1080;
-
-      img.onload = function () {
-        context.drawImage(img, 0, 0);
-      };
-
-      var updateImage = function updateImage(index) {
-        img.src = currentFrame(index);
-        context.drawImage(img, 0, 0);
-      };
-
-      gsap__WEBPACK_IMPORTED_MODULE_8__["default"].from('.video', {
-        scrollTrigger: {
-          trigger: '.video',
-          scroller: '[data-scroll-container]',
-          scrub: true,
-          pin: true,
-          start: 'top top',
-          end: '+=100%',
-          onUpdate: function onUpdate(self) {
-            console.log('progress:', self.progress.toFixed(3), 'direction:', self.direction, 'velocity', self.getVelocity()); //const frameIndex = Math.ceil(self.progress * frameCount);
-
-            var frameIndex = Math.min(frameCount - 1, Math.ceil(self.progress * frameCount));
-            console.log(frameIndex);
-            requestAnimationFrame(function () {
-              return updateImage(frameIndex + 1);
-            });
-          }
-        },
-        ease: 'none'
-      }); // each time the window updates, we should refresh ScrollTrigger and then update LocomotiveScroll.
-
-      gsap_dist_ScrollTrigger__WEBPACK_IMPORTED_MODULE_9__["ScrollTrigger"].addEventListener('refresh', function () {
-        return mainScroll.update();
-      }); // after everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
-
-      gsap_dist_ScrollTrigger__WEBPACK_IMPORTED_MODULE_9__["ScrollTrigger"].refresh();
-      preloadImages();
+      var mainScroll = this.MainController.getScroll(); // ** Frames Animation ** 
+      // gsap.registerPlugin(ScrollTrigger);
+      // mainScroll.on('scroll', ScrollTrigger.update);
+      // ScrollTrigger.scrollerProxy('[data-scroll-container]', {
+      //   scrollTop(value) {
+      //     return arguments.length
+      //       ? mainScroll.scrollTo(value, 0, 0)
+      //       : mainScroll.scroll.instance.scroll.y;
+      //   }, // we don't have to define a scrollLeft because we're only scrolling vertically.
+      //   getBoundingClientRect() {
+      //     return {
+      //       top: 0,
+      //       left: 0,
+      //       width: window.innerWidth,
+      //       height: window.innerHeight
+      //     };
+      //   },
+      //   // LocomotiveScroll handles things completely differently on mobile devices - it doesn't even transform the container at all! So to get the correct behavior and avoid jitters, we should pin things with position: fixed on mobile. We sense it by checking to see if there's a transform applied to the container (the LocomotiveScroll-controlled element).
+      //   pinType: document.querySelector('[data-scroll-container]').style.transform
+      //     ? 'transform'
+      //     : 'fixed'
+      // });
+      // const canvas = document.getElementById('videoCanvas');
+      // const context = canvas.getContext('2d');
+      // const frameCount = 110;
+      // const currentFrame = (index) => `${this.themeUrl}/resources/assets/images/frames/soundit-${index.toString().padStart(5, '0')}.jpg`;
+      // const preloadImages = () => {
+      //   for (let i = 1; i < frameCount; i++) {
+      //     const img = new Image();
+      //     img.src = currentFrame(i);
+      //   }
+      // };
+      // const img = new Image();
+      // img.src = currentFrame(1);
+      // canvas.width = 590;
+      // canvas.height = 1080;
+      // img.onload = function () {
+      //   context.drawImage(img, 0, 0);
+      // };
+      // const updateImage = (index) => {
+      //   img.src = currentFrame(index);
+      //   context.drawImage(img, 0, 0);
+      // };
+      // gsap.from('.video', {
+      //   scrollTrigger: {
+      //     trigger: '.video',
+      //     scroller: '[data-scroll-container]',
+      //     scrub: true,
+      //     pin: true,
+      //     start: 'top top',
+      //     end: '+=100%',
+      //     onUpdate: (self) => {
+      //       console.log(
+      //         'progress:',
+      //         self.progress.toFixed(3),
+      //         'direction:',
+      //         self.direction,
+      //         'velocity',
+      //         self.getVelocity()
+      //       );
+      //       //const frameIndex = Math.ceil(self.progress * frameCount);
+      //       const frameIndex = Math.min(
+      //         frameCount - 1,
+      //         Math.ceil(self.progress * frameCount)
+      //       );
+      //       console.log(frameIndex);
+      //       requestAnimationFrame(() => updateImage(frameIndex + 1));
+      //     }
+      //   },
+      //   ease: 'none'
+      // });
+      // // each time the window updates, we should refresh ScrollTrigger and then update LocomotiveScroll.
+      // ScrollTrigger.addEventListener('refresh', () => mainScroll.update());
+      // // after everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
+      // ScrollTrigger.refresh();
+      // preloadImages();
     }
   }, {
     key: "onFirstLoad",
@@ -1080,8 +1123,6 @@ var Private = /*#__PURE__*/function (_DefaultRenderer) {
   _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(Private, [{
     key: "onEnter",
     value: function onEnter() {
-      var _this = this;
-
       _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(Private.prototype), "onEnter", this).call(this);
 
       var mainScroll = this.MainController.getScroll(); // ** Infographics Slideshow ** 
@@ -1118,136 +1159,7 @@ var Private = /*#__PURE__*/function (_DefaultRenderer) {
           nextEl: '.infographic-mobile .swiper-next',
           prevEl: '.infographic-mobile .swiper-prev'
         }
-      }); // ** Team Mobile Slideshow ** 
-
-      var members = document.querySelectorAll('.team__members li'),
-          membersIndex = document.querySelectorAll('[data-row]'),
-          navPrev = document.querySelector('.team-prev');
-      members.forEach(function (member) {
-        if (member.getAttribute('data-row') == '1') {
-          member.classList.add('active-member');
-        }
-      });
-
-      function forward() {
-        document.querySelector('.team-next').addEventListener('click', function () {
-          var currentEl = document.querySelector('.active-member'),
-              nextEl;
-
-          if (currentEl.dataset.row == membersIndex.length) {
-            nextEl = members[0];
-          } else {
-            nextEl = currentEl.nextElementSibling;
-          }
-
-          currentEl.classList.remove('active-member');
-          nextEl.classList.add('active-member');
-
-          if (currentEl.getElementsByClassName('accordion-content')[0].classList.contains('visible')) {
-            currentEl.getElementsByClassName('accordion-tab')[0].click();
-          }
-        });
-      }
-
-      forward();
-
-      function previous() {
-        document.querySelector('.team-prev').addEventListener('click', function () {
-          var currentEl = document.querySelector('.active-member'),
-              prevEl;
-
-          if (currentEl.dataset.row == 1) {
-            prevEl = members[members.length - 1];
-          } else {
-            prevEl = currentEl.previousElementSibling;
-          }
-
-          currentEl.classList.remove('active-member');
-          prevEl.classList.add('active-member');
-
-          if (currentEl.getElementsByClassName('accordion-content')[0].classList.contains('visible')) {
-            currentEl.getElementsByClassName('accordion-tab')[0].click();
-          }
-        });
-      }
-
-      previous(); // ** Frames Animation ** 
-
-      gsap__WEBPACK_IMPORTED_MODULE_8__["default"].registerPlugin(gsap_dist_ScrollTrigger__WEBPACK_IMPORTED_MODULE_9__["ScrollTrigger"]);
-      mainScroll.on('scroll', gsap_dist_ScrollTrigger__WEBPACK_IMPORTED_MODULE_9__["ScrollTrigger"].update);
-      gsap_dist_ScrollTrigger__WEBPACK_IMPORTED_MODULE_9__["ScrollTrigger"].scrollerProxy('[data-scroll-container]', {
-        scrollTop: function scrollTop(value) {
-          return arguments.length ? mainScroll.scrollTo(value, 0, 0) : mainScroll.scroll.instance.scroll.y;
-        },
-        // we don't have to define a scrollLeft because we're only scrolling vertically.
-        getBoundingClientRect: function getBoundingClientRect() {
-          return {
-            top: 0,
-            left: 0,
-            width: window.innerWidth,
-            height: window.innerHeight
-          };
-        },
-        // LocomotiveScroll handles things completely differently on mobile devices - it doesn't even transform the container at all! So to get the correct behavior and avoid jitters, we should pin things with position: fixed on mobile. We sense it by checking to see if there's a transform applied to the container (the LocomotiveScroll-controlled element).
-        pinType: document.querySelector('[data-scroll-container]').style.transform ? 'transform' : 'fixed'
-      });
-      var canvas = document.getElementById('videoCanvas');
-      var context = canvas.getContext('2d');
-      var frameCount = 110;
-
-      var currentFrame = function currentFrame(index) {
-        return "".concat(_this.themeUrl, "/resources/assets/images/frames/soundit-").concat(index.toString().padStart(5, '0'), ".jpg");
-      };
-
-      var preloadImages = function preloadImages() {
-        for (var i = 1; i < frameCount; i++) {
-          var _img = new Image();
-
-          _img.src = currentFrame(i);
-        }
-      };
-
-      var img = new Image();
-      img.src = currentFrame(1);
-      canvas.width = 590;
-      canvas.height = 1080;
-
-      img.onload = function () {
-        context.drawImage(img, 0, 0);
-      };
-
-      var updateImage = function updateImage(index) {
-        img.src = currentFrame(index);
-        context.drawImage(img, 0, 0);
-      };
-
-      gsap__WEBPACK_IMPORTED_MODULE_8__["default"].from('.video', {
-        scrollTrigger: {
-          trigger: '.video',
-          scroller: '[data-scroll-container]',
-          scrub: true,
-          pin: true,
-          start: 'top top',
-          end: '+=100%',
-          onUpdate: function onUpdate(self) {
-            console.log('progress:', self.progress.toFixed(3), 'direction:', self.direction, 'velocity', self.getVelocity()); //const frameIndex = Math.ceil(self.progress * frameCount);
-
-            var frameIndex = Math.min(frameCount - 1, Math.ceil(self.progress * frameCount));
-            console.log(frameIndex);
-            requestAnimationFrame(function () {
-              return updateImage(frameIndex + 1);
-            });
-          }
-        },
-        ease: 'none'
-      }); // each time the window updates, we should refresh ScrollTrigger and then update LocomotiveScroll.
-
-      gsap_dist_ScrollTrigger__WEBPACK_IMPORTED_MODULE_9__["ScrollTrigger"].addEventListener('refresh', function () {
-        return mainScroll.update();
-      }); // after everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
-
-      gsap_dist_ScrollTrigger__WEBPACK_IMPORTED_MODULE_9__["ScrollTrigger"].refresh();
-      preloadImages(); // ** on slideChange **
+      }); // ** on slideChange **
 
       infographicsDesktop.on('slideChangeTransitionEnd', function () {
         setTimeout(function () {

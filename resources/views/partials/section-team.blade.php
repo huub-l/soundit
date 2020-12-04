@@ -1,9 +1,9 @@
 <div class="row expanded">
     <div class="column small-10 small-offset-1 xxlarge-8 xxlarge-offset-2">
         <div class="team-wrapper">
-            <span class="heading-three-grey">@field('team_uppertitle')</span>
-            <h2 class="heading-two-black">@field('team_title')</h2>
-            <p>@field('team_text')</p>
+            <span class="heading-three-grey" data-scroll data-scroll-call="revealOpacity">@field('team_uppertitle')</span>
+            <h2 class="heading-two-black" data-scroll data-scroll-call="revealOpacity">@field('team_title')</h2>
+            <p data-scroll data-scroll-call="revealOpacity">@field('team_text')</p>
 
             @hasfield('team_members')
             <div class="team__nav">
@@ -13,7 +13,7 @@
 
             <ul class="team__members js-parent">
                 @fields('team_members')
-                <li data-row="{{ get_row_index() }}" class="accordion-wrapper js-accordion">
+                <li data-row="{{ get_row_index() }}" class="accordion-wrapper js-accordion" data-scroll data-scroll-call="revealOpacity">
                     <div class="accordion-content">
                         <div class="accordion-child">
                             @group('team_member')

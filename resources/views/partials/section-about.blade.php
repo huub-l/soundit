@@ -7,9 +7,9 @@
 <div class="row expanded">
     <div class="column small-10 small-offset-1 xxlarge-8 xxlarge-offset-2">
         <div class="about-wrapper">
-                <span class="heading-three-white">@field('about_uppertitle')</span>
-                <h2 class="heading-two-white">@field('about_title')</h2>
-                <div class="accordion-wrapper js-accordion">
+                <span class="heading-three-white" data-scroll data-scroll-call="revealOpacity">@field('about_uppertitle')</span>
+                <h2 class="heading-two-white" data-scroll data-scroll-call="revealOpacity">@field('about_title')</h2>
+                <div class="accordion-wrapper js-accordion" data-scroll data-scroll-call="revealOpacity">
                     <div class="accordion-content">
                         <p class="accordion-child">@field('about_text')</p>
                     </div>

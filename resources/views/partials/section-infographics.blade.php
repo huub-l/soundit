@@ -10,8 +10,8 @@
                         @fields('slide')
                             <div class="slide__wrapper">
                                 <div class="slide__text">
-                                    <span class="heading-three-white">@sub('uppertitle')</span>
-                                    <p>@sub('text')</p>
+                                    <span class="heading-three-white" data-scroll data-scroll-call="revealOpacity">@sub('uppertitle')</span>
+                                    <p data-scroll data-scroll-call="revealOpacity">@sub('text')</p>
                                 </div>
                                 <div class="slide__image">
                                     <img class="img_desktop" src="@sub('image_desktop', 'url')" alt="@sub('image_desktop', 'alt')">
@@ -43,10 +43,10 @@
                     @fields('slide')
                         <div class="slide__wrapper">
                             <div class="slide__text">
-                                <span class="heading-three-white">@sub('uppertitle')</span>
-                                <p>@sub('text')</p>
+                                <span class="heading-three-white" data-scroll data-scroll-call="revealOpacity">@sub('uppertitle')</span>
+                                <p data-scroll data-scroll-call="revealOpacity">@sub('text')</p>
                             </div>
-                            <div class="slide__image">
+                            <div class="slide__image" data-scroll data-scroll-call="revealOpacity">
                                 <img class="img_mobile" src="@sub('image_mobile', 'url')" alt="@sub('image_mobile', 'alt')">
                             </div>
                         </div>
@@ -57,7 +57,7 @@
         </div>
     </div>
 
-    <div class="swiper-navigation">
+    <div class="swiper-navigation" data-scroll data-scroll-call="revealOpacity">
         <div class="swiper-prev triggers-hover"> @include('svg.icon-arrow') </div>
         <div class="swiper-pagination"></div>
         <div class="swiper-next triggers-hover"> @include('svg.icon-arrow') </div>

@@ -32,7 +32,7 @@
         <div class="small-10 small-offset-1 xxlarge-4 xxlarge-offset-1">
             <div class="newsletter">
                 <form>
-                    <label for="newsletter">Stay up to date with our latest innovations</label>
+                    <label for="newsletter">Stay Up To Date With Our Latest Innovations</label>
                     <div class="input__wrapper">
                         <input type="email" id="newsletter" name="newsletter" placeholder="Your@Mail.Here">
                         <button class="btn btn-subscribe">Subscribe</button>

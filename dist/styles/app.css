@@ -4040,16 +4040,16 @@ a:focus, a:hover {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  border-radius: 12px;
+  border-radius: 10px;
 }
 @media only screen and (min-width: 1023px) {
   .btn {
     font-size: 0.9375vw;
-    padding-top: 0.625vw;
-    padding-bottom: 0.625vw;
+    padding-top: 0.83333vw;
+    padding-bottom: 0.83333vw;
     padding-left: 1.875vw;
     padding-right: 1.875vw;
-    border-radius: 12px;
+    border-radius: 10px;
   }
 }
 .btn.btn-white {
@@ -4062,7 +4062,7 @@ a:focus, a:hover {
 }
 .btn.btn-subscribe {
   background: #ffffff;
-  color: #000000;
+  color: #919194;
   font-weight: 500;
 }
 
@@ -4071,7 +4071,7 @@ input {
   font-size: 3.33333vw;
   background: #ffffff;
   color: #000000;
-  border-radius: 8px;
+  border-radius: 10px;
 }
 input:-ms-input-placeholder {
   color: #919194;
@@ -4084,10 +4084,10 @@ input::placeholder {
 }
 @media only screen and (min-width: 1023px) {
   input {
-    padding-top: 1.04167vw;
-    padding-bottom: 1.04167vw;
-    padding-left: 0.625vw;
-    padding-right: 0.625vw;
+    padding-top: 0.83333vw;
+    padding-bottom: 0.83333vw;
+    padding-left: 1.25vw;
+    padding-right: 1.25vw;
     font-size: 0.83333vw;
   }
 }
@@ -4151,26 +4151,67 @@ input::placeholder {
 }
 #siteHeader .nav-header {
   margin-top: 1.875vw;
-  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background: #000000;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
   transition: all 0.3s ease-in-out;
+}
+#siteHeader .nav-header.visible {
+  opacity: 1;
+  pointer-events: auto;
 }
 @media only screen and (min-width: 1023px) {
   #siteHeader .nav-header {
-    display: block;
+    position: relative;
+    height: auto;
+    width: auto;
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+#siteHeader .nav-header ul {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+@media only screen and (min-width: 1023px) {
+  #siteHeader .nav-header ul {
+    height: auto;
+    flex-direction: row;
   }
 }
 #siteHeader .nav-header ul li {
-  font-size: 0.9375vw;
-  padding-left: 1.25vw;
-  padding-right: 1.25vw;
-  display: inline-block;
+  font-size: 5.71429vw;
+  padding-top: 1.90476vw;
+  padding-bottom: 1.90476vw;
 }
 #siteHeader .nav-header ul li a {
-  padding-left: 1.25vw;
-  padding-right: 1.25vw;
-  padding-top: 0.625vw;
-  padding-bottom: 0.625vw;
+  padding-top: 2.85714vw;
+  padding-bottom: 2.85714vw;
   color: #ffffff;
+}
+@media only screen and (min-width: 1023px) {
+  #siteHeader .nav-header ul li {
+    font-size: 0.9375vw;
+    padding-left: 1.25vw;
+    padding-right: 1.25vw;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  #siteHeader .nav-header ul li a {
+    padding-left: 1.25vw;
+    padding-right: 1.25vw;
+    padding-top: 0.625vw;
+    padding-bottom: 0.625vw;
+  }
 }
 #siteHeader.fixed {
   padding: 1.875vw;
@@ -4192,18 +4233,38 @@ input::placeholder {
 #siteHeader .burger-menu {
   width: 16px;
   height: 12px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   position: absolute;
   top: 50%;
   left: 24px;
   transform: translateY(-50%);
+  z-index: 12;
 }
 #siteHeader .burger-menu span {
   width: 100%;
   height: 1px;
+  position: absolute;
+  left: 0;
   background: #919194;
+  opacity: 1;
+  transition: all 0.3s ease-in-out;
+  z-index: 12;
+}
+#siteHeader .burger-menu span:first-child {
+  top: 0;
+}
+#siteHeader .burger-menu span:nth-child(2) {
+  top: 48%;
+}
+#siteHeader .burger-menu span:last-child {
+  bottom: 0;
+}
+#siteHeader .burger-menu.open span:first-child {
+  top: 48%;
+  opacity: 0;
+}
+#siteHeader .burger-menu.open span:last-child {
+  bottom: 52%;
+  opacity: 0;
 }
 @media only screen and (min-width: 1023px) {
   #siteHeader .burger-menu {
@@ -4326,11 +4387,12 @@ input::placeholder {
 #siteFooter .newsletter form .input__wrapper input {
   margin-bottom: 2.85714vw;
   width: 100%;
+  border-radius: 0;
 }
 @media only screen and (min-width: 1023px) {
   #siteFooter .newsletter form .input__wrapper input {
-    width: 70%;
-    margin: 0 24px 0 0;
+    width: 80%;
+    margin: 0 12px 0 0;
   }
 }
 #siteFooter .site-copyright {
@@ -4734,7 +4796,7 @@ h3 {
   height: 100vh;
   position: -webkit-sticky;
   position: sticky;
-  top: -1px;
+  top: 0;
   left: 0;
   overflow: hidden;
   opacity: 0;
@@ -4750,10 +4812,9 @@ h3 {
     opacity: 1;
   }
 }
-.home--hero .hero-wrapper .hero__background img {
+.home--hero .hero-wrapper .hero__background video {
   width: 110%;
   height: 100%;
-  margin-left: -2%;
   object-fit: cover;
   object-position: center;
 }
@@ -4766,13 +4827,8 @@ h3 {
 .home--hero .hero-wrapper .hero__title {
   padding-bottom: 71.42857vw;
 }
-@media only screen and (min-width: 1023px) {
-  .home--hero .hero-wrapper .hero__title {
-    padding: 0;
-  }
-}
 .home--hero .hero-wrapper .hero__title .heading-one {
-  width: 60%;
+  width: 80%;
   margin: auto;
   text-align: center;
 }
@@ -4782,7 +4838,18 @@ h3 {
   margin: auto;
 }
 .home--hero .hero-wrapper .hero__title .btn {
-  margin-top: 1.25vw;
+  margin-top: 5.71429vw;
+}
+@media only screen and (min-width: 1023px) {
+  .home--hero .hero-wrapper .hero__title {
+    padding: 0;
+  }
+  .home--hero .hero-wrapper .hero__title .heading-one {
+    max-width: 650px;
+  }
+  .home--hero .hero-wrapper .hero__title .btn {
+    margin-top: 1.25vw;
+  }
 }
 
 .home--about {
@@ -5029,15 +5096,15 @@ h3 {
 }
 
 .home--experience {
-  margin-top: 28.57143vw;
-  margin-bottom: 28.57143vw;
+  padding-top: 28.57143vw;
+  padding-bottom: 28.57143vw;
   background: #000000;
   position: relative;
 }
 @media only screen and (min-width: 1023px) {
   .home--experience {
-    margin-top: 10.41667vw;
-    margin-bottom: 10.41667vw;
+    padding-top: 10.41667vw;
+    padding-bottom: 10.41667vw;
     height: 100vh;
     display: flex;
     align-items: center;
@@ -5054,18 +5121,22 @@ h3 {
   z-index: 2;
 }
 .home--experience .experience-background {
-  height: 80vh;
+  height: 60vh;
   width: 100%;
   position: relative;
   z-index: 0;
 }
-.home--experience .experience-background canvas {
-  width: auto;
+.home--experience .experience-background .experience__one, .home--experience .experience-background .experience__two {
+  width: 100%;
   height: 100%;
   position: absolute;
   left: 50%;
   top: 0;
   transform: translateX(-50%);
+}
+.home--experience .experience-background .experience__one video, .home--experience .experience-background .experience__two video {
+  width: 100%;
+  height: 100%;
 }
 @media only screen and (min-width: 1023px) {
   .home--experience .experience-background {
@@ -5074,9 +5145,11 @@ h3 {
     top: 0;
     left: 0;
   }
-  .home--experience .experience-background canvas {
-    left: 60%;
-    transform: translateX(-60%);
+  .home--experience .experience-background .experience__one, .home--experience .experience-background .experience__two {
+    width: auto;
+    height: 100%;
+    left: 65%;
+    transform: translateX(-65%);
   }
 }
 .home--experience .experience-wrapper {
@@ -5129,9 +5202,14 @@ h3 {
   z-index: 0;
 }
 .home--technology .technology-background {
-  width: 90%;
+  width: 100%;
   height: 100%;
   margin: auto;
+}
+.home--technology .technology-background video {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 @media only screen and (min-width: 1023px) {
   .home--technology .technology-background {
@@ -5144,13 +5222,8 @@ h3 {
     z-index: -1;
   }
 }
-.home--technology .technology-background video {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-}
 .home--technology .technology-wrapper {
-  padding-top: 28.57143vw;
+  padding-top: 21.42857vw;
   padding-bottom: 28.57143vw;
 }
 @media only screen and (min-width: 1023px) {
@@ -5375,8 +5448,6 @@ h3 {
 }
 .home--form .form__wrapper .btn {
   margin-top: 2.85714vw;
-  padding-top: 3.80952vw;
-  padding-bottom: 3.80952vw;
 }
 @media only screen and (min-width: 1023px) {
   .home--form .form__wrapper {
@@ -5396,8 +5467,6 @@ h3 {
   }
   .home--form .form__wrapper .btn {
     margin-top: 1.25vw;
-    padding-top: 1.04167vw;
-    padding-bottom: 1.04167vw;
   }
 }
 

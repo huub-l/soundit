@@ -111,10 +111,11 @@
                 input {
                     @include vw('margin-bottom', 12, 420);
                     width: 100%;
+                    border-radius: 0;
 
                     @include min-screen($small) {
-                        width: 70%;
-                        margin: 0 $unit 0 0;
+                        width: 80%;
+                        margin: 0 $unit-small 0 0;
                     }
                 }
             }

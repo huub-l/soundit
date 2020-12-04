@@ -174,15 +174,15 @@ input {
     @include vw('font-size', 14, 420);
     background: $white;
     color: $black;
-    border-radius: 8px;
+    border-radius: 10px;
     
     &::placeholder { color: $light-grey; }
 
     @include min-screen ($small) {
-        @include vw('padding-top', 20);
-        @include vw('padding-bottom', 20);
-        @include vw('padding-left', 12);
-        @include vw('padding-right', 12);
+        @include vw('padding-top',16);
+        @include vw('padding-bottom', 16);
+        @include vw('padding-left', 24);
+        @include vw('padding-right', 24);
         @include vw('font-size', 16);
     }
 }

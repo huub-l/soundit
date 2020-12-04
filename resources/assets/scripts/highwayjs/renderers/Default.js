@@ -4,6 +4,8 @@ import Highway from '@dogstudio/highway/build/highway.min.js'
 import AssetLoader from '../AssetLoader'
 import PageLoader from '../animations/PageLoader'
 
+import gsap from "gsap";
+
 export default class DefaultRenderer extends Highway.Renderer {
   constructor(properties) {
     // pass properties into constructor of parent class
@@ -32,8 +34,7 @@ export default class DefaultRenderer extends Highway.Renderer {
             document.documentElement.style.setProperty('--vh', `${vh}px`);
 
         
-            //cursor 
-
+            // Cursor 
             const cursor = document.querySelector('#cursor');
             let links = document.querySelectorAll('a, button, .triggers-hover');
 
@@ -70,8 +71,22 @@ export default class DefaultRenderer extends Highway.Renderer {
                 });
             }
 
-            // Margin for footer
 
+            // Burger menu 
+            if (window.matchMedia('(max-width: 1023px)').matches) {
+                let burger = document.querySelector('.burger-menu'),
+                    nav = document.querySelector('.nav-header');
+
+                burger.addEventListener('click', (ev) => {
+                    ev.preventDefault();
+
+                    burger.classList.toggle('open');
+                    nav.classList.toggle('visible');
+                });
+            }
+
+
+            // Margin for footer
             let footer = document.querySelector('#siteFooter'),
                 footerHeight = footer.offsetHeight,
                 main = document.querySelector('.grid-container');
@@ -93,7 +108,6 @@ export default class DefaultRenderer extends Highway.Renderer {
 
             
             // Accordion
-
             const accordions = document.querySelectorAll('.js-accordion'),
                 tabs = document.querySelectorAll('.accordion-tab'),
                 parent = document.querySelector('.js-parent');
@@ -135,6 +149,99 @@ export default class DefaultRenderer extends Highway.Renderer {
                     setTimeout( function() { mainScroll.update() }, 300)
                 };
             });
+
+
+            // Team Mobile Slideshow 
+
+            let members = document.querySelectorAll('.team__members li'),
+            membersIndex = document.querySelectorAll('[data-row]'),
+            navPrev = document.querySelector('.team-prev');
+
+            members.forEach(member => {
+                if ( member.getAttribute('data-row') == '1' ) {
+                member.classList.add('active-member')
+                }
+            })
+            
+            function forward() {
+                document.querySelector('.team-next').addEventListener('click', function() {
+                let currentEl = document.querySelector('.active-member'),
+                    nextEl;
+                
+                if (currentEl.dataset.row == membersIndex.length ) {
+                    nextEl = members[0];
+                } else {
+                    nextEl = currentEl.nextElementSibling;
+                }
+
+                currentEl.classList.remove('active-member');
+                nextEl.classList.add('active-member');
+
+                if(currentEl.getElementsByClassName('accordion-content')[0].classList.contains('visible')) {
+                    currentEl.getElementsByClassName('accordion-tab')[0].click();
+                }
+                })
+            }
+            forward();
+                    
+            function previous() {
+                document.querySelector('.team-prev').addEventListener('click', function() {
+                let currentEl = document.querySelector('.active-member'),
+                    prevEl;
+
+                if (currentEl.dataset.row == 1 ) {
+                    prevEl = members[members.length - 1]
+                } else {
+                    prevEl = currentEl.previousElementSibling;
+                }
+
+                currentEl.classList.remove('active-member');
+                prevEl.classList.add('active-member');
+
+                if(currentEl.getElementsByClassName('accordion-content')[0].classList.contains('visible')) {
+                    currentEl.getElementsByClassName('accordion-tab')[0].click();
+                }
+                })
+            }
+            previous();
+
+
+            // Text Animation
+            mainScroll.on('call', (value, way, obj) => {
+            switch (value) {
+                case 'revealOpacity': 
+                if(! obj.el.classList.contains('animated')) {
+                    let element = obj.el;
+
+                    gsap.from(element, {
+                        duration: 1.5,
+                        y: 50,
+                        opacity: 0,
+                        ease: 'power3.out',
+                    });
+
+                    obj.el.classList.add('animated')
+                }
+                break;
+
+                case 'showVideo': 
+                let videoA = document.querySelector('.experience__one'),
+                    videoB = document.querySelector('.experience__two');
+
+                gsap.from(videoA, {
+                    duration: 6,
+                    opacity: 1,
+                    ease: 'power3.out',
+                });
+
+                gsap.from(videoB, {
+                    duration: 6,
+                    opacity: 0,
+                    ease: 'power3.out',
+                });
+                break;
+            }
+            });  
         })
     }
 
