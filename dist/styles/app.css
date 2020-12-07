@@ -4138,7 +4138,7 @@ input::placeholder {
   }
 }
 #siteHeader .brand-icon {
-  height: 50%;
+  height: 2.5vw;
   position: absolute;
   top: 50%;
   left: 2.5vw;
@@ -4828,7 +4828,7 @@ h3 {
   padding-bottom: 71.42857vw;
 }
 .home--hero .hero-wrapper .hero__title .heading-one {
-  width: 80%;
+  max-width: 80%;
   margin: auto;
   text-align: center;
 }
@@ -4845,7 +4845,7 @@ h3 {
     padding: 0;
   }
   .home--hero .hero-wrapper .hero__title .heading-one {
-    max-width: 650px;
+    max-width: 60%;
   }
   .home--hero .hero-wrapper .hero__title .btn {
     margin-top: 1.25vw;
@@ -4952,11 +4952,20 @@ h3 {
 }
 .home--infographics .infographic__slideshow.infographic-desktop {
   display: none;
+  height: 33.85417vw;
 }
 @media only screen and (min-width: 1023px) {
   .home--infographics .infographic__slideshow.infographic-desktop {
     display: block;
   }
+}
+.home--infographics .infographic__slideshow .swiper-container {
+  height: 100%;
+}
+.home--infographics .infographic__slideshow .swiper-container .swiper-slide {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .home--infographics .infographic__slideshow .swiper-container .swiper-slide .slide__wrapper {
   margin-bottom: 15vw;
@@ -5014,7 +5023,6 @@ h3 {
 }
 @media only screen and (min-width: 1023px) {
   .home--infographics .infographic__slideshow .swiper-navigation {
-    top: 105%;
     left: 0;
   }
 }

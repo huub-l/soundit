@@ -1109,6 +1109,7 @@ function _isNativeReflectConstruct() {
 
 
 
+
 var Private = /*#__PURE__*/function (_DefaultRenderer) {
   _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3___default()(Private, _DefaultRenderer);
 
@@ -1128,10 +1129,14 @@ var Private = /*#__PURE__*/function (_DefaultRenderer) {
       var mainScroll = this.MainController.getScroll(); // ** Infographics Slideshow ** 
 
       swiper__WEBPACK_IMPORTED_MODULE_7__["default"].use([swiper__WEBPACK_IMPORTED_MODULE_7__["Navigation"], swiper__WEBPACK_IMPORTED_MODULE_7__["Pagination"]]);
+      swiper__WEBPACK_IMPORTED_MODULE_7__["default"].use([swiper__WEBPACK_IMPORTED_MODULE_7__["EffectFade"]]);
       var infographicsDesktop = new swiper__WEBPACK_IMPORTED_MODULE_7__["default"]('.infographic-desktop > .swiper-container', {
+        fadeEffect: {
+          crossFade: true
+        },
         slidesPerView: 1,
         spaceBetween: 48,
-        autoHeight: true,
+        effect: 'fade',
         pagination: {
           el: '.infographic-desktop .swiper-pagination',
           clickable: true,

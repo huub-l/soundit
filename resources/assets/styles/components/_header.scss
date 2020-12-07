@@ -34,7 +34,7 @@
     }
 
     .brand-icon {
-        height: 50%;
+        @include vw('height', 48);
         position: absolute;
         top: 50%;
         left: 2.5vw;

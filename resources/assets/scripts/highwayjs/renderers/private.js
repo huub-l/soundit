@@ -1,6 +1,8 @@
 
 import DefaultRenderer from './Default';
 import Swiper, { Navigation, Pagination } from 'swiper';
+import SwiperCore, { EffectFade } from 'swiper';
+
 
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
@@ -14,11 +16,13 @@ class Private extends DefaultRenderer {
 
     // ** Infographics Slideshow ** 
     Swiper.use([Navigation, Pagination]);
+    SwiperCore.use([EffectFade]);
 
     var infographicsDesktop = new Swiper('.infographic-desktop > .swiper-container', { 
+      fadeEffect: { crossFade: true },
       slidesPerView: 1,
-      spaceBetween: 48, 
-      autoHeight: true,
+      spaceBetween: 48,
+      effect: 'fade',
 
       pagination: {
         el: '.infographic-desktop .swiper-pagination',
