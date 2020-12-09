@@ -11,9 +11,9 @@
                 <span class="team-next">@include('svg.icon-arrow')</span>
             </div>
 
-            <ul class="team__members js-parent">
+            <ul class="team__members js-parent" data-scroll data-scroll-call="revealOpacity">
                 @fields('team_members')
-                <li data-row="{{ get_row_index() }}" class="accordion-wrapper js-accordion" data-scroll data-scroll-call="revealOpacity">
+                <li data-row="{{ get_row_index() }}" class="accordion-wrapper js-accordion">
                     <div class="accordion-content">
                         <div class="accordion-child">
                             @group('team_member')

@@ -4040,7 +4040,20 @@ a:focus, a:hover {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  border-radius: 10px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  line-height: 1.5;
+  border-radius: 20px;
+}
+@media only screen and (min-width: 767px) {
+  .btn {
+    padding-top: 2.08605vw;
+    padding-bottom: 2.08605vw;
+    padding-left: 4.69361vw;
+    padding-right: 4.69361vw;
+    border-radius: 26px;
+  }
 }
 @media only screen and (min-width: 1023px) {
   .btn {
@@ -4067,8 +4080,11 @@ a:focus, a:hover {
 }
 
 input {
-  padding: 2.85714vw;
   font-size: 3.33333vw;
+  padding-top: 3.80952vw;
+  padding-bottom: 3.80952vw;
+  padding-left: 5.71429vw;
+  padding-right: 5.71429vw;
   background: #ffffff;
   color: #000000;
   border-radius: 10px;
@@ -4081,6 +4097,14 @@ input::-ms-input-placeholder {
 }
 input::placeholder {
   color: #919194;
+}
+@media only screen and (min-width: 767px) {
+  input {
+    padding-top: 3.12907vw;
+    padding-bottom: 3.12907vw;
+    padding-left: 4.69361vw;
+    padding-right: 4.69361vw;
+  }
 }
 @media only screen and (min-width: 1023px) {
   input {
@@ -4103,7 +4127,7 @@ input::placeholder {
 }
 
 #siteHeader {
-  padding: 5.71429vw;
+  padding: 4.28571vw;
   width: 100%;
   position: fixed;
   top: 0;
@@ -4276,9 +4300,6 @@ input::placeholder {
   padding-top: 11.42857vw;
   padding-bottom: 11.42857vw;
   width: 100%;
-  position: fixed;
-  bottom: 0;
-  left: 0;
   background: #000000;
   z-index: 2;
 }
@@ -4289,7 +4310,9 @@ input::placeholder {
   #siteFooter {
     padding: 2.5vw;
     padding-top: 4.79167vw;
-    position: absolute;
+    position: fixed;
+    bottom: 0;
+    left: 0;
   }
   #siteFooter svg {
     width: 1.14583vw;
@@ -4349,8 +4372,32 @@ input::placeholder {
   padding-bottom: 0.625vw;
 }
 #siteFooter .footer__nav .nav-social li {
-  padding-right: 0.625vw;
+  padding-right: 1.90476vw;
+  height: 3.80952vw;
   display: inline-block;
+}
+#siteFooter .footer__nav .nav-social li a, #siteFooter .footer__nav .nav-social li img {
+  height: 100%;
+}
+#siteFooter .footer__nav .nav-social li a {
+  padding-right: 1.90476vw;
+}
+@media only screen and (min-width: 767px) {
+  #siteFooter .footer__nav .nav-social li {
+    height: 3.65059vw;
+  }
+  #siteFooter .footer__nav .nav-social li a {
+    padding-right: 1.56454vw;
+  }
+}
+@media only screen and (min-width: 1023px) {
+  #siteFooter .footer__nav .nav-social li {
+    padding-right: 0.41667vw;
+    height: 1.25vw;
+  }
+  #siteFooter .footer__nav .nav-social li a {
+    padding-right: 0.41667vw;
+  }
 }
 #siteFooter .newsletter {
   padding-top: 5.71429vw;
@@ -4910,9 +4957,9 @@ h3 {
 .home--about .about-wrapper .about__bullets li span {
   width: 2.85714vw;
   height: 2.85714vw;
+  top: 1.42857vw;
   border-radius: 50%;
   position: absolute;
-  top: 6px;
   left: 0;
 }
 @media only screen and (min-width: 1023px) {
@@ -4926,6 +4973,7 @@ h3 {
   .home--about .about-wrapper .about__bullets li span {
     width: 0.83333vw;
     height: 0.83333vw;
+    top: 0.41667vw;
   }
 }
 
@@ -5212,12 +5260,17 @@ h3 {
 .home--technology .technology-background {
   width: 100%;
   height: 100%;
-  margin: auto;
 }
 .home--technology .technology-background video {
   height: 100%;
   width: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: right;
+}
+@media only screen and (min-width: 767px) {
+  .home--technology .technology-background {
+    height: 80vh;
+  }
 }
 @media only screen and (min-width: 1023px) {
   .home--technology .technology-background {
@@ -5228,6 +5281,10 @@ h3 {
     right: -5%;
     transform: translateY(-50%);
     z-index: -1;
+  }
+  .home--technology .technology-background video {
+    object-fit: cover;
+    object-position: left;
   }
 }
 .home--technology .technology-wrapper {
@@ -5272,6 +5329,8 @@ h3 {
 }
 .home--technology .technology-wrapper .technology__characteristics .btn {
   margin-bottom: 5.71429vw;
+  padding-top: 5.71429vw;
+  padding-bottom: 5.71429vw;
   width: 100%;
   text-align: center;
   border: 1px solid #919194;
@@ -5282,6 +5341,13 @@ h3 {
 .home--technology .technology-wrapper .technology__characteristics .btn .heading-two-grey, .home--technology .technology-wrapper .technology__characteristics .btn .heading-three-grey {
   margin: 0;
   color: #919194;
+}
+@media only screen and (min-width: 767px) {
+  .home--technology .technology-wrapper .technology__characteristics .btn {
+    padding-top: 3.12907vw;
+    padding-bottom: 3.12907vw;
+    border-radius: 24px;
+  }
 }
 @media only screen and (min-width: 1023px) {
   .home--technology .technology-wrapper .technology__characteristics {
@@ -5294,11 +5360,14 @@ h3 {
   }
   .home--technology .technology-wrapper .technology__characteristics .btn {
     margin-right: 1.5625vw;
+    padding-top: 0.83333vw;
+    padding-bottom: 0.83333vw;
     margin-bottom: 0;
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
     display: inline-block;
+    border-radius: 10px;
   }
 }
 
@@ -5338,7 +5407,7 @@ h3 {
 }
 .home--team .team-wrapper .team__members {
   margin-top: 5.71429vw;
-  height: 120px;
+  height: 20vh;
   position: relative;
   transition: all 0.3s ease-in-out;
 }
@@ -5360,7 +5429,7 @@ h3 {
   transition: all 0.3s ease-in-out;
 }
 .home--team .team-wrapper .team__members li .accordion-content {
-  height: 120px;
+  height: 20vh;
 }
 .home--team .team-wrapper .team__members li .accordion-content:after {
   background: linear-gradient(180deg, rgba(230, 228, 227, 0) 0%, #e6e4e3 100%);
@@ -5529,13 +5598,15 @@ h3 {
   background: linear-gradient(180deg, rgba(23, 23, 29, 0) 0%, #17171d 100%);
 }
 
-.page-template-template-login {
+.password-page {
   background: #121219;
+  position: relative;
+  z-index: 100;
 }
-.page-template-template-login #siteHeader, .page-template-template-login #siteFooter {
+.password-page #siteHeader, .password-page #siteFooter {
   display: none;
 }
-.page-template-template-login .login--background {
+.password-page .login--background {
   height: 100vh;
   width: 100%;
   display: flex;
@@ -5544,30 +5615,30 @@ h3 {
   left: 0;
   z-index: 0;
 }
-.page-template-template-login .login--background svg {
+.password-page .login--background svg {
   width: 105%;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
 }
-.page-template-template-login .login--background svg:first-of-type {
+.password-page .login--background svg:first-of-type {
   top: -48px;
 }
-.page-template-template-login .login--background svg:last-of-type {
+.password-page .login--background svg:last-of-type {
   bottom: -48px;
 }
-.page-template-template-login .login--background .background__image {
+.password-page .login--background .background__image {
   height: 110%;
   width: auto;
   margin: auto;
   z-index: -1;
 }
-.page-template-template-login .login--background .background__image img {
+.password-page .login--background .background__image img {
   height: 100%;
   width: auto;
   object-fit: contain;
 }
-.page-template-template-login .login--wrapper .login__content {
+.password-page .login--wrapper .login__content {
   height: 100vh;
   width: 100%;
   position: relative;
@@ -5578,25 +5649,28 @@ h3 {
   text-align: center;
   z-index: 2;
 }
-.page-template-template-login .login--wrapper .login__content .heading-three-white, .page-template-template-login .login--wrapper .login__content .page--content h3, .page--content .page-template-template-login .login--wrapper .login__content h3 {
+.password-page .login--wrapper .login__content .heading-three-white, .password-page .login--wrapper .login__content .page--content h3, .page--content .password-page .login--wrapper .login__content h3 {
   font-size: 0.9375vw;
 }
-.page-template-template-login .login--wrapper .login__content .login__form {
+.password-page .login--wrapper .login__content .login__form {
   width: 50%;
 }
-.page-template-template-login .login--wrapper .login__content .login__form .form__group {
+.password-page .login--wrapper .login__content .login__form input, .password-page .login--wrapper .login__content .login__form label {
+  cursor: none;
+}
+.password-page .login--wrapper .login__content .login__form .form__group {
   position: relative;
   display: flex;
   align-items: center;
 }
-.page-template-template-login .login--wrapper .login__content .login__form .form__group button {
+.password-page .login--wrapper .login__content .login__form .form__group button {
   height: 100%;
   position: absolute;
   top: 50%;
   right: 12px;
   transform: rotate(180deg) translateY(50%);
 }
-.page-template-template-login .login--wrapper .login__content .login__form .form__group button svg {
+.password-page .login--wrapper .login__content .login__form .form__group button svg {
   height: 40%;
 }
 /*# sourceMappingURL=app.css.map*/

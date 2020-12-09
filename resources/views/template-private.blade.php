@@ -4,11 +4,14 @@
 
 @extends('layouts.app')
 
+@if( post_password_required() ) 
+    @include('partials.password')
+@else 
+
 @section('content')
     @include('partials.content-page')
 
     <div class="home-wrapper">
-
         <section class="home--hero" id="home-hero">
            @include('partials.section-hero')
         </section>
@@ -56,6 +59,9 @@
         <section class="video--banner-three" id="video-three">
             <div class="video-background"><img src="@field('video_three_background', 'url')" alt=""></div>
         </section>
-        
     </div>
 @endsection
+
+@endif
+
+

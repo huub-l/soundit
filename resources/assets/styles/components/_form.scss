@@ -170,13 +170,23 @@
 // }
 
 input {
-    @include vw('padding', 12, 420);
     @include vw('font-size', 14, 420);
+    @include vw('padding-top',16, 420);
+    @include vw('padding-bottom', 16, 420);
+    @include vw('padding-left', 24, 420);
+    @include vw('padding-right', 24, 420);
     background: $white;
     color: $black;
     border-radius: 10px;
     
     &::placeholder { color: $light-grey; }
+
+    @include min-screen($xsmall) {
+        @include vw('padding-top', 24, 767);
+        @include vw('padding-bottom', 24, 767);
+        @include vw('padding-left', 36, 767);
+        @include vw('padding-right', 36, 767);
+    }
 
     @include min-screen ($small) {
         @include vw('padding-top',16);

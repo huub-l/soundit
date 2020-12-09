@@ -5,7 +5,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     <section class="page--hero">
         <div class="row expanded">
             <div class="xxlarge-8 xxlarge-offset-2">
@@ -23,5 +22,4 @@
             </div>
         </div>
     </section>
-
 @endsection

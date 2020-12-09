@@ -83,16 +83,27 @@ export default class DefaultRenderer extends Highway.Renderer {
                     burger.classList.toggle('open');
                     nav.classList.toggle('visible');
                 });
+
+                let menuItem = document.querySelectorAll('header .menu-item a');
+
+                menuItem.forEach(item => {
+                    item.addEventListener('click', (ev) => {
+                        ev.preventDefault();
+                        burger.click();
+                    })
+                })          
             }
 
 
             // Margin for footer
-            let footer = document.querySelector('#siteFooter'),
-                footerHeight = footer.offsetHeight,
-                main = document.querySelector('.grid-container');
+            if (window.matchMedia('(min-width: 1024px)').matches) {
+                let footer = document.querySelector('#siteFooter'),
+                    footerHeight = footer.offsetHeight,
+                    main = document.querySelector('.grid-container');
 
-            main.style.padding = '0 0 '+footerHeight+'px';
-            mainScroll.update();
+                main.style.padding = '0 0 '+footerHeight+'px';
+                mainScroll.update();
+            }
 
 
             document.querySelectorAll('[data-anchor').forEach(anchor => {
@@ -131,7 +142,7 @@ export default class DefaultRenderer extends Highway.Renderer {
                 wrapper.classList.remove('visible');
                 wrapper.style.height = null;
 
-                if(parent) { parent.style.height = '120px'; }
+                if(parent) { parent.style.height = '20vh'; }
             };
 
             accordions.forEach((accordion) => {
@@ -152,10 +163,9 @@ export default class DefaultRenderer extends Highway.Renderer {
 
 
             // Team Mobile Slideshow 
-
             let members = document.querySelectorAll('.team__members li'),
-            membersIndex = document.querySelectorAll('[data-row]'),
-            navPrev = document.querySelector('.team-prev');
+                membersIndex = document.querySelectorAll('[data-row]'),
+                navPrev = document.querySelector('.team-prev');
 
             members.forEach(member => {
                 if ( member.getAttribute('data-row') == '1' ) {
@@ -165,42 +175,42 @@ export default class DefaultRenderer extends Highway.Renderer {
             
             function forward() {
                 document.querySelector('.team-next').addEventListener('click', function() {
-                let currentEl = document.querySelector('.active-member'),
-                    nextEl;
-                
-                if (currentEl.dataset.row == membersIndex.length ) {
-                    nextEl = members[0];
-                } else {
-                    nextEl = currentEl.nextElementSibling;
-                }
+                    let currentEl = document.querySelector('.active-member'),
+                        nextEl;
+                    
+                    if (currentEl.dataset.row == membersIndex.length ) {
+                        nextEl = members[0];
+                    } else {
+                        nextEl = currentEl.nextElementSibling;
+                    }
 
-                currentEl.classList.remove('active-member');
-                nextEl.classList.add('active-member');
+                    currentEl.classList.remove('active-member');
+                    nextEl.classList.add('active-member');
 
-                if(currentEl.getElementsByClassName('accordion-content')[0].classList.contains('visible')) {
-                    currentEl.getElementsByClassName('accordion-tab')[0].click();
-                }
+                    if(currentEl.getElementsByClassName('accordion-content')[0].classList.contains('visible')) {
+                        currentEl.getElementsByClassName('accordion-tab')[0].click();
+                    }
                 })
             }
             forward();
                     
             function previous() {
                 document.querySelector('.team-prev').addEventListener('click', function() {
-                let currentEl = document.querySelector('.active-member'),
-                    prevEl;
+                    let currentEl = document.querySelector('.active-member'),
+                        prevEl;
 
-                if (currentEl.dataset.row == 1 ) {
-                    prevEl = members[members.length - 1]
-                } else {
-                    prevEl = currentEl.previousElementSibling;
-                }
+                    if (currentEl.dataset.row == 1 ) {
+                        prevEl = members[members.length - 1]
+                    } else {
+                        prevEl = currentEl.previousElementSibling;
+                    }
 
-                currentEl.classList.remove('active-member');
-                prevEl.classList.add('active-member');
+                    currentEl.classList.remove('active-member');
+                    prevEl.classList.add('active-member');
 
-                if(currentEl.getElementsByClassName('accordion-content')[0].classList.contains('visible')) {
-                    currentEl.getElementsByClassName('accordion-tab')[0].click();
-                }
+                    if(currentEl.getElementsByClassName('accordion-content')[0].classList.contains('visible')) {
+                        currentEl.getElementsByClassName('accordion-tab')[0].click();
+                    }
                 })
             }
             previous();

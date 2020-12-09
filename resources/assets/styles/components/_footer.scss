@@ -2,9 +2,6 @@
     @include vw ('padding-top', 48, 420);
     @include vw ('padding-bottom', 48, 420);
     width: 100%;
-    position: fixed;
-    bottom: 0;
-    left: 0;
     background: $black;
     z-index: 2;
 
@@ -13,7 +10,9 @@
     @include min-screen($small) {
         @include vw ('padding', 48);
         @include vw ('padding-top', 92);
-        position: absolute;
+        position: fixed;
+        bottom: 0;
+        left: 0;
 
         svg {  @include vw('width', 22); }
     }
@@ -70,8 +69,26 @@
             }
 
             li {
-                @include vw('padding-right', 12);
+                @include vw('padding-right', 8, 420);
+                @include vw('height', 16, 420);
                 display: inline-block;
+    
+                a, img { height: 100%; }
+
+                a { @include vw('padding-right', 8, 420); }
+
+                @include min-screen($xsmall) {
+                    @include vw('height', 28, 767);
+
+                    a { @include vw('padding-right', 12, 767); }
+                }
+
+                @include min-screen($small) {
+                    @include vw('padding-right', 8);
+                    @include vw('height', 24);
+
+                    a { @include vw('padding-right', 8); }
+                }
             }
 
         }

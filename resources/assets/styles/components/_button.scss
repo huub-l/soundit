@@ -17,7 +17,17 @@
     @include vw('padding-right', 36, 420);
     display: block;
     width: fit-content;
-    border-radius: 10px;
+    height: fit-content;
+    line-height: 1.5;
+    border-radius: 20px;
+
+    @include min-screen($xsmall) {
+        @include vw('padding-top', 16, 767);
+        @include vw('padding-bottom', 16, 767);
+        @include vw('padding-left', 36, 767);
+        @include vw('padding-right', 36, 767);
+        border-radius: 26px;
+    }
 
     @include min-screen ($small) {
         @include vw('font-size', 18);
