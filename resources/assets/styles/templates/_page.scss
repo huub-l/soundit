@@ -1,20 +1,41 @@
 .page--hero {
-    @include vw('padding-top', 212);
-    @include vw('padding-bottom', 92);
+    @include vw('padding-top', 144, 420);
+    @include vw('padding-bottom', 72, 420);
     background: $black;
     color: $white;
     text-align: center;
+
+    @include min-screen($xsmall) {
+        @include vw('padding-top', 192, 767);
+        @include vw('padding-bottom', 92, 767);
+    }
+    
+    @include min-screen($small) {
+        @include vw('padding-top', 212);
+        @include vw('padding-bottom', 92);
+    }
 }
 
 .page--content {
-    @include vw('padding-top', 190);
-    @include vw('padding-bottom', 190);
+    @include vw('padding-top', 72, 420);
+    @include vw('padding-bottom', 72, 420);
     background: $dark-grey;
+
+    @include min-screen($xsmall) {
+        @include vw('padding-top', 92, 767);
+        @include vw('padding-bottom', 92, 767);
+    }
+
+    @include min-screen($small) {
+        @include vw('padding-top', 190);
+        @include vw('padding-bottom', 190);
+    }
 
     h2 {
         @extend .heading-two-white;
         font-family: $font-circular;
         text-transform: none;
+        font-weight: 500;
     }
 
     h3 { @extend .heading-three-white; }

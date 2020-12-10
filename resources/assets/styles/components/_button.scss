@@ -11,28 +11,29 @@
 
 .btn {
     @include vw('font-size', 12, 420);
-    @include vw('padding-top', 12, 420);
-    @include vw('padding-bottom', 12, 420);
+    @include vw('padding-top', 8, 420);
+    @include vw('padding-bottom', 8, 420);
     @include vw('padding-left', 36, 420);
     @include vw('padding-right', 36, 420);
     display: block;
     width: fit-content;
     height: fit-content;
+    font-weight: 500;
     line-height: 1.5;
-    border-radius: 20px;
+    border-radius: 16px;
 
     @include min-screen($xsmall) {
-        @include vw('padding-top', 16, 767);
-        @include vw('padding-bottom', 16, 767);
+        @include vw('padding-top', 12, 767);
+        @include vw('padding-bottom', 12, 767);
         @include vw('padding-left', 36, 767);
         @include vw('padding-right', 36, 767);
-        border-radius: 26px;
+        border-radius: 24px;
     }
 
     @include min-screen ($small) {
         @include vw('font-size', 18);
-        @include vw('padding-top', 16);
-        @include vw('padding-bottom', 16);
+        @include vw('padding-top', 10);
+        @include vw('padding-bottom', 10);
         @include vw('padding-left', 36);
         @include vw('padding-right', 36);
         border-radius: 10px;
@@ -51,6 +52,5 @@
     &.btn-subscribe {
         background: $white;
         color: $light-grey;
-        font-weight: 500;
     }
 }

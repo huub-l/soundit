@@ -103,6 +103,7 @@ hr {
     @include vw ('font-size', 42, 420);
     @include vw ('line-height', 56, 420);
     color: $white;
+    font-weight: 500;
 
     @include min-screen($small) {
         @include vw ('font-size', 120);

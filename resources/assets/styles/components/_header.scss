@@ -1,5 +1,5 @@
 #siteHeader {
-    @include vw ('padding', 18, 420);
+    @include vw ('padding', 24, 420);
     width: 100%;
     position: fixed;
     top: 0;
@@ -51,6 +51,7 @@
         top: 0;
         left: 0;
         height: 100vh;
+        height: calc(var(--vh, 1vh) * 100);    
         width: 100%;
         background: $black;
         opacity: 0;
@@ -84,7 +85,7 @@
             }
 
             li {
-                @include vw ('font-size', 24, 420);
+                @include vw ('font-size', 42, 420);
                 @include vw ('padding-top', 8, 420);
                 @include vw ('padding-bottom', 8, 420);
 

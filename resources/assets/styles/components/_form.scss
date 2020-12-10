@@ -169,6 +169,8 @@
 //     min-height: rem(200px);
 // }
 
+input, label { cursor: none; }
+
 input {
     @include vw('font-size', 14, 420);
     @include vw('padding-top',16, 420);
@@ -177,7 +179,7 @@ input {
     @include vw('padding-right', 24, 420);
     background: $white;
     color: $black;
-    border-radius: 10px;
+    border-radius: 8px;
     
     &::placeholder { color: $light-grey; }
 
@@ -189,10 +191,12 @@ input {
     }
 
     @include min-screen ($small) {
-        @include vw('padding-top',16);
-        @include vw('padding-bottom', 16);
+        @include vw('font-size', 16);
+        @include vw('padding-top',18);
+        @include vw('padding-bottom', 18);
         @include vw('padding-left', 24);
         @include vw('padding-right', 24);
-        @include vw('font-size', 16);
+
+        &::placeholder { @include vw('font-size', 14); }
     }
 }

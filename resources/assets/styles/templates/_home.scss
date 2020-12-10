@@ -11,6 +11,7 @@
     .hero-wrapper {
         width: 100%;
         min-height: 100vh;
+        min-height: calc(var(--vh, 1vh) * 100);
         position: relative;
 
         @include min-screen($small) { @include vw('padding-bottom', 460); }
@@ -19,6 +20,7 @@
             display: none;
             width: 100%;
             height: 100vh;
+            height: calc(var(--vh, 1vh) * 100);
             background: transparent;
             position: relative;
             z-index: 2;
@@ -80,13 +82,21 @@
                 margin: auto;
             }
 
-            .btn { @include vw('margin-top', 24, 420); }
+            .btn {
+                @include vw('margin-top', 24, 420);
+                @include vw('padding-left', 48, 420);
+                @include vw('padding-right', 48, 420);
+            }
 
             @include min-screen($small) {
                 padding: 0;
 
                 .heading-one { max-width: 60%; }
-                .btn { @include vw('margin-top', 24); }
+                .btn {
+                    @include vw('margin-top', 24);
+                    @include vw('padding-left', 48);
+                    @include vw('padding-right', 48);
+                }
             }
         }
     }
@@ -168,7 +178,7 @@
 
 .home--infographics {
     @include vw('padding-top', 120, 420);
-    @include vw('padding-bottom', 180, 420);
+    @include vw('padding-bottom', 200, 420);
     background: $dark-grey;
 
     @include min-screen($small) {
@@ -195,12 +205,14 @@
             height: 100%;
 
             .swiper-slide {
+                height: 100%;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
 
                 .slide__wrapper {
                     @include vw('margin-bottom', 48, 320);
+                    max-height: 100%;
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
@@ -218,10 +230,21 @@
                     
                         img {
                             height: auto;
+                            max-height: 100%;
 
                             &.img_desktop { display: none; }
                             &.img_mobile { display: block; }
                         }
+                    }
+
+                    @include min-screen($xsmall) {
+                        .slide__image {
+                            width: 80%;
+                            margin: auto;
+
+                            img { width: 100%; }
+                        }
+    
                     }
 
                     @include min-screen($small) {
@@ -236,6 +259,7 @@
 
                         .slide__image {
                             width: 65%;
+                            margin: 0;
                             text-align: right;
 
                             img {
@@ -250,6 +274,7 @@
 
         .swiper-navigation {
             display: flex;
+            align-items: center;
             position: absolute;
             top: 110%;
             left: 10%;
@@ -267,7 +292,11 @@
                 @include min-screen($small) { svg { @include vw('height', 24); } }
             }
     
-            .swiper-prev { margin-right: $unit-small; }
+            .swiper-prev {
+                @include vw('margin-right', 16, 420);
+                @include min-screen($xsmall) { @include vw('margin-right', 16, 767);  }
+                @include min-screen($small) { @include vw('margin-right', 16); }
+            }
 
             .swiper-next { transform: rotate(180deg); }
 
@@ -275,12 +304,22 @@
                 position: relative;
            
                 .swiper-pagination-bullet {
+                    @include vw('padding-right', 16, 420);
                     width: auto;
                     height: auto;
                     background: none;
                     color: $light-grey;
-                    padding-right: $unit-small;
                     cursor: none;
+
+                    @include min-screen($xsmall) {
+                        @include vw('font-size', 24, 767);
+                        @include vw('padding-right', 16, 767);
+                    }
+
+                    @include min-screen($small) {
+                        @include vw('font-size', 20);
+                        @include vw('padding-right', 16);
+                    }
                 }
 
                 .swiper-pagination-bullet-active { color: $white; }
@@ -338,6 +377,7 @@
         @include vw('padding-top', 200);
         @include vw('padding-bottom', 200);
         height: 100vh;
+        height: calc(var(--vh, 1vh) * 100);    
         display: flex;
         align-items: center;
     }
@@ -355,6 +395,7 @@
      
     .experience-background {
         height: 60vh;
+        height: calc(var(--vh, 1vh) * 60);
         width: 100%;
         position: relative;
         z-index: 0;
@@ -415,9 +456,13 @@
 .video--banner-one , .video--banner-two {
     width: 100%;
     height: 80vh;
+    height: calc(var(--vh, 1vh) * 80);
     position: relative;
 
-    @include min-screen($small) { height: 100vh; }
+    @include min-screen($small) { 
+        height: 100vh;
+        height: calc(var(--vh, 1vh) * 100);    
+    }
 
     .video-background {
         width: 100%;
@@ -446,6 +491,7 @@
 .home--technology {
     position: relative;
     background: #121217;
+    overflow: hidden;
     z-index: 0;
 
     .technology-background {
@@ -459,7 +505,11 @@
             object-position: right;
         }
 
-        @include min-screen($xsmall) { height: 80vh; }
+        @include min-screen($xsmall) {
+            height: 80vh;
+            height: calc(var(--vh, 1vh) * 80);
+            
+        }
        
         @include min-screen($small) {
             width: 60%;
@@ -485,7 +535,7 @@
             @include vw('padding-top', 400);
             @include vw('padding-bottom', 400);
 
-            .heading-two-white, p { width: 60%; }
+            .heading-two-white, p { width: 75%; }
         }
 
         .technology__image {
@@ -495,9 +545,9 @@
             @include vw('margin-top', 48, 420);
             
             @include min-screen($small) {
+                width: 35%;
                 margin: 0;
                 @include vw('margin-top', 60);
-                width: 40%;
             }
 
             img {

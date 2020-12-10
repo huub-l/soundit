@@ -34,6 +34,13 @@ export default class DefaultRenderer extends Highway.Renderer {
             document.documentElement.style.setProperty('--vh', `${vh}px`);
 
         
+            // Max body for login page 
+            let login = document.querySelector('.password-page');
+
+            if(login) {
+                document.body.height = '100vh';
+            }
+
             // Cursor 
             const cursor = document.querySelector('#cursor');
             let links = document.querySelectorAll('a, button, .triggers-hover');
@@ -82,6 +89,7 @@ export default class DefaultRenderer extends Highway.Renderer {
 
                     burger.classList.toggle('open');
                     nav.classList.toggle('visible');
+                    document.body.classList.toggle('no-scroll');
                 });
 
                 let menuItem = document.querySelectorAll('header .menu-item a');

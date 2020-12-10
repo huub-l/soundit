@@ -1,12 +1,13 @@
 .password-page {
+    max-height: 100vh;
     background: #121219;
     position: relative;
     z-index: 100;
-
-    #siteHeader, #siteFooter { display: none; }
+    overflow: hidden;
 
     .login--background {
         height: 100vh;
+        height: calc(var(--vh, 1vh) * 100);   
         width: 100%;
         display: flex;
         position: absolute;
@@ -15,17 +16,23 @@
         z-index: 0;
 
         svg {
-            width: 105%;
+            width: 150vw;
             position: absolute;
             left: 50%;
             transform: translateX(-50%); 
 
-            &:first-of-type { top: -#{$unit*2}; }
-            &:last-of-type { bottom: -#{$unit*2}; }
+            &:first-of-type { top: -5vw; }
+            &:last-of-type { bottom: -5vw; }
+    
+            @include min-screen($small) {
+                width: 105vw;
+                &:first-of-type { top: -5vw; }
+                &:last-of-type { bottom: -5vw; }
+            }
         }
 
         .background__image {
-            height: 110%;
+            height: 100%;
             width: auto;
             margin: auto;
             z-index: -1;
@@ -33,28 +40,52 @@
             img {
                 height: 100%;
                 width: auto;
-                object-fit: contain;
+                object-fit: cover;
+                object-position: center;
+            }
+
+            @include min-screen($small) {
+                height: 110%;
+
+                img { object-fit: contain; }
             }
         }
     }
 
     .login--wrapper .login__content {
         height: 100vh;
+        height: calc(var(--vh, 1vh) * 100);
         width: 100%;
         position: relative;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        text-align: center;
         z-index: 2;
 
-        .heading-three-white { @include vw ('font-size', 18); }
+        .heading-two-white { @include vw('font-size', 36, 420); }
+        .heading-three-white { @include vw('font-size', 14, 420); }
+
+        @include min-screen($xsmall) {
+            text-align: center;
+            .heading-two-white { @include vw ('font-size', 39, 767); }
+            .heading-three-white { @include vw ('font-size', 18, 767); }
+        }
+
+        @include min-screen($small) {
+            .heading-two-white { @include vw ('font-size', 39); }
+            .heading-three-white { @include vw ('font-size', 18); }
+        }
 
         .login__form {
-            width: 50%;
+            width: 100%;
 
-            input, label { cursor: none; }
+            label { @include vw('margin-bottom', 12, 420); }
+
+            @include min-screen($small) {
+                width: 50%;
+                label { @include vw('margin-bottom', 12); }
+            }
             
             .form__group {
                 position: relative;

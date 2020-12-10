@@ -1,5 +1,5 @@
 <div class="technology-background">
-    <video src="@field('technology_background', 'url')" loop autoplay muted>
+    <video src="@field('technology_background', 'url')" autoplay loop playsinline muted>
 </div>
 
 <div class="row expanded">

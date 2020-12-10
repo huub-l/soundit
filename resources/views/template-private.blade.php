@@ -34,7 +34,7 @@
 
         <section class="video--banner-one" id="video-one">
             <div class="video-background">
-                <video src="@field('video_one_background', 'url')" loop autoplay muted>
+                <video src="@field('video_one_background', 'url')" autoplay loop playsinline muted>
             </div>
             @hasfield('video_one_title')<h2 class="heading-one">@field('video_one_title')</h2>@endfield
         </section>

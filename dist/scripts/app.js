@@ -571,7 +571,14 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
         }); // Viewport vh
 
         var vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty('--vh', "".concat(vh, "px")); // Cursor 
+        document.documentElement.style.setProperty('--vh', "".concat(vh, "px")); // Max body for login page 
+
+        var login = document.querySelector('.password-page');
+
+        if (login) {
+          document.body.height = '100vh';
+        } // Cursor 
+
 
         var cursor = document.querySelector('#cursor');
         var links = document.querySelectorAll('a, button, .triggers-hover');
@@ -612,6 +619,7 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
             ev.preventDefault();
             burger.classList.toggle('open');
             nav.classList.toggle('visible');
+            document.body.classList.toggle('no-scroll');
           });
           var menuItem = document.querySelectorAll('header .menu-item a');
           menuItem.forEach(function (item) {

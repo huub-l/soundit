@@ -7,7 +7,7 @@
 
     <section class="login--wrapper">
         <div class="row expanded">
-            <div class="xxlarge-6 xxlarge-offset-3">
+            <div class="small-10 small-offset-1 xxlarge-6 xxlarge-offset-3">
                 <div class="login__content">
                     <h2 class="heading-two-white">@field('login_title')</h2>
 
