@@ -31,11 +31,11 @@
 
         <div class="small-10 small-offset-1 xxlarge-4 xxlarge-offset-1">
             <div class="newsletter">
-                <form>
-                    <label for="newsletter">Stay Up To Date With Our Latest Innovations</label>
+                <form data-form="newsletter" data-loading="false" >
+                    <label for="newsletter_email">Stay Up To Date With Our Latest Innovations</label>
                     <div class="input__wrapper">
-                        <input type="email" id="newsletter" name="newsletter" placeholder="Your@Mail.Here">
-                        <button class="btn btn-subscribe">Subscribe</button>
+                        <input class="required-field" type="email" name="newsletter_email" placeholder="Your@Mail.Here">
+                        <button class="btn btn-subscribe" type="submit" data-submit-form="{{'newsletter'}}">Subscribe</button>
                     </div>
                 </form>
             </div>

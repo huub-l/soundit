@@ -8,18 +8,22 @@
     </div>
     
     <div class="column small-10 small-offset-1 xxlarge-4 xxlarge-offset-0">
-        <div class="form__wrapper" data-scroll data-scroll-call="revealOpacity">
+        <form class="form__wrapper" data-form="contact-form" data-loading="false" data-scroll data-scroll-call="revealOpacity">
             <div class="row expanded">
                 <div class="column">
-                    <input type="text" placeholder="Name">
+                    <input class="required-field" type="text" placeholder="Name" name="contact_form_name">
                 </div>
                 <div class="column">
-                    <input type="text" placeholder="Company">
+                    <input class="required-field" type="text" placeholder="Company" name="contact_form_company">
                 </div>
             </div>
 
-            <input type="email" placeholder="Your@Mail.Here">
-            <button class="btn btn-black">Schedule A Live Demo</button>
-        </div>
+            <input type="email" placeholder="Your@Mail.Here" name="contact_form_email">
+
+            <div class="form__submit">
+                <button class="btn btn-black" type="submit" data-submit-form="{{'contact-form'}}">Schedule A Live Demo</button>
+                <p class="form-feedback">Thanks for getting in touch!</p>
+            </div>
+        </form>
     </div>
 </div>

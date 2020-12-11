@@ -3,6 +3,7 @@ import Highway from '@dogstudio/highway/build/highway.min.js'
 
 import AssetLoader from '../AssetLoader'
 import PageLoader from '../animations/PageLoader'
+import form from '../../components/form';
 
 import gsap from "gsap";
 
@@ -28,18 +29,19 @@ export default class DefaultRenderer extends Highway.Renderer {
             let mainScroll = this.MainController.getScroll();
 
             window.addEventListener('resize', function () { mainScroll.update() });
+
+            form('contact-form')
+            form('newsletter')
         
             // Viewport vh
             let vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
 
-        
+    
             // Max body for login page 
             let login = document.querySelector('.password-page');
 
-            if(login) {
-                document.body.height = '100vh';
-            }
+            if(login) { document.body.height = '100vh'; }
 
             // Cursor 
             const cursor = document.querySelector('#cursor');

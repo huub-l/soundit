@@ -12,7 +12,7 @@
     <link rel="manifest" href="/wp-content/themes/soundit/favicon//site.webmanifest">
   </head>
 
-  <body <?php body_class(); ?>>
+  <body <?php body_class(); ?> data-nonce=<?php echo wp_create_nonce("wp_rest"); ?>>
     <?php wp_body_open(); ?>
     <?php do_action('get_header'); ?>
 

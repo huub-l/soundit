@@ -29,7 +29,7 @@ require $composer;
 |
 */
 
-collect(['helpers', 'setup', 'filters', 'admin', 'clean-wordpress'])
+collect(['helpers', 'setup', 'filters', 'admin', 'clean-wordpress', 'forms'])
     ->each(function ($file) {
         $file = "app/{$file}.php";
 

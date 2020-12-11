@@ -737,6 +737,7 @@
 
     .form__wrapper {
         @include vw('margin-top', 24, 420);
+        position: relative;
         input {  display: inline-block; }
 
         .row .column {
@@ -747,7 +748,24 @@
             input { width: 100%; }
         }
 
-        .btn { @include vw('margin-top', 12, 420); }       
+        .form__submit {
+            @include vw('margin-top', 12, 420);
+            display: flex;     
+            align-items: center;
+
+            .btn { height: 100%; }
+
+            .form-feedback {
+                @include vw('font-size', 16, 420);
+                margin-left: $unit;
+                color: $white;
+                opacity: 0;
+                transition: all 0.3s ease-in-out;
+
+                &.success { opacity: 1; }
+            }
+        }
+            
 
         @include min-screen($small) {
            margin: 0;
@@ -760,7 +778,11 @@
                 &:nth-of-type(2) {  padding-left: #{$gutter/2}vw; }
             }
 
-            .btn { @include vw('margin-top', 24); }       
+            .form__submit {
+                @include vw('margin-top', 24);
+
+                .form-feedback { @include vw('font-size', 16); }
+            }    
         }
     }
 }

@@ -38,6 +38,133 @@ function common() {
 
 /***/ }),
 
+/***/ "./resources/assets/scripts/components/form.js":
+/*!*****************************************************!*\
+  !*** ./resources/assets/scripts/components/form.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return form; });
+/* harmony import */ var _utils_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/api */ "./resources/assets/scripts/utils/api.js");
+
+function form(selector) {
+  var form = document.querySelector('[data-form="' + selector + '"]'),
+      requiredFields = form.getElementsByClassName('required-field');
+  console.log('works');
+  var postURL;
+
+  switch (form.dataset.form) {
+    case 'contact-form':
+      postURL = _utils_api__WEBPACK_IMPORTED_MODULE_0__["default"].forms.contact;
+      break;
+
+    case 'newsletter':
+      postURL = _utils_api__WEBPACK_IMPORTED_MODULE_0__["default"].forms.newsletter;
+      break;
+
+    default:
+      break;
+  }
+  /* Form Helpers */
+
+
+  function resetMessages() {
+    form.querySelectorAll('.form-error').forEach(function (f) {
+      f.classList.remove('show');
+    });
+  }
+
+  function resetFields() {
+    var Inputs = form.querySelectorAll('input:not([type=submit]), select');
+    [].forEach.call(Inputs, function (Input) {
+      Input.value = '';
+    });
+  }
+
+  function validateEmail(email) {
+    // eslint-disable-next-line
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
+
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+
+    if (form.dataset.form != selector) {
+      return;
+    }
+
+    form.dataset.loading = 'true'; // reset the form messages
+
+    resetMessages(); // Validate Everything
+
+    var invalidFields = [];
+
+    var makeInvalid = function makeInvalid(field) {
+      invalidFields.push(field);
+      form.querySelector('[data-error="' + field.id + '"]').classList.add('show');
+    };
+
+    var validateForm = function validateForm(fields) {
+      for (var index = 0; index < fields.length; index++) {
+        var required = fields[index];
+
+        if (required.type == 'email') {
+          if (!validateEmail(required.value)) {
+            makeInvalid(required);
+          }
+        } else if (required.type == 'file' && required.files.length == 0) {
+          makeInvalid(required);
+        } else {
+          if (!required.value) {
+            makeInvalid(required);
+          }
+        }
+      }
+
+      if (invalidFields.length > 0) {
+        return false;
+      }
+
+      return true;
+    }; // Append all present files
+
+
+    var params = new FormData(form);
+    params.append('_wpnonce', document.body.dataset.nonce);
+
+    if (validateForm(requiredFields)) {
+      fetch(postURL, {
+        method: 'POST',
+        body: params
+      }).then(_utils_api__WEBPACK_IMPORTED_MODULE_0__["checkStatus"]).then(_utils_api__WEBPACK_IMPORTED_MODULE_0__["parseJSON"]).then(function (response) {
+        console.log(params);
+
+        if (response.code === 'sent-with-success') {
+          if (form.dataset.form == 'contact-form') {
+            document.querySelector('.form-feedback').classList.add('success');
+          }
+
+          resetFields();
+          form.dataset.loading = 'done';
+          setTimeout(function () {
+            form.dataset.loading = 'false';
+            document.querySelector('.form-feedback').classList.remove('success');
+          }, 4000);
+        }
+      })["catch"](function (error) {
+        console.log('...', error);
+        Object(_utils_api__WEBPACK_IMPORTED_MODULE_0__["errorResponse"])(error);
+      });
+    }
+  });
+}
+
+/***/ }),
+
 /***/ "./resources/assets/scripts/highwayjs/AssetLoader.js":
 /*!***********************************************************!*\
   !*** ./resources/assets/scripts/highwayjs/AssetLoader.js ***!
@@ -266,8 +393,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _dogstudio_highway_build_highway_min_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_dogstudio_highway_build_highway_min_js__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _renderers_Default__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./renderers/Default */ "./resources/assets/scripts/highwayjs/renderers/Default.js");
 /* harmony import */ var _transitions_Default__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./transitions/Default */ "./resources/assets/scripts/highwayjs/transitions/Default.js");
-/* harmony import */ var _renderers_home__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./renderers/home */ "./resources/assets/scripts/highwayjs/renderers/home.js");
-/* harmony import */ var _renderers_private__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./renderers/private */ "./resources/assets/scripts/highwayjs/renderers/private.js");
+/* harmony import */ var _renderers_private__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./renderers/private */ "./resources/assets/scripts/highwayjs/renderers/private.js");
 
 
 
@@ -384,7 +510,6 @@ function _isNativeReflectConstruct() {
 
 
 
-
 var H = /*#__PURE__*/function (_Highway$Core) {
   _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_2___default()(H, _Highway$Core);
 
@@ -397,8 +522,8 @@ var H = /*#__PURE__*/function (_Highway$Core) {
 
     _this = _super.call(this, {
       renderers: {
-        home: _renderers_home__WEBPACK_IMPORTED_MODULE_9__["default"],
-        template_private: _renderers_private__WEBPACK_IMPORTED_MODULE_10__["default"],
+        home: _renderers_Default__WEBPACK_IMPORTED_MODULE_7__["default"],
+        template_private: _renderers_private__WEBPACK_IMPORTED_MODULE_9__["default"],
         template_page: _renderers_Default__WEBPACK_IMPORTED_MODULE_7__["default"],
         template_login: _renderers_Default__WEBPACK_IMPORTED_MODULE_7__["default"],
         single_post: _renderers_Default__WEBPACK_IMPORTED_MODULE_7__["default"]
@@ -491,7 +616,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _dogstudio_highway_build_highway_min_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_dogstudio_highway_build_highway_min_js__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _AssetLoader__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../AssetLoader */ "./resources/assets/scripts/highwayjs/AssetLoader.js");
 /* harmony import */ var _animations_PageLoader__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../animations/PageLoader */ "./resources/assets/scripts/highwayjs/animations/PageLoader.js");
-/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
+/* harmony import */ var _components_form__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/form */ "./resources/assets/scripts/components/form.js");
+/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
 
 
 
@@ -534,6 +660,7 @@ function _isNativeReflectConstruct() {
 
 
 
+
 var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
   _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_2___default()(DefaultRenderer, _Highway$Renderer);
 
@@ -568,7 +695,9 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
 
         window.addEventListener('resize', function () {
           mainScroll.update();
-        }); // Viewport vh
+        });
+        Object(_components_form__WEBPACK_IMPORTED_MODULE_9__["default"])('contact-form');
+        Object(_components_form__WEBPACK_IMPORTED_MODULE_9__["default"])('newsletter'); // Viewport vh
 
         var vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', "".concat(vh, "px")); // Max body for login page 
@@ -755,7 +884,7 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
             case 'revealOpacity':
               if (!obj.el.classList.contains('animated')) {
                 var element = obj.el;
-                gsap__WEBPACK_IMPORTED_MODULE_9__["default"].from(element, {
+                gsap__WEBPACK_IMPORTED_MODULE_10__["default"].from(element, {
                   duration: 1.5,
                   y: 50,
                   opacity: 0,
@@ -769,12 +898,12 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
             case 'showVideo':
               var videoA = document.querySelector('.experience__one'),
                   videoB = document.querySelector('.experience__two');
-              gsap__WEBPACK_IMPORTED_MODULE_9__["default"].from(videoA, {
+              gsap__WEBPACK_IMPORTED_MODULE_10__["default"].from(videoA, {
                 duration: 6,
                 opacity: 1,
                 ease: 'power3.out'
               });
-              gsap__WEBPACK_IMPORTED_MODULE_9__["default"].from(videoB, {
+              gsap__WEBPACK_IMPORTED_MODULE_10__["default"].from(videoB, {
                 duration: 6,
                 opacity: 0,
                 ease: 'power3.out'
@@ -871,191 +1000,6 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
 }(_dogstudio_highway_build_highway_min_js__WEBPACK_IMPORTED_MODULE_6___default.a.Renderer);
 
 
-
-/***/ }),
-
-/***/ "./resources/assets/scripts/highwayjs/renderers/home.js":
-/*!**************************************************************!*\
-  !*** ./resources/assets/scripts/highwayjs/renderers/home.js ***!
-  \**************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/get */ "./node_modules/@babel/runtime/helpers/get.js");
-/* harmony import */ var _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js");
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js");
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _Default__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Default */ "./resources/assets/scripts/highwayjs/renderers/Default.js");
-/* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! swiper */ "./node_modules/swiper/swiper.esm.js");
-/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
-/* harmony import */ var gsap_dist_ScrollTrigger__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! gsap/dist/ScrollTrigger */ "./node_modules/gsap/dist/ScrollTrigger.js");
-/* harmony import */ var gsap_dist_ScrollTrigger__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(gsap_dist_ScrollTrigger__WEBPACK_IMPORTED_MODULE_9__);
-
-
-
-
-
-
-
-function _createSuper(Derived) {
-  return function () {
-    var Super = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(Derived),
-        result;
-
-    if (_isNativeReflectConstruct()) {
-      var NewTarget = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(this).constructor;
-
-      result = Reflect.construct(Super, arguments, NewTarget);
-    } else {
-      result = Super.apply(this, arguments);
-    }
-
-    return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4___default()(this, result);
-  };
-}
-
-function _isNativeReflectConstruct() {
-  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-  if (Reflect.construct.sham) return false;
-  if (typeof Proxy === "function") return true;
-
-  try {
-    Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
-    return true;
-  } catch (e) {
-    return false;
-  }
-}
-
-
-
-
-
-
-var Home = /*#__PURE__*/function (_DefaultRenderer) {
-  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3___default()(Home, _DefaultRenderer);
-
-  var _super = _createSuper(Home);
-
-  function Home() {
-    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, Home);
-
-    return _super.apply(this, arguments);
-  }
-
-  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(Home, [{
-    key: "onEnter",
-    value: function onEnter() {
-      _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(Home.prototype), "onEnter", this).call(this);
-
-      var mainScroll = this.MainController.getScroll(); // ** Frames Animation ** 
-      // gsap.registerPlugin(ScrollTrigger);
-      // mainScroll.on('scroll', ScrollTrigger.update);
-      // ScrollTrigger.scrollerProxy('[data-scroll-container]', {
-      //   scrollTop(value) {
-      //     return arguments.length
-      //       ? mainScroll.scrollTo(value, 0, 0)
-      //       : mainScroll.scroll.instance.scroll.y;
-      //   }, // we don't have to define a scrollLeft because we're only scrolling vertically.
-      //   getBoundingClientRect() {
-      //     return {
-      //       top: 0,
-      //       left: 0,
-      //       width: window.innerWidth,
-      //       height: window.innerHeight
-      //     };
-      //   },
-      //   // LocomotiveScroll handles things completely differently on mobile devices - it doesn't even transform the container at all! So to get the correct behavior and avoid jitters, we should pin things with position: fixed on mobile. We sense it by checking to see if there's a transform applied to the container (the LocomotiveScroll-controlled element).
-      //   pinType: document.querySelector('[data-scroll-container]').style.transform
-      //     ? 'transform'
-      //     : 'fixed'
-      // });
-      // const canvas = document.getElementById('videoCanvas');
-      // const context = canvas.getContext('2d');
-      // const frameCount = 110;
-      // const currentFrame = (index) => `${this.themeUrl}/resources/assets/images/frames/soundit-${index.toString().padStart(5, '0')}.jpg`;
-      // const preloadImages = () => {
-      //   for (let i = 1; i < frameCount; i++) {
-      //     const img = new Image();
-      //     img.src = currentFrame(i);
-      //   }
-      // };
-      // const img = new Image();
-      // img.src = currentFrame(1);
-      // canvas.width = 590;
-      // canvas.height = 1080;
-      // img.onload = function () {
-      //   context.drawImage(img, 0, 0);
-      // };
-      // const updateImage = (index) => {
-      //   img.src = currentFrame(index);
-      //   context.drawImage(img, 0, 0);
-      // };
-      // gsap.from('.video', {
-      //   scrollTrigger: {
-      //     trigger: '.video',
-      //     scroller: '[data-scroll-container]',
-      //     scrub: true,
-      //     pin: true,
-      //     start: 'top top',
-      //     end: '+=100%',
-      //     onUpdate: (self) => {
-      //       console.log(
-      //         'progress:',
-      //         self.progress.toFixed(3),
-      //         'direction:',
-      //         self.direction,
-      //         'velocity',
-      //         self.getVelocity()
-      //       );
-      //       //const frameIndex = Math.ceil(self.progress * frameCount);
-      //       const frameIndex = Math.min(
-      //         frameCount - 1,
-      //         Math.ceil(self.progress * frameCount)
-      //       );
-      //       console.log(frameIndex);
-      //       requestAnimationFrame(() => updateImage(frameIndex + 1));
-      //     }
-      //   },
-      //   ease: 'none'
-      // });
-      // // each time the window updates, we should refresh ScrollTrigger and then update LocomotiveScroll.
-      // ScrollTrigger.addEventListener('refresh', () => mainScroll.update());
-      // // after everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
-      // ScrollTrigger.refresh();
-      // preloadImages();
-    }
-  }, {
-    key: "onFirstLoad",
-    value: function onFirstLoad() {
-      _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(Home.prototype), "onFirstLoad", this).call(this);
-    }
-  }, {
-    key: "onLeave",
-    value: function onLeave() {
-      _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(Home.prototype), "onLeave", this).call(this);
-    }
-  }, {
-    key: "onEnterCompleted",
-    value: function onEnterCompleted() {
-      _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(Home.prototype), "onEnterCompleted", this).call(this);
-    }
-  }]);
-
-  return Home;
-}(_Default__WEBPACK_IMPORTED_MODULE_6__["default"]);
-
-/* harmony default export */ __webpack_exports__["default"] = (Home);
 
 /***/ }),
 
@@ -1326,6 +1270,45 @@ var DefaultTransition = /*#__PURE__*/function (_Highway$Transition) {
 }(_dogstudio_highway_build_highway_min_js__WEBPACK_IMPORTED_MODULE_5___default.a.Transition);
 
 
+
+/***/ }),
+
+/***/ "./resources/assets/scripts/utils/api.js":
+/*!***********************************************!*\
+  !*** ./resources/assets/scripts/utils/api.js ***!
+  \***********************************************/
+/*! exports provided: default, checkStatus, parseJSON, errorResponse */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkStatus", function() { return checkStatus; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parseJSON", function() { return parseJSON; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "errorResponse", function() { return errorResponse; });
+/* Config */
+var url = '/wp-json/soundit/';
+var api = {
+  forms: {
+    contact: "".concat(url, "v1/contact-form"),
+    newsletter: "".concat(url, "v1/newsletter")
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (api);
+function checkStatus(response) {
+  if (response.status >= 200 && response.status < 300) {
+    return response;
+  } else {
+    var error = new Error(response.statusText);
+    error.response = response;
+    throw error;
+  }
+}
+function parseJSON(response) {
+  return response.json();
+}
+function errorResponse(response) {
+  throw Error(response);
+}
 
 /***/ }),
 
