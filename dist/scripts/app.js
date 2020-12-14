@@ -693,19 +693,17 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
 
         var mainScroll = _this2.MainController.getScroll();
 
+        var login = document.querySelector('.password-page');
         window.addEventListener('resize', function () {
           mainScroll.update();
-        });
-        Object(_components_form__WEBPACK_IMPORTED_MODULE_9__["default"])('contact-form');
-        Object(_components_form__WEBPACK_IMPORTED_MODULE_9__["default"])('newsletter'); // Viewport vh
+        }); // Viewport vh
 
         var vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', "".concat(vh, "px")); // Max body for login page 
 
-        var login = document.querySelector('.password-page');
-
         if (login) {
-          document.body.height = '100vh';
+          document.body.style.height = '100vh';
+          document.body.classList.add('no-scroll');
         } // Cursor 
 
 
@@ -724,160 +722,165 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
             cursor.classList.remove('cursor-link');
             return false;
           });
-        }); // Header fixed
-
-        if (window.matchMedia('(min-width: 1023px)').matches) {
-          mainScroll.on('scroll', function (instance) {
-            var y = instance.scroll.y,
-                header = document.querySelector('#siteHeader'),
-                heroHeight = document.querySelector('#siteHeader').offsetHeight;
-
-            if (y >= heroHeight) {
-              header.classList.add('fixed');
-            } else {
-              header.classList.remove('fixed');
-            }
-          });
-        } // Burger menu 
-
-
-        if (window.matchMedia('(max-width: 1023px)').matches) {
-          var burger = document.querySelector('.burger-menu'),
-              nav = document.querySelector('.nav-header');
-          burger.addEventListener('click', function (ev) {
-            ev.preventDefault();
-            burger.classList.toggle('open');
-            nav.classList.toggle('visible');
-            document.body.classList.toggle('no-scroll');
-          });
-          var menuItem = document.querySelectorAll('header .menu-item a');
-          menuItem.forEach(function (item) {
-            item.addEventListener('click', function (ev) {
-              ev.preventDefault();
-              burger.click();
-            });
-          });
-        } // Margin for footer
-
-
-        if (window.matchMedia('(min-width: 1024px)').matches) {
-          var footer = document.querySelector('#siteFooter'),
-              footerHeight = footer.offsetHeight,
-              main = document.querySelector('.grid-container');
-          main.style.padding = '0 0 ' + footerHeight + 'px';
-          mainScroll.update();
-        }
-
-        document.querySelectorAll('[data-anchor').forEach(function (anchor) {
-          anchor.addEventListener('click', function (ev) {
-            ev.preventDefault();
-            var url = anchor.dataset.anchor;
-            mainScroll.scrollTo(url, {
-              offset: -50
-            });
-            mainScroll.update();
-          });
-        }); // Accordion
-
-        var accordions = document.querySelectorAll('.js-accordion'),
-            tabs = document.querySelectorAll('.accordion-tab'),
-            parent = document.querySelector('.js-parent');
-
-        var openAccordion = function openAccordion(accordion) {
-          var wrapper = accordion.querySelector('.accordion-content'),
-              content = accordion.querySelector('.accordion-child');
-          accordion.querySelector('.accordion-tab').innerHTML = '<span>-</span> Close';
-          wrapper.classList.add('visible');
-          wrapper.style.height = content.offsetHeight + "px";
-
-          if (parent) {
-            parent.style.height = content.offsetHeight + "px";
-          }
-        };
-
-        var closeAccordion = function closeAccordion(accordion) {
-          var wrapper = accordion.querySelector('.accordion-content');
-          accordion.querySelector('.accordion-tab').innerHTML = '<span>+</span> Read More';
-          wrapper.classList.remove('visible');
-          wrapper.style.height = null;
-
-          if (parent) {
-            parent.style.height = '20vh';
-          }
-        };
-
-        accordions.forEach(function (accordion) {
-          var intro = accordion.querySelector('.accordion-tab');
-          var wrapper = accordion.querySelector('.accordion-content');
-
-          intro.onclick = function () {
-            if (wrapper.style.height) {
-              closeAccordion(accordion);
-            } else {
-              accordions.forEach(function (accordion) {
-                return closeAccordion(accordion);
-              });
-              openAccordion(accordion);
-            }
-
-            setTimeout(function () {
-              mainScroll.update();
-            }, 300);
-          };
-        }); // Team Mobile Slideshow 
-
-        var members = document.querySelectorAll('.team__members li'),
-            membersIndex = document.querySelectorAll('[data-row]'),
-            navPrev = document.querySelector('.team-prev');
-        members.forEach(function (member) {
-          if (member.getAttribute('data-row') == '1') {
-            member.classList.add('active-member');
-          }
         });
 
-        function forward() {
-          document.querySelector('.team-next').addEventListener('click', function () {
-            var currentEl = document.querySelector('.active-member'),
-                nextEl;
+        if (login == 'null') {
+          var forward = function forward() {
+            document.querySelector('.team-next').addEventListener('click', function () {
+              var currentEl = document.querySelector('.active-member'),
+                  nextEl;
 
-            if (currentEl.dataset.row == membersIndex.length) {
-              nextEl = members[0];
-            } else {
-              nextEl = currentEl.nextElementSibling;
+              if (currentEl.dataset.row == membersIndex.length) {
+                nextEl = members[0];
+              } else {
+                nextEl = currentEl.nextElementSibling;
+              }
+
+              currentEl.classList.remove('active-member');
+              nextEl.classList.add('active-member');
+
+              if (currentEl.getElementsByClassName('accordion-content')[0].classList.contains('visible')) {
+                currentEl.getElementsByClassName('accordion-tab')[0].click();
+              }
+            });
+          };
+
+          var previous = function previous() {
+            document.querySelector('.team-prev').addEventListener('click', function () {
+              var currentEl = document.querySelector('.active-member'),
+                  prevEl;
+
+              if (currentEl.dataset.row == 1) {
+                prevEl = members[members.length - 1];
+              } else {
+                prevEl = currentEl.previousElementSibling;
+              }
+
+              currentEl.classList.remove('active-member');
+              prevEl.classList.add('active-member');
+
+              if (currentEl.getElementsByClassName('accordion-content')[0].classList.contains('visible')) {
+                currentEl.getElementsByClassName('accordion-tab')[0].click();
+              }
+            });
+          }; // Froms
+
+
+          Object(_components_form__WEBPACK_IMPORTED_MODULE_9__["default"])('contact-form');
+          Object(_components_form__WEBPACK_IMPORTED_MODULE_9__["default"])('newsletter'); // Header fixed
+
+          if (window.matchMedia('(min-width: 1023px)').matches) {
+            mainScroll.on('scroll', function (instance) {
+              var y = instance.scroll.y,
+                  header = document.querySelector('#siteHeader'),
+                  heroHeight = document.querySelector('#siteHeader').offsetHeight;
+
+              if (y >= heroHeight) {
+                header.classList.add('fixed');
+              } else {
+                header.classList.remove('fixed');
+              }
+            });
+          } // Burger menu 
+
+
+          if (window.matchMedia('(max-width: 1023px)').matches) {
+            var burger = document.querySelector('.burger-menu'),
+                nav = document.querySelector('.nav-header');
+            burger.addEventListener('click', function (ev) {
+              ev.preventDefault();
+              burger.classList.toggle('open');
+              nav.classList.toggle('visible');
+              document.body.classList.toggle('no-scroll');
+            });
+            var menuItem = document.querySelectorAll('header .menu-item a');
+            menuItem.forEach(function (item) {
+              item.addEventListener('click', function (ev) {
+                ev.preventDefault();
+                burger.click();
+              });
+            });
+          } // Margin for footer
+
+
+          if (window.matchMedia('(min-width: 1024px)').matches) {
+            var footer = document.querySelector('#siteFooter'),
+                footerHeight = footer.offsetHeight,
+                main = document.querySelector('.grid-container');
+            main.style.padding = '0 0 ' + footerHeight + 'px';
+            mainScroll.update();
+          }
+
+          document.querySelectorAll('[data-anchor').forEach(function (anchor) {
+            anchor.addEventListener('click', function (ev) {
+              ev.preventDefault();
+              var url = anchor.dataset.anchor;
+              mainScroll.scrollTo(url, {
+                offset: -50
+              });
+              mainScroll.update();
+            });
+          }); // Accordion
+
+          var accordions = document.querySelectorAll('.js-accordion'),
+              tabs = document.querySelectorAll('.accordion-tab'),
+              parent = document.querySelector('.js-parent');
+
+          var openAccordion = function openAccordion(accordion) {
+            var wrapper = accordion.querySelector('.accordion-content'),
+                content = accordion.querySelector('.accordion-child');
+            accordion.querySelector('.accordion-tab').innerHTML = '<span>-</span> Close';
+            wrapper.classList.add('visible');
+            wrapper.style.height = content.offsetHeight + "px";
+
+            if (parent) {
+              parent.style.height = content.offsetHeight + "px";
             }
+          };
 
-            currentEl.classList.remove('active-member');
-            nextEl.classList.add('active-member');
+          var closeAccordion = function closeAccordion(accordion) {
+            var wrapper = accordion.querySelector('.accordion-content');
+            accordion.querySelector('.accordion-tab').innerHTML = '<span>+</span> Read More';
+            wrapper.classList.remove('visible');
+            wrapper.style.height = null;
 
-            if (currentEl.getElementsByClassName('accordion-content')[0].classList.contains('visible')) {
-              currentEl.getElementsByClassName('accordion-tab')[0].click();
+            if (parent) {
+              parent.style.height = '20vh';
+            }
+          };
+
+          accordions.forEach(function (accordion) {
+            var intro = accordion.querySelector('.accordion-tab');
+            var wrapper = accordion.querySelector('.accordion-content');
+
+            intro.onclick = function () {
+              if (wrapper.style.height) {
+                closeAccordion(accordion);
+              } else {
+                accordions.forEach(function (accordion) {
+                  return closeAccordion(accordion);
+                });
+                openAccordion(accordion);
+              }
+
+              setTimeout(function () {
+                mainScroll.update();
+              }, 300);
+            };
+          }); // Team Mobile Slideshow 
+
+          var members = document.querySelectorAll('.team__members li'),
+              membersIndex = document.querySelectorAll('[data-row]'),
+              navPrev = document.querySelector('.team-prev');
+          members.forEach(function (member) {
+            if (member.getAttribute('data-row') == '1') {
+              member.classList.add('active-member');
             }
           });
-        }
+          forward();
+          previous();
+        } // Text Animation
 
-        forward();
-
-        function previous() {
-          document.querySelector('.team-prev').addEventListener('click', function () {
-            var currentEl = document.querySelector('.active-member'),
-                prevEl;
-
-            if (currentEl.dataset.row == 1) {
-              prevEl = members[members.length - 1];
-            } else {
-              prevEl = currentEl.previousElementSibling;
-            }
-
-            currentEl.classList.remove('active-member');
-            prevEl.classList.add('active-member');
-
-            if (currentEl.getElementsByClassName('accordion-content')[0].classList.contains('visible')) {
-              currentEl.getElementsByClassName('accordion-tab')[0].click();
-            }
-          });
-        }
-
-        previous(); // Text Animation
 
         mainScroll.on('call', function (value, way, obj) {
           switch (value) {

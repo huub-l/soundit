@@ -34,7 +34,7 @@ function contact_form(WP_REST_Request $request) {
     ];
 
     # Build HTML Email
-    $to      = sanitize_email('joanasilva@armazemcriativo.pt');
+    $to      = sanitize_email(get_field('email', 'option'));
     $subject = esc_html__( 'Soundit → Contact Form', 'soundit' );
     $body = '<html><body>';
     $body .= '<h1>'.__('Contact Details', 'soundit').'</h1>';
@@ -84,31 +84,69 @@ function newsletter(WP_REST_Request $request) {
     }
 
     # Form Fields
-    $email = sanitize_email($request->get_param( 'newsletter_email' ));
+    $email = $email = sanitize_email($request->get_param( 'newsletter_email' ));
 
     # Register on DB
-   
-    function insertemail(){
-        global $wpdb, $name, $email;
-        $table_name = $wpdb->prefix . 'newsletter';
-        $wpdb->insert($table_name, array( 'email' => $email) ); 
-    }
-  
-    // $r = 
-    insertemail();
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'newsletter';
 
-    // if ( $r ) {
-    //     $response = [
-    //         'code'    => 'sent-with-success',
-    //         'data'    => [
-    //             'status' => 200,
-    //         ],
-    //         'message' => esc_html__( 'Sent with success', 'soundit' )
-    //     ];
+    if ( is_email($email) ) {
+        $wpdb->insert( $table_name, array(
+            'email' => $email
+        ) );
+
+        $response = [
+            'code'    => 'sent-with-success',
+            'data'    => [
+                'status' => 200,
+            ],
+            'message' => esc_html__( 'Sent with success', 'soundit' )
+        ];
         
-    //     return new WP_REST_Response( $response, 200 );
+        return new WP_REST_Response( $response, 200 );
 
-    // } else {
-    //     return new WP_Error( 'could-not-send-email', esc_html__( 'Could not send email, please try again later.', 'soundit' ), [ 'status' => 403 ] );
-    // }
+    } else {
+        return new WP_Error( 'could-not-send-email', esc_html__( 'Could not send email, please try again later.', 'soundit' ), [ 'status' => 403 ] );
+    }
+}
+
+
+/**
+ *  Export Emails to CSV
+ */
+function custom_table_csv_pull() {
+    global $wpdb;
+
+    $filename = 'newsletter_csv';
+    $date = date("Y-m-d H:i:s");
+    $output = fopen('php://output', 'w');
+    $result = $wpdb->get_results('SELECT * FROM     wp_newsletter', ARRAY_A);
+    fputcsv( $output, array('email'));
+    foreach ( $result as $key => $value ) {
+        $modified_values = array(
+        $value['email']
+        );
+        fputcsv( $output, $modified_values );
+    }
+    header("Pragma: public");
+    header("Expires: 0");
+    header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+    header("Cache-Control: private", false);
+    header('Content-Type: text/csv; charset=utf-8');
+    header("Content-Disposition: attachment; filename=\"" . $filename . " " . $date . ".csv\";" );
+    header("Content-Transfer-Encoding: binary");
+    exit;
+}
+
+add_action('wp_ajax_csv_pull','custom_table_csv_pull');
+add_action('admin_menu', 'add_export_button');
+
+function add_export_button() {
+    add_menu_page( 'Export Emails', 'Export Emails', 'manage_options', 'custom_admin_page_slug', 'pg_building_function','',3 );
+}
+
+function pg_building_function() {
+	$ajax_url = admin_url('admin-ajax.php?action=csv_pull');
+    echo "<script>window.open('".$ajax_url."');</script>";
+    exit;
 }

@@ -8,7 +8,6 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 class Private extends DefaultRenderer {
-
   onEnter() {
     super.onEnter();
     

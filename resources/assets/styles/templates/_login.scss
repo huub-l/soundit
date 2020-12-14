@@ -1,6 +1,6 @@
 .password-page {
     max-height: 100vh;
-    background: #121219;
+    background: #000;
     position: relative;
     z-index: 100;
     overflow: hidden;
@@ -31,23 +31,28 @@
             }
         }
 
-        .background__image {
+        .login__background {
             height: 100%;
-            width: auto;
-            margin: auto;
+            width: 100%;
             z-index: -1;
+            opacity: 0.8;
 
-            img {
+            video {
                 height: 100%;
-                width: auto;
+                width: 100%;
                 object-fit: cover;
                 object-position: center;
             }
 
             @include min-screen($small) {
                 height: 110%;
+                width: auto;
+                margin: auto;
 
-                img { object-fit: contain; }
+                video {
+                    width: auto;
+                    object-fit: contain;
+                }
             }
         }
     }

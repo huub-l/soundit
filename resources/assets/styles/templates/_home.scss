@@ -373,15 +373,6 @@
     background: $black;
     position: relative;
 
-    @include min-screen($small) {
-        @include vw('padding-top', 200);
-        @include vw('padding-bottom', 200);
-        height: 100vh;
-        height: calc(var(--vh, 1vh) * 100);    
-        display: flex;
-        align-items: center;
-    }
-
     &:before {
         content: '';
         height: 20%;
@@ -392,7 +383,17 @@
         background: linear-gradient(180deg, rgba(0,0,0,0.9990371148459384) 0%, rgba(0,0,0,0) 100%);
         z-index: 2;
     }
-     
+
+    @include min-screen($small) {
+        @include vw('padding-top', 200);
+        @include vw('padding-bottom', 200);
+        height: 100vh;
+        height: calc(var(--vh, 1vh) * 100);    
+        display: flex;
+        align-items: center;
+    }
+
+ 
     .experience-background {
         height: 60vh;
         height: calc(var(--vh, 1vh) * 60);
@@ -408,6 +409,17 @@
         //     top: 0;
         //     transform: translateX(-50%);
         // }
+
+        &:after {
+            content: '';
+            height: 20%;
+            width: 100%;
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.9990371148459384) 100%);
+            z-index: 2;
+        }
 
         .experience__one, .experience__two {
             width: 100%;
@@ -433,6 +445,8 @@
             //     left: 60%;
             //     transform: translateX(-60%);
             // }
+
+            &:after { display: none; }
             
             .experience__one, .experience__two {
                 width: auto;
@@ -497,6 +511,18 @@
     .technology-background {
         width: 100%;
         height: 100%;
+        position: relative;
+
+        &:after {
+            content: '';
+            height: 10%;
+            width: 100%;
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            background: linear-gradient(180deg, rgba(18, 18, 23,0) 0%, rgba(18, 18, 23,0.9990371148459384) 100%);
+            z-index: 2;
+        }
 
         video {
             height: 100%;
@@ -519,6 +545,8 @@
             right: -5%;
             transform: translateY(-50%);
             z-index: -1;
+
+            &:after { display: none; }
 
             video {
                 object-fit: cover;

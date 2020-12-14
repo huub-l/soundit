@@ -27,21 +27,21 @@ export default class DefaultRenderer extends Highway.Renderer {
             console.log('assets loaded')
 
             let mainScroll = this.MainController.getScroll();
+            let login = document.querySelector('.password-page');
 
             window.addEventListener('resize', function () { mainScroll.update() });
 
-            form('contact-form')
-            form('newsletter')
-        
             // Viewport vh
             let vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
 
-    
-            // Max body for login page 
-            let login = document.querySelector('.password-page');
 
-            if(login) { document.body.height = '100vh'; }
+            // Max body for login page 
+            if( login ) {
+                document.body.style.height = '100vh';
+                document.body.classList.add('no-scroll');
+            }
+ 
 
             // Cursor 
             const cursor = document.querySelector('#cursor');
@@ -64,166 +64,171 @@ export default class DefaultRenderer extends Highway.Renderer {
                 });
             });
 
-
-            // Header fixed
-            if (window.matchMedia('(min-width: 1023px)').matches) {
-                mainScroll.on('scroll', function(instance) {
-                    let y = instance.scroll.y,
-                    header = document.querySelector('#siteHeader'),
-                    heroHeight = document.querySelector('#siteHeader').offsetHeight;
-                
-                    if (y >= heroHeight) {
-                    header.classList.add('fixed');
-                    } else {
-                    header.classList.remove('fixed');
-                    }    
-                });
-            }
-
-
-            // Burger menu 
-            if (window.matchMedia('(max-width: 1023px)').matches) {
-                let burger = document.querySelector('.burger-menu'),
-                    nav = document.querySelector('.nav-header');
-
-                burger.addEventListener('click', (ev) => {
-                    ev.preventDefault();
-
-                    burger.classList.toggle('open');
-                    nav.classList.toggle('visible');
-                    document.body.classList.toggle('no-scroll');
-                });
-
-                let menuItem = document.querySelectorAll('header .menu-item a');
-
-                menuItem.forEach(item => {
-                    item.addEventListener('click', (ev) => {
-                        ev.preventDefault();
-                        burger.click();
-                    })
-                })          
-            }
-
-
-            // Margin for footer
-            if (window.matchMedia('(min-width: 1024px)').matches) {
-                let footer = document.querySelector('#siteFooter'),
-                    footerHeight = footer.offsetHeight,
-                    main = document.querySelector('.grid-container');
-
-                main.style.padding = '0 0 '+footerHeight+'px';
-                mainScroll.update();
-            }
-
-
-            document.querySelectorAll('[data-anchor').forEach(anchor => {
-                anchor.addEventListener('click', (ev) => {
-                  ev.preventDefault()
-          
-                  let url = anchor.dataset.anchor;
-          
-                  mainScroll.scrollTo(url, {offset: -50})
-                  mainScroll.update()
-                })
-            })
-
-            
-            // Accordion
-            const accordions = document.querySelectorAll('.js-accordion'),
-                tabs = document.querySelectorAll('.accordion-tab'),
-                parent = document.querySelector('.js-parent');
-
-
-            const openAccordion = (accordion) => {
-                const wrapper = accordion.querySelector('.accordion-content'), 
-                    content = accordion.querySelector('.accordion-child');
-
-                accordion.querySelector('.accordion-tab').innerHTML = '<span>-</span> Close';
-                wrapper.classList.add('visible');
-                wrapper.style.height = content.offsetHeight + "px";
-
-                if(parent) { parent.style.height = content.offsetHeight + "px"; }
-            };
-
-            const closeAccordion = (accordion) => {
-                const wrapper = accordion.querySelector('.accordion-content');
-
-                accordion.querySelector('.accordion-tab').innerHTML = '<span>+</span> Read More';
-                wrapper.classList.remove('visible');
-                wrapper.style.height = null;
-
-                if(parent) { parent.style.height = '20vh'; }
-            };
-
-            accordions.forEach((accordion) => {
-                const intro = accordion.querySelector('.accordion-tab');
-                const wrapper = accordion.querySelector('.accordion-content');
-
-                intro.onclick = () => {
-                    if (wrapper.style.height) {
-                        closeAccordion(accordion);
-                    } else {
-                        accordions.forEach((accordion) => closeAccordion(accordion));
-                        openAccordion(accordion);
-                    }
-
-                    setTimeout( function() { mainScroll.update() }, 300)
-                };
-            });
-
-
-            // Team Mobile Slideshow 
-            let members = document.querySelectorAll('.team__members li'),
-                membersIndex = document.querySelectorAll('[data-row]'),
-                navPrev = document.querySelector('.team-prev');
-
-            members.forEach(member => {
-                if ( member.getAttribute('data-row') == '1' ) {
-                member.classList.add('active-member')
+            if(login == 'null') {
+                // Froms
+                form('contact-form')
+                form('newsletter')
+        
+                // Header fixed
+                if (window.matchMedia('(min-width: 1023px)').matches) {
+                    mainScroll.on('scroll', function(instance) {
+                        let y = instance.scroll.y,
+                        header = document.querySelector('#siteHeader'),
+                        heroHeight = document.querySelector('#siteHeader').offsetHeight;
+                    
+                        if (y >= heroHeight) {
+                        header.classList.add('fixed');
+                        } else {
+                        header.classList.remove('fixed');
+                        }    
+                    });
                 }
-            })
+
+
+                // Burger menu 
+                if (window.matchMedia('(max-width: 1023px)').matches) {
+                    let burger = document.querySelector('.burger-menu'),
+                        nav = document.querySelector('.nav-header');
+
+                    burger.addEventListener('click', (ev) => {
+                        ev.preventDefault();
+
+                        burger.classList.toggle('open');
+                        nav.classList.toggle('visible');
+                        document.body.classList.toggle('no-scroll');
+                    });
+
+                    let menuItem = document.querySelectorAll('header .menu-item a');
+
+                    menuItem.forEach(item => {
+                        item.addEventListener('click', (ev) => {
+                            ev.preventDefault();
+                            burger.click();
+                        })
+                    })          
+                }
+
+
+                // Margin for footer
+                if (window.matchMedia('(min-width: 1024px)').matches) {
+                    let footer = document.querySelector('#siteFooter'),
+                        footerHeight = footer.offsetHeight,
+                        main = document.querySelector('.grid-container');
+
+                    main.style.padding = '0 0 '+footerHeight+'px';
+                    mainScroll.update();
+                }
+
+                document.querySelectorAll('[data-anchor').forEach(anchor => {
+                    anchor.addEventListener('click', (ev) => {
+                    ev.preventDefault()
             
-            function forward() {
-                document.querySelector('.team-next').addEventListener('click', function() {
-                    let currentEl = document.querySelector('.active-member'),
-                        nextEl;
-                    
-                    if (currentEl.dataset.row == membersIndex.length ) {
-                        nextEl = members[0];
-                    } else {
-                        nextEl = currentEl.nextElementSibling;
-                    }
+                    let url = anchor.dataset.anchor;
+            
+                    mainScroll.scrollTo(url, {offset: -50})
+                    mainScroll.update()
+                    })
+                })
 
-                    currentEl.classList.remove('active-member');
-                    nextEl.classList.add('active-member');
+                
+                // Accordion
+                const accordions = document.querySelectorAll('.js-accordion'),
+                    tabs = document.querySelectorAll('.accordion-tab'),
+                    parent = document.querySelector('.js-parent');
 
-                    if(currentEl.getElementsByClassName('accordion-content')[0].classList.contains('visible')) {
-                        currentEl.getElementsByClassName('accordion-tab')[0].click();
+
+                const openAccordion = (accordion) => {
+                    const wrapper = accordion.querySelector('.accordion-content'), 
+                        content = accordion.querySelector('.accordion-child');
+
+                    accordion.querySelector('.accordion-tab').innerHTML = '<span>-</span> Close';
+                    wrapper.classList.add('visible');
+                    wrapper.style.height = content.offsetHeight + "px";
+
+                    if(parent) { parent.style.height = content.offsetHeight + "px"; }
+                };
+
+                const closeAccordion = (accordion) => {
+                    const wrapper = accordion.querySelector('.accordion-content');
+
+                    accordion.querySelector('.accordion-tab').innerHTML = '<span>+</span> Read More';
+                    wrapper.classList.remove('visible');
+                    wrapper.style.height = null;
+
+                    if(parent) { parent.style.height = '20vh'; }
+                };
+
+                accordions.forEach((accordion) => {
+                    const intro = accordion.querySelector('.accordion-tab');
+                    const wrapper = accordion.querySelector('.accordion-content');
+
+                    intro.onclick = () => {
+                        if (wrapper.style.height) {
+                            closeAccordion(accordion);
+                        } else {
+                            accordions.forEach((accordion) => closeAccordion(accordion));
+                            openAccordion(accordion);
+                        }
+
+                        setTimeout( function() { mainScroll.update() }, 300)
+                    };
+                });
+
+
+                // Team Mobile Slideshow 
+                let members = document.querySelectorAll('.team__members li'),
+                    membersIndex = document.querySelectorAll('[data-row]'),
+                    navPrev = document.querySelector('.team-prev');
+
+                members.forEach(member => {
+                    if ( member.getAttribute('data-row') == '1' ) {
+                    member.classList.add('active-member')
                     }
                 })
+                
+                function forward() {
+                    document.querySelector('.team-next').addEventListener('click', function() {
+                        let currentEl = document.querySelector('.active-member'),
+                            nextEl;
+                        
+                        if (currentEl.dataset.row == membersIndex.length ) {
+                            nextEl = members[0];
+                        } else {
+                            nextEl = currentEl.nextElementSibling;
+                        }
+
+                        currentEl.classList.remove('active-member');
+                        nextEl.classList.add('active-member');
+
+                        if(currentEl.getElementsByClassName('accordion-content')[0].classList.contains('visible')) {
+                            currentEl.getElementsByClassName('accordion-tab')[0].click();
+                        }
+                    })
+                }
+                forward();
+                        
+                function previous() {
+                    document.querySelector('.team-prev').addEventListener('click', function() {
+                        let currentEl = document.querySelector('.active-member'),
+                            prevEl;
+
+                        if (currentEl.dataset.row == 1 ) {
+                            prevEl = members[members.length - 1]
+                        } else {
+                            prevEl = currentEl.previousElementSibling;
+                        }
+
+                        currentEl.classList.remove('active-member');
+                        prevEl.classList.add('active-member');
+
+                        if(currentEl.getElementsByClassName('accordion-content')[0].classList.contains('visible')) {
+                            currentEl.getElementsByClassName('accordion-tab')[0].click();
+                        }
+                    })
+                }
+                previous();
+
             }
-            forward();
-                    
-            function previous() {
-                document.querySelector('.team-prev').addEventListener('click', function() {
-                    let currentEl = document.querySelector('.active-member'),
-                        prevEl;
-
-                    if (currentEl.dataset.row == 1 ) {
-                        prevEl = members[members.length - 1]
-                    } else {
-                        prevEl = currentEl.previousElementSibling;
-                    }
-
-                    currentEl.classList.remove('active-member');
-                    prevEl.classList.add('active-member');
-
-                    if(currentEl.getElementsByClassName('accordion-content')[0].classList.contains('visible')) {
-                        currentEl.getElementsByClassName('accordion-tab')[0].click();
-                    }
-                })
-            }
-            previous();
 
 
             // Text Animation

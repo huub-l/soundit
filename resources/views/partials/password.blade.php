@@ -1,7 +1,7 @@
 <div class="password-page">
     <div class="login--background">
         @include('svg.logo-extended')
-        <div class="background__image"><img src="@field('login_background', 'url')" alt="@field('login_background', 'alt')"></div>
+        <div class="login__background"><video src="@field('login_background', 'url')" autoplay loop playsinline muted></div>
         @include('svg.logo-extended')
     </div>
 
