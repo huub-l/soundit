@@ -8,7 +8,7 @@
     </div>
     
     <div class="column small-10 small-offset-1 xxlarge-4 xxlarge-offset-0">
-        <form class="form__wrapper" data-form="contact-form" data-loading="false" data-scroll data-scroll-call="revealOpacity">
+        <form class="form__wrapper contact-form" data-form="contact-form" data-loading="false" data-scroll data-scroll-call="revealOpacity">
             <div class="row expanded">
                 <div class="column">
                     <input class="required-field" type="text" placeholder="Name" name="contact_form_name">

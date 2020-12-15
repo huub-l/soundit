@@ -3,7 +3,6 @@ import DefaultRenderer from './Default';
 import Swiper, { Navigation, Pagination } from 'swiper';
 import SwiperCore, { EffectFade } from 'swiper';
 
-
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 

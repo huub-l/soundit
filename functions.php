@@ -74,43 +74,11 @@ if( function_exists('acf_add_options_page') ) {
 	acf_add_options_page();
 }
 
+// Add Class if Password protected
 
-// //  Export Emails to CSV
-
-// function custom_table_csv_pull() {
-//     global $wpdb;
-
-//     $filename = 'email_csv';
-//     $date = date("Y-m-d H:i:s");
-//     $output = fopen('php://output', 'w');
-//     $result = $wpdb->get_results('SELECT * FROM     wp_get_directions_form', ARRAY_A);
-//     fputcsv( $output, array('id', 'email'));
-//     foreach ( $result as $key => $value ) {
-//         $modified_values = array(
-//         $value['id'],
-//         $value['email']
-//         );
-//         fputcsv( $output, $modified_values );
-//     }
-//     header("Pragma: public");
-//     header("Expires: 0");
-//     header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
-//     header("Cache-Control: private", false);
-//     header('Content-Type: text/csv; charset=utf-8');
-//     header("Content-Disposition: attachment; filename=\"" . $filename . " " . $date . ".csv\";" );
-//     header("Content-Transfer-Encoding: binary");
-//     exit;
-// }
-
-// add_action('wp_ajax_csv_pull','custom_table_csv_pull');
-// add_action('admin_menu', 'add_export_button');
-
-// function add_export_button() {
-//     add_menu_page( 'Export Emails', 'Export Emails', 'manage_options', 'custom_admin_page_slug', 'pg_building_function','',3 );
-// }
-
-// function pg_building_function() {
-// 	$ajax_url = admin_url('admin-ajax.php?action=csv_pull');
-//     echo "<script>window.open('".$ajax_url."');</script>";
-//     exit;
-// }
+add_filter( 'body_class', 'add_password_protected_body_class' );
+function add_password_protected_body_class( $classes ) {
+if ( post_password_required() ) 
+   $classes[] = 'password-protected';
+   return $classes;
+}

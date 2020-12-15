@@ -145,7 +145,9 @@ function form(selector) {
 
         if (response.code === 'sent-with-success') {
           if (form.dataset.form == 'contact-form') {
-            document.querySelector('.form-feedback').classList.add('success');
+            document.querySelector('.contact-form .form-feedback').classList.add('success');
+          } else if (form.dataset.form == 'newsletter') {
+            document.querySelector('.newsletter .form-feedback').classList.add('success');
           }
 
           resetFields();
@@ -724,7 +726,7 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
           });
         });
 
-        if (login == 'null') {
+        if (!document.body.classList.contains('password-protected')) {
           var forward = function forward() {
             document.querySelector('.team-next').addEventListener('click', function () {
               var currentEl = document.querySelector('.active-member'),

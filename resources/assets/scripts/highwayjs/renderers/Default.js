@@ -64,11 +64,13 @@ export default class DefaultRenderer extends Highway.Renderer {
                 });
             });
 
-            if(login == 'null') {
+            
+
+            if( ! document.body.classList.contains('password-protected') ) {
                 // Froms
                 form('contact-form')
                 form('newsletter')
-        
+
                 // Header fixed
                 if (window.matchMedia('(min-width: 1023px)').matches) {
                     mainScroll.on('scroll', function(instance) {

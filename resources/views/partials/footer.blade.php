@@ -37,6 +37,7 @@
                         <input class="required-field" type="email" name="newsletter_email" placeholder="Your@Mail.Here">
                         <button class="btn btn-subscribe" type="submit" data-submit-form="{{'newsletter'}}">Subscribe</button>
                     </div>
+                    <p class="form-feedback">Added with success!</p>
                 </form>
             </div>
         </div>
