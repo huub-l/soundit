@@ -578,7 +578,7 @@
                 @include vw('margin-top', 60);
             }
 
-            img {
+            lottie-player {
                 height: 100%;
                 width: 100%;
                 object-fit: cover;
@@ -830,8 +830,8 @@
     }
 
     @include min-screen($small) {
-        @include vw('padding-top', 215);
-        @include vw('padding-bottom', 215);
+        @include vw('padding-top', 160);
+        @include vw('padding-bottom', 160);
 
         .video-background { @include vw('width', 460); }
     }

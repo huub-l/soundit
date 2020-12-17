@@ -5437,7 +5437,7 @@ h3 {
     margin-top: 3.125vw;
   }
 }
-.home--technology .technology-wrapper .technology__image img {
+.home--technology .technology-wrapper .technology__image lottie-player {
   height: 100%;
   width: 100%;
   object-fit: cover;
@@ -5704,8 +5704,8 @@ h3 {
 }
 @media only screen and (min-width: 1023px) {
   .video--banner-three {
-    padding-top: 11.19792vw;
-    padding-bottom: 11.19792vw;
+    padding-top: 8.33333vw;
+    padding-bottom: 8.33333vw;
   }
   .video--banner-three .video-background {
     width: 23.95833vw;

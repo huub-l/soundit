@@ -10,7 +10,7 @@
             <p data-scroll data-scroll-call="revealOpacity">@field('technology_text')</p>
 
             <div class="technology__image" data-scroll data-scroll-call="revealOpacity">
-                <img src="@field('technology_image', 'url')" alt="">
+                <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_izvbcgpt/data.json" background="transparent"  speed="1"  style="width: 100%; height: 100%;" loop autoplay></lottie-player>
             </div>
 
             @hasfield('technology_characteristics')

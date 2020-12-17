@@ -22,5 +22,7 @@
 
     <?php do_action('get_footer'); ?>
     <?php wp_footer(); ?>
+
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   </body>
 </html>
