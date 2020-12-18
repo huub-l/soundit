@@ -50,11 +50,17 @@
                 column-gap: 24px;
 
                 li {
-                    @include vw('padding-bottom', 6);
+                    @include vw('padding-bottom', 8, 420);
                     
                     a {
-                        @include vw('padding-bottom', 6);
+                        @include vw('padding-bottom', 8, 420);
                         color: $white;
+                    }
+
+                    @include min-screen($small) {
+                        @include vw('padding-bottom', 12);
+                    
+                        a { @include vw('padding-bottom', 12); }
                     }
                 }
             }
@@ -137,8 +143,7 @@
                 input {
                     @include vw('margin-bottom', 12, 420);
                     width: 100%;
-                    border-radius: 0;
-
+    
                     @include min-screen($small) {
                         width: 80%;
                         margin: 0 $unit-small 0 0;

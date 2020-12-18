@@ -107,17 +107,25 @@
     overflow: hidden;
 
     .about-logo {
-        margin-top: -12px;
-        margin-left: -10%;
+        margin-top: -4px;
+        margin-left: -$unit-small;
         display: inline-block;
         white-space: nowrap;
 
-        svg { width: 100%; }
+        svg { width: 120%; }
+
+        @include min-screen($small) {
+            margin-top: -12px;
+            margin-left: -10%;
+
+
+            svg { width: 100%; }
+        }
     }
 
     .about-wrapper {
-        @include vw('padding-top', 120, 420);
-        @include vw('padding-bottom', 120, 420);
+        @include vw('padding-top', 140, 420);
+        @include vw('padding-bottom', 140, 420);
 
         @include min-screen($small) {
             @include vw('padding-top', 210);
@@ -177,8 +185,8 @@
 }
 
 .home--infographics {
-    @include vw('padding-top', 120, 420);
-    @include vw('padding-bottom', 200, 420);
+    @include vw('padding-top', 96, 420);
+    @include vw('padding-bottom', 160, 420);
     background: $dark-grey;
 
     @include min-screen($small) {
@@ -368,8 +376,8 @@
 }
 
 .home--experience {
-    @include vw('padding-top', 120, 420);
-    @include vw('padding-bottom', 120, 420);
+    @include vw('padding-top', 140, 420);
+    @include vw('padding-bottom', 140, 420);
     background: $black;
     position: relative;
 
@@ -400,15 +408,6 @@
         width: 100%;
         position: relative;
         z-index: 0;
-        
-        // canvas {
-        //     width: auto;
-        //     height: 100%;
-        //     position: absolute;
-        //     left: 50%;
-        //     top: 0;
-        //     transform: translateX(-50%);
-        // }
 
         &:after {
             content: '';
@@ -440,11 +439,6 @@
             position: absolute;
             top: 0;
             left: 0;
-
-            // canvas {
-            //     left: 60%;
-            //     transform: translateX(-60%);
-            // }
 
             &:after { display: none; }
             
@@ -534,7 +528,6 @@
         @include min-screen($xsmall) {
             height: 80vh;
             height: calc(var(--vh, 1vh) * 80);
-            
         }
        
         @include min-screen($small) {
@@ -556,8 +549,8 @@
     }
 
     .technology-wrapper {
-        @include vw('padding-top', 90, 420);
-        @include vw('padding-bottom', 120, 420);
+        @include vw('padding-top', 140, 420);
+        @include vw('padding-bottom', 140, 420);
 
         @include min-screen($small) {
             @include vw('padding-top', 400);
@@ -586,10 +579,9 @@
         }
 
         .technology__characteristics {
-            width: 80%;
+            width: 100%;
             display: flex;
             flex-direction: column;
-            margin: auto;
             @include vw('margin-top', 48, 420);
 
             .btn {
@@ -620,7 +612,7 @@
                 width: fit-content;
                 display: block;
                 margin: 0;
-                @include vw('margin-top', 130);
+                @include vw('margin-top', 60);
                 
                 .btn {
                     @include vw('margin-right', 30); 
@@ -637,8 +629,8 @@
 }
 
 .home--team {
-    @include vw('padding-top', 120, 420);
-    @include vw('padding-bottom', 120, 420);
+    @include vw('padding-top', 96, 420);
+    @include vw('padding-bottom', 140, 420);
     background: #E6E4E3;
 
     @include min-screen($small) {
@@ -746,8 +738,8 @@
 }
 
 .home--form {
-    @include vw('padding-top', 120, 420);
-    @include vw('padding-bottom', 120, 420);
+    @include vw('padding-top', 96, 420);
+    @include vw('padding-bottom', 96, 420);
     background: #343436;
 
     @include min-screen($small) {
@@ -779,7 +771,8 @@
         .form__submit {
             @include vw('margin-top', 12, 420);
             display: flex;     
-            align-items: center;
+            flex-direction: column;
+            align-items: flex-start;
 
             .btn { height: 100%; }
 
@@ -808,6 +801,8 @@
 
             .form__submit {
                 @include vw('margin-top', 24);
+                flex-direction: row;
+                align-items: center;
 
                 .form-feedback { @include vw('font-size', 16); }
             }    
@@ -816,8 +811,8 @@
 }
 
 .video--banner-three {
-    @include vw('padding-top', 120, 420);
-    @include vw('padding-bottom', 120, 420);
+    @include vw('padding-top', 96, 420);
+    @include vw('padding-bottom', 96, 420);
     background: #121217; 
     display: flex;
     align-items: center;

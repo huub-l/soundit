@@ -173,19 +173,18 @@ input, label { cursor: none; }
 
 input {
     @include vw('font-size', 14, 420);
-    @include vw('padding-top',16, 420);
-    @include vw('padding-bottom', 16, 420);
+    @include vw('padding-top', 18, 420);
+    @include vw('padding-bottom', 18, 420);
     @include vw('padding-left', 24, 420);
     @include vw('padding-right', 24, 420);
     background: $white;
     color: $black;
-    border-radius: 8px;
     
     &::placeholder { color: $light-grey; }
 
     @include min-screen($xsmall) {
-        @include vw('padding-top', 24, 767);
-        @include vw('padding-bottom', 24, 767);
+        @include vw('padding-top', 26, 767);
+        @include vw('padding-bottom', 26, 767);
         @include vw('padding-left', 36, 767);
         @include vw('padding-right', 36, 767);
     }
