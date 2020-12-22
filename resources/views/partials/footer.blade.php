@@ -45,7 +45,7 @@
 
     <div class="row expanded">
         <div class="small-12 xxlarge-12">
-            <div class="site-copyright" id="gridToggle">{{date('Y')}} Soundit Ltd. All rights reserved.</div>
+            <div class="site-copyright" id="gridToggle">Copyright &copy; {{date('Y')}} Soundit Ltd. All rights reserved.</div>
         </div>
     </div>
 </footer>
