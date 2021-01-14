@@ -183,12 +183,12 @@ hr {
 }
 
 p {
-    @include vw ('font-size', 16, 420);
+    @include vw ('font-size', 18, 420);
     color: $light-grey;
     font-weight: 300;
 
     @include min-screen($small) {
-        @include vw ('font-size', 24);
+        @include vw ('font-size', 26);
     }
 }
 

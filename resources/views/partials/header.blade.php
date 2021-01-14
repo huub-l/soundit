@@ -1,6 +1,6 @@
 <header id="siteHeader">
   <a class="brand" href="{{ home_url('/') }}"> @include('svg.logo') </a>
-  <a class="brand-icon" href="{{ home_url('/') }}"> @include('svg.logo-icon') </a>
+  <span class="brand-icon"> @include('svg.logo-icon') </span>
 
   @if ($headerNav)
   <nav class="nav-header">

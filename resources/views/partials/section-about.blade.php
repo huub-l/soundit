@@ -9,14 +9,8 @@
         <div class="about-wrapper">
                 <span class="heading-three-white" data-scroll data-scroll-call="revealOpacity">@field('about_uppertitle')</span>
                 <h2 class="heading-two-white" data-scroll data-scroll-call="revealOpacity">@field('about_title')</h2>
-                <div class="accordion-wrapper js-accordion" data-scroll data-scroll-call="revealOpacity">
-                    <div class="accordion-content">
-                        <p class="accordion-child">@field('about_text')</p>
-                    </div>
-                    <button class="accordion-tab"><span>+</span>Read More</button>
-                </div>
+                <p class="about__text" data-scroll data-scroll-call="revealOpacity">@field('about_text') </p>
                 
-
                 @hasfield('about_bullets')
                 <ul class="about__bullets">
                     <span class="heading-three-white">@field('about_uppertitle_bullets')</span>

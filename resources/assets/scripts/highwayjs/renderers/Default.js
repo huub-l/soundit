@@ -31,6 +31,15 @@ export default class DefaultRenderer extends Highway.Renderer {
 
             window.addEventListener('resize', function () { mainScroll.update() });
 
+            /**
+             * Update Window Size
+             */
+            let windowSize;
+            windowSize = window.innerWidth;
+            window.onresize = function() {
+                windowSize = window.innerWidth;
+            };
+         
             // Viewport vh
             let vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -42,7 +51,6 @@ export default class DefaultRenderer extends Highway.Renderer {
                 document.body.classList.add('no-scroll');
             }
  
-
             // Cursor 
             const cursor = document.querySelector('#cursor');
             let links = document.querySelectorAll('a, button, .triggers-hover');
@@ -64,15 +72,24 @@ export default class DefaultRenderer extends Highway.Renderer {
                 });
             });
 
-            
+            // Icon scroll to top
+
+            let headerIcon = document.querySelector('.brand-icon'), 
+                hero = document.querySelector('.js-hero');
+
+            headerIcon.addEventListener('click', function() {
+                mainScroll.scrollTo(hero);
+            })
 
             if( ! document.body.classList.contains('password-protected') ) {
                 // Froms
                 form('contact-form')
                 form('newsletter')
 
+                console.log('this is the size' + windowSize)
+
                 // Header fixed
-                if (window.matchMedia('(min-width: 1023px)').matches) {
+                if (windowSize > 1023) {
                     mainScroll.on('scroll', function(instance) {
                         let y = instance.scroll.y,
                         header = document.querySelector('#siteHeader'),
@@ -85,8 +102,7 @@ export default class DefaultRenderer extends Highway.Renderer {
                         }    
                     });
                 }
-
-
+            
                 // Burger menu 
                 if (window.matchMedia('(max-width: 1023px)').matches) {
                     let burger = document.querySelector('.burger-menu'),
@@ -131,7 +147,6 @@ export default class DefaultRenderer extends Highway.Renderer {
                     mainScroll.update()
                     })
                 })
-
                 
                 // Accordion
                 const accordions = document.querySelectorAll('.js-accordion'),
@@ -179,15 +194,24 @@ export default class DefaultRenderer extends Highway.Renderer {
 
                 // Team Mobile Slideshow 
                 let members = document.querySelectorAll('.team__members li'),
-                    membersIndex = document.querySelectorAll('[data-row]'),
-                    navPrev = document.querySelector('.team-prev');
+                    membersIndex = document.querySelectorAll('[data-row]');
 
                 members.forEach(member => {
                     if ( member.getAttribute('data-row') == '1' ) {
                     member.classList.add('active-member')
                     }
                 })
-                
+
+                function parentHeight() {
+                    let currentEl = document.querySelector('.active-member'), 
+                        membersParent = document.querySelector('.team__members'),
+                        currentHeight = currentEl.offsetHeight;
+
+                    membersParent.style.height = currentHeight + 'px';
+                }  
+
+                if( windowSize < 1023 ) { parentHeight(); }
+
                 function forward() {
                     document.querySelector('.team-next').addEventListener('click', function() {
                         let currentEl = document.querySelector('.active-member'),
@@ -202,9 +226,7 @@ export default class DefaultRenderer extends Highway.Renderer {
                         currentEl.classList.remove('active-member');
                         nextEl.classList.add('active-member');
 
-                        if(currentEl.getElementsByClassName('accordion-content')[0].classList.contains('visible')) {
-                            currentEl.getElementsByClassName('accordion-tab')[0].click();
-                        }
+                        parentHeight();
                     })
                 }
                 forward();
@@ -223,13 +245,10 @@ export default class DefaultRenderer extends Highway.Renderer {
                         currentEl.classList.remove('active-member');
                         prevEl.classList.add('active-member');
 
-                        if(currentEl.getElementsByClassName('accordion-content')[0].classList.contains('visible')) {
-                            currentEl.getElementsByClassName('accordion-tab')[0].click();
-                        }
+                        parentHeight();
                     })
                 }
                 previous();
-
             }
 
 

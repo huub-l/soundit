@@ -82,3 +82,6 @@ if ( post_password_required() )
    $classes[] = 'password-protected';
    return $classes;
 }
+
+
+// Wrong password warning 

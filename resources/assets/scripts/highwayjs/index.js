@@ -2,7 +2,7 @@ import 'whatwg-fetch'
 import Highway from '@dogstudio/highway/build/highway.min.js'
 
 import DefaultRenderer from './renderers/Default'
-import DefaultTransition from './transitions/Default'
+import DefaultTransition from './transitions/Default';
 import Private from './renderers/private';
 
 export default class H extends Highway.Core {

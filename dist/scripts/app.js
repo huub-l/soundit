@@ -51,118 +51,122 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/api */ "./resources/assets/scripts/utils/api.js");
 
 function form(selector) {
-  var form = document.querySelector('[data-form="' + selector + '"]'),
-      requiredFields = form.getElementsByClassName('required-field');
-  console.log('works');
-  var postURL;
-
-  switch (form.dataset.form) {
-    case 'contact-form':
-      postURL = _utils_api__WEBPACK_IMPORTED_MODULE_0__["default"].forms.contact;
-      break;
-
-    case 'newsletter':
-      postURL = _utils_api__WEBPACK_IMPORTED_MODULE_0__["default"].forms.newsletter;
-      break;
-
-    default:
-      break;
-  }
-  /* Form Helpers */
-
-
-  function resetMessages() {
-    form.querySelectorAll('.form-error').forEach(function (f) {
-      f.classList.remove('show');
-    });
-  }
-
-  function resetFields() {
-    var Inputs = form.querySelectorAll('input:not([type=submit]), select');
-    [].forEach.call(Inputs, function (Input) {
-      Input.value = '';
-    });
-  }
-
-  function validateEmail(email) {
-    // eslint-disable-next-line
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-  }
-
-  form.addEventListener('submit', function (ev) {
-    ev.preventDefault();
-
-    if (form.dataset.form != selector) {
-      return;
-    }
-
-    form.dataset.loading = 'true'; // reset the form messages
-
-    resetMessages(); // Validate Everything
-
-    var invalidFields = [];
-
-    var makeInvalid = function makeInvalid(field) {
-      invalidFields.push(field);
-      form.querySelector('[data-error="' + field.id + '"]').classList.add('show');
+  if (!document.body.classList.contains('page-template-template-page')) {
+    /* Form Helpers */
+    var resetMessages = function resetMessages() {
+      _form.querySelectorAll('.form-error').forEach(function (f) {
+        f.classList.remove('show');
+      });
     };
 
-    var validateForm = function validateForm(fields) {
-      for (var index = 0; index < fields.length; index++) {
-        var required = fields[index];
+    var resetFields = function resetFields() {
+      var Inputs = _form.querySelectorAll('input:not([type=submit]), select');
 
-        if (required.type == 'email') {
-          if (!validateEmail(required.value)) {
-            makeInvalid(required);
-          }
-        } else if (required.type == 'file' && required.files.length == 0) {
-          makeInvalid(required);
-        } else {
-          if (!required.value) {
-            makeInvalid(required);
-          }
-        }
-      }
-
-      if (invalidFields.length > 0) {
-        return false;
-      }
-
-      return true;
-    }; // Append all present files
-
-
-    var params = new FormData(form);
-    params.append('_wpnonce', document.body.dataset.nonce);
-
-    if (validateForm(requiredFields)) {
-      fetch(postURL, {
-        method: 'POST',
-        body: params
-      }).then(_utils_api__WEBPACK_IMPORTED_MODULE_0__["checkStatus"]).then(_utils_api__WEBPACK_IMPORTED_MODULE_0__["parseJSON"]).then(function (response) {
-        console.log(params);
-
-        if (response.code === 'sent-with-success') {
-          if (form.dataset.form == 'contact-form') {
-            document.querySelector('.contact-form .form-feedback').classList.add('success');
-          } else if (form.dataset.form == 'newsletter') {
-            document.querySelector('.newsletter .form-feedback').classList.add('success');
-          }
-
-          resetFields();
-          form.dataset.loading = 'done';
-          setTimeout(function () {
-            form.dataset.loading = 'false';
-            document.querySelector('.form-feedback').classList.remove('success');
-          }, 4000);
-        }
-      })["catch"](function (error) {
-        console.log('...', error);
-        Object(_utils_api__WEBPACK_IMPORTED_MODULE_0__["errorResponse"])(error);
+      [].forEach.call(Inputs, function (Input) {
+        Input.value = '';
       });
+    };
+
+    var validateEmail = function validateEmail(email) {
+      // eslint-disable-next-line
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    };
+
+    var _form = document.querySelector('[data-form="' + selector + '"]'),
+        requiredFields = _form.getElementsByClassName('required-field');
+
+    console.log('works');
+    var postURL;
+
+    switch (_form.dataset.form) {
+      case 'contact-form':
+        postURL = _utils_api__WEBPACK_IMPORTED_MODULE_0__["default"].forms.contact;
+        break;
+
+      case 'newsletter':
+        postURL = _utils_api__WEBPACK_IMPORTED_MODULE_0__["default"].forms.newsletter;
+        break;
+
+      default:
+        break;
     }
-  });
+
+    _form.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+
+      if (_form.dataset.form != selector) {
+        return;
+      }
+
+      _form.dataset.loading = 'true'; // reset the form messages
+
+      resetMessages(); // Validate Everything
+
+      var invalidFields = [];
+
+      var makeInvalid = function makeInvalid(field) {
+        invalidFields.push(field);
+
+        _form.querySelector('[data-error="' + field.id + '"]').classList.add('show');
+      };
+
+      var validateForm = function validateForm(fields) {
+        for (var index = 0; index < fields.length; index++) {
+          var required = fields[index];
+
+          if (required.type == 'email') {
+            if (!validateEmail(required.value)) {
+              makeInvalid(required);
+            }
+          } else if (required.type == 'file' && required.files.length == 0) {
+            makeInvalid(required);
+          } else {
+            if (!required.value) {
+              makeInvalid(required);
+            }
+          }
+        }
+
+        if (invalidFields.length > 0) {
+          return false;
+        }
+
+        return true;
+      }; // Append all present files
+
+
+      var params = new FormData(_form);
+      params.append('_wpnonce', document.body.dataset.nonce);
+
+      if (validateForm(requiredFields)) {
+        fetch(postURL, {
+          method: 'POST',
+          body: params
+        }).then(_utils_api__WEBPACK_IMPORTED_MODULE_0__["checkStatus"]).then(_utils_api__WEBPACK_IMPORTED_MODULE_0__["parseJSON"]).then(function (response) {
+          console.log(params);
+
+          if (response.code === 'sent-with-success') {
+            if (_form.dataset.form == 'contact-form') {
+              document.querySelector('.contact-form .form-feedback').classList.add('success');
+            } else if (_form.dataset.form == 'newsletter') {
+              document.querySelector('.newsletter .form-feedback').classList.add('success');
+            }
+
+            resetFields();
+            _form.dataset.loading = 'done';
+            setTimeout(function () {
+              _form.dataset.loading = 'false';
+              document.querySelector('.form-feedback').classList.remove('success');
+            }, 4000);
+          }
+        })["catch"](function (error) {
+          console.log('...', error);
+          Object(_utils_api__WEBPACK_IMPORTED_MODULE_0__["errorResponse"])(error);
+        });
+      }
+    });
+  }
 }
 
 /***/ }),
@@ -698,7 +702,18 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
         var login = document.querySelector('.password-page');
         window.addEventListener('resize', function () {
           mainScroll.update();
-        }); // Viewport vh
+        });
+        /**
+         * Update Window Size
+         */
+
+        var windowSize;
+        windowSize = window.innerWidth;
+
+        window.onresize = function () {
+          windowSize = window.innerWidth;
+        }; // Viewport vh
+
 
         var vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', "".concat(vh, "px")); // Max body for login page 
@@ -724,9 +739,22 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
             cursor.classList.remove('cursor-link');
             return false;
           });
+        }); // Icon scroll to top
+
+        var headerIcon = document.querySelector('.brand-icon'),
+            hero = document.querySelector('.js-hero');
+        headerIcon.addEventListener('click', function () {
+          mainScroll.scrollTo(hero);
         });
 
         if (!document.body.classList.contains('password-protected')) {
+          var parentHeight = function parentHeight() {
+            var currentEl = document.querySelector('.active-member'),
+                membersParent = document.querySelector('.team__members'),
+                currentHeight = currentEl.offsetHeight;
+            membersParent.style.height = currentHeight + 'px';
+          };
+
           var forward = function forward() {
             document.querySelector('.team-next').addEventListener('click', function () {
               var currentEl = document.querySelector('.active-member'),
@@ -740,10 +768,7 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
 
               currentEl.classList.remove('active-member');
               nextEl.classList.add('active-member');
-
-              if (currentEl.getElementsByClassName('accordion-content')[0].classList.contains('visible')) {
-                currentEl.getElementsByClassName('accordion-tab')[0].click();
-              }
+              parentHeight();
             });
           };
 
@@ -760,18 +785,16 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
 
               currentEl.classList.remove('active-member');
               prevEl.classList.add('active-member');
-
-              if (currentEl.getElementsByClassName('accordion-content')[0].classList.contains('visible')) {
-                currentEl.getElementsByClassName('accordion-tab')[0].click();
-              }
+              parentHeight();
             });
           }; // Froms
 
 
           Object(_components_form__WEBPACK_IMPORTED_MODULE_9__["default"])('contact-form');
-          Object(_components_form__WEBPACK_IMPORTED_MODULE_9__["default"])('newsletter'); // Header fixed
+          Object(_components_form__WEBPACK_IMPORTED_MODULE_9__["default"])('newsletter');
+          console.log('this is the size' + windowSize); // Header fixed
 
-          if (window.matchMedia('(min-width: 1023px)').matches) {
+          if (windowSize > 1023) {
             mainScroll.on('scroll', function (instance) {
               var y = instance.scroll.y,
                   header = document.querySelector('#siteHeader'),
@@ -872,13 +895,17 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
           }); // Team Mobile Slideshow 
 
           var members = document.querySelectorAll('.team__members li'),
-              membersIndex = document.querySelectorAll('[data-row]'),
-              navPrev = document.querySelector('.team-prev');
+              membersIndex = document.querySelectorAll('[data-row]');
           members.forEach(function (member) {
             if (member.getAttribute('data-row') == '1') {
               member.classList.add('active-member');
             }
           });
+
+          if (windowSize < 1023) {
+            parentHeight();
+          }
+
           forward();
           previous();
         } // Text Animation

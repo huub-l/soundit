@@ -9,7 +9,7 @@
 
     <div class="home-wrapper">
 
-        <section class="home--hero" id="home-hero">
+        <section class="home--hero js-hero" id="home-hero">
            @include('partials.section-hero')
         </section>
 

@@ -13,17 +13,11 @@
 
             <ul class="team__members js-parent" data-scroll data-scroll-call="revealOpacity">
                 @fields('team_members')
-                <li data-row="{{ get_row_index() }}" class="accordion-wrapper js-accordion">
-                    <div class="accordion-content">
-                        <div class="accordion-child">
-                            @group('team_member')
-                            <h3 class="heading-three-grey">@sub('name')</h3>
-                            <p>@sub('description')</p>
-                            @endgroup 
-                        </div>
-                    </div>
-
-                    <button class="accordion-tab triggers-hover"><span>+</span>Read more</button>
+                <li data-row="{{ get_row_index() }}">
+                    @group('team_member')
+                    <h3 class="heading-three-grey">@sub('name')</h3>
+                    <p>@sub('description')</p>
+                    @endgroup 
                 </li>
                 @endfields
             </ul>

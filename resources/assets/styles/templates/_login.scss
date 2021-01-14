@@ -14,23 +14,7 @@
         top: 0;
         left: 0;
         z-index: 0;
-
-        svg {
-            width: 150vw;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%); 
-
-            &:first-of-type { top: -5vw; }
-            &:last-of-type { bottom: -5vw; }
-    
-            @include min-screen($small) {
-                width: 105vw;
-                &:first-of-type { top: -5vw; }
-                &:last-of-type { bottom: -5vw; }
-            }
-        }
-
+        
         .login__background {
             height: 100%;
             width: 100%;
