@@ -4966,20 +4966,14 @@ h3 {
 }
 .home--about .about-logo {
   margin-top: -4px;
-  margin-left: -12px;
   display: inline-block;
-  white-space: nowrap;
 }
 .home--about .about-logo svg {
-  width: 120%;
+  width: 100%;
 }
 @media only screen and (min-width: 1023px) {
   .home--about .about-logo {
     margin-top: -12px;
-    margin-left: -10%;
-  }
-  .home--about .about-logo svg {
-    width: 100%;
   }
 }
 .home--about .about-wrapper {
@@ -5140,6 +5134,8 @@ h3 {
 .home--infographics .infographic__slideshow .swiper-navigation .swiper-prev, .home--infographics .infographic__slideshow .swiper-navigation .swiper-next {
   height: auto;
   position: relative;
+  padding: 8px;
+  padding-left: 0;
   pointer-events: auto;
   z-index: 10;
 }
@@ -5151,19 +5147,6 @@ h3 {
     height: 1.25vw;
   }
 }
-.home--infographics .infographic__slideshow .swiper-navigation .swiper-prev {
-  margin-right: 3.80952vw;
-}
-@media only screen and (min-width: 767px) {
-  .home--infographics .infographic__slideshow .swiper-navigation .swiper-prev {
-    margin-right: 2.08605vw;
-  }
-}
-@media only screen and (min-width: 1023px) {
-  .home--infographics .infographic__slideshow .swiper-navigation .swiper-prev {
-    margin-right: 0.83333vw;
-  }
-}
 .home--infographics .infographic__slideshow .swiper-navigation .swiper-next {
   transform: rotate(180deg);
 }
@@ -5171,7 +5154,7 @@ h3 {
   position: relative;
 }
 .home--infographics .infographic__slideshow .swiper-navigation .swiper-pagination .swiper-pagination-bullet {
-  padding-right: 3.80952vw;
+  padding: 1.90476vw;
   width: auto;
   height: auto;
   background: none;
@@ -5181,13 +5164,13 @@ h3 {
 @media only screen and (min-width: 767px) {
   .home--infographics .infographic__slideshow .swiper-navigation .swiper-pagination .swiper-pagination-bullet {
     font-size: 3.12907vw;
-    padding-right: 2.08605vw;
+    padding: 1.04302vw;
   }
 }
 @media only screen and (min-width: 1023px) {
   .home--infographics .infographic__slideshow .swiper-navigation .swiper-pagination .swiper-pagination-bullet {
-    font-size: 1.04167vw;
-    padding-right: 0.83333vw;
+    font-size: 1.25vw;
+    padding: 0.41667vw;
   }
 }
 .home--infographics .infographic__slideshow .swiper-navigation .swiper-pagination .swiper-pagination-bullet-active {
@@ -5214,6 +5197,18 @@ h3 {
     margin-bottom: 3.75vw;
   }
 }
+.home--services > .row .column, #grid-debug #grid .home--services > .row div {
+  border-bottom: 1px solid #707070;
+}
+.home--services > .row .column:last-of-type, #grid-debug #grid .home--services > .row div:last-of-type {
+  border: none;
+}
+@media only screen and (min-width: 1023px) {
+  .home--services > .row .column, #grid-debug #grid .home--services > .row div {
+    border-right: 1px solid #707070;
+    border-bottom: none;
+  }
+}
 .home--services .service__wrapper {
   padding-top: 5.71429vw;
   padding-bottom: 5.71429vw;
@@ -5221,7 +5216,6 @@ h3 {
   width: 110%;
   margin-left: -5%;
   display: flex;
-  border: 1px solid #919194;
 }
 @media only screen and (min-width: 1023px) {
   .home--services .service__wrapper {
@@ -5444,26 +5438,25 @@ h3 {
   flex-direction: column;
   margin-top: 11.42857vw;
 }
-.home--technology .technology-wrapper .technology__characteristics .btn {
-  margin-bottom: 5.71429vw;
+.home--technology .technology-wrapper .technology__characteristics li {
   padding-top: 5.71429vw;
   padding-bottom: 5.71429vw;
   width: 100%;
   text-align: center;
-  border: 1px solid #919194;
+  border-bottom: 1px solid #707070;
 }
-.home--technology .technology-wrapper .technology__characteristics .btn:last-of-type {
+.home--technology .technology-wrapper .technology__characteristics li:last-of-type {
   margin: 0;
+  border: none;
 }
-.home--technology .technology-wrapper .technology__characteristics .btn .heading-two-grey, .home--technology .technology-wrapper .technology__characteristics .btn .heading-three-grey {
+.home--technology .technology-wrapper .technology__characteristics li .heading-two-grey, .home--technology .technology-wrapper .technology__characteristics li .heading-three-grey {
   margin: 0;
   color: #919194;
 }
 @media only screen and (min-width: 767px) {
-  .home--technology .technology-wrapper .technology__characteristics .btn {
+  .home--technology .technology-wrapper .technology__characteristics li {
     padding-top: 3.12907vw;
     padding-bottom: 3.12907vw;
-    border-radius: 24px;
   }
 }
 @media only screen and (min-width: 1023px) {
@@ -5475,16 +5468,23 @@ h3 {
     margin: 0;
     margin-top: 3.125vw;
   }
-  .home--technology .technology-wrapper .technology__characteristics .btn {
-    margin-right: 1.5625vw;
-    padding-top: 0.83333vw;
-    padding-bottom: 0.83333vw;
+  .home--technology .technology-wrapper .technology__characteristics li {
+    padding: 0;
     margin-bottom: 0;
+    padding-left: 1.875vw;
+    padding-right: 1.875vw;
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
     display: inline-block;
-    border-radius: 10px;
+    border-right: 1px solid #707070;
+    border-bottom: none;
+  }
+  .home--technology .technology-wrapper .technology__characteristics li:first-of-type {
+    padding-left: 0;
+  }
+  .home--technology .technology-wrapper .technology__characteristics li:last-of-type {
+    padding-right: 0;
   }
 }
 
@@ -5665,7 +5665,7 @@ h3 {
   justify-content: center;
 }
 .video--banner-three .video-background {
-  width: 61.90476vw;
+  width: 80.95238vw;
 }
 .video--banner-three .video-background img {
   width: 100%;
@@ -5836,5 +5836,24 @@ h3 {
 }
 .password-page .login--wrapper .login__content .login__form .form__group button svg {
   height: 40%;
+}
+.password-page .login--wrapper .login__content .password-error {
+  font-size: 3.33333vw;
+  margin-top: 5.71429vw;
+  color: #ffffff;
+  align-self: flex-start;
+}
+@media only screen and (min-width: 767px) {
+  .password-page .login--wrapper .login__content .password-error {
+    font-size: 2.34681vw;
+    margin-top: 3.12907vw;
+    align-self: center;
+  }
+}
+@media only screen and (min-width: 1023px) {
+  .password-page .login--wrapper .login__content .password-error {
+    font-size: 0.9375vw;
+    margin-top: 1.25vw;
+  }
 }
 /*# sourceMappingURL=app.css.map*/

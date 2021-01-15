@@ -92,5 +92,23 @@
                 }
             }
         }
+
+        .password-error { 
+            @include vw('font-size', 14, 420);
+            @include vw('margin-top', 24, 420);
+            color: $white;
+            align-self: flex-start;
+            
+            @include min-screen($xsmall) {
+                @include vw('font-size', 18, 767);
+                @include vw('margin-top', 24, 767);
+                align-self: center;
+            }
+    
+            @include min-screen($small) {
+                @include vw ('font-size', 18);
+                @include vw('margin-top', 24);
+            }
+        }
     }
 }

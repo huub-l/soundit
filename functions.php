@@ -85,3 +85,19 @@ if ( post_password_required() )
 
 
 // Wrong password warning 
+
+function check_post_pass() {
+
+    if ( ! is_single() || ! post_password_required() ) {
+        return;
+    }
+
+    if ( isset( $_COOKIE['wp-postpass_' . COOKIEHASH ] ) ) {
+        define( 'INVALID_POST_PASS', true );
+
+        // Tell the browser to remove the cookie so the message doesn't show up every time
+        setcookie( 'wp-postpass_' . COOKIEHASH, NULL, -1, COOKIEPATH );
+    }
+}
+
+add_action( 'wp', 'check_post_pass' );

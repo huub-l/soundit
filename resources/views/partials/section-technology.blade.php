@@ -16,7 +16,7 @@
             @hasfield('technology_characteristics')
             <ul class="technology__characteristics">
             @fields('technology_characteristics')
-            <li class="btn" data-scroll data-scroll-call="revealOpacity">
+                <li data-scroll data-scroll-call="revealOpacity">
                     @group('characteristic')
                     <h2 class="heading-two-grey">@sub('title')</h2>
                     <span class="heading-three-grey">@sub('subtitle')</span>

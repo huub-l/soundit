@@ -1,7 +1,5 @@
 <div class="about-logo" data-scroll data-scroll-direction="horizontal" data-scroll-speed="2" id="scrollAbout">
     @include('svg.logo-extended')
-    @include('svg.logo-extended')
-    @include('svg.logo-extended')
 </div>
 
 <div class="row expanded">

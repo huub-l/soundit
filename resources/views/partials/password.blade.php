@@ -16,6 +16,10 @@
                             <button type="submit">@include('svg.icon-arrow')</button>
                         </div> 
                     </form>
+                    
+                    <?php if ( isset ( $_COOKIE[ 'wp-postpass_' . COOKIEHASH ] ) ): ?> 
+                        <span class="password-error">Incorrect password. Please try again.</span>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
