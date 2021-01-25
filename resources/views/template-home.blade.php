@@ -8,7 +8,6 @@
     @include('partials.content-page')
 
     <div class="home-wrapper">
-
         <section class="home--hero js-hero" id="home-hero">
            @include('partials.section-hero')
         </section>

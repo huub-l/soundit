@@ -4916,7 +4916,17 @@ h3 {
     opacity: 1;
   }
 }
-.home--hero .hero-wrapper .hero__background video {
+.home--hero .hero-wrapper .hero__background div {
+  width: 110%;
+  height: 100%;
+}
+.home--hero .hero-wrapper .hero__background div.video-desktop {
+  display: none;
+}
+.home--hero .hero-wrapper .hero__background div.video-mobile {
+  display: block;
+}
+.home--hero .hero-wrapper .hero__background div video {
   width: 110%;
   height: 100%;
   object-fit: cover;
@@ -4926,6 +4936,12 @@ h3 {
   .home--hero .hero-wrapper .hero__background {
     margin-bottom: 20.83333vw;
     position: absolute;
+  }
+  .home--hero .hero-wrapper .hero__background .video-desktop {
+    display: block !important;
+  }
+  .home--hero .hero-wrapper .hero__background .video-mobile {
+    display: none !important;
   }
 }
 .home--hero .hero-wrapper .hero__title {
@@ -4969,6 +4985,7 @@ h3 {
   display: inline-block;
 }
 .home--about .about-logo svg {
+  min-width: 100%;
   width: 100%;
 }
 @media only screen and (min-width: 1023px) {
