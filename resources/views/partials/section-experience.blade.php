@@ -1,7 +1,14 @@
 <div class="experience-background" id="video">
-    {{-- <canvas id="videoCanvas"></canvas> --}}
-    <div class="experience__one"> <video src="@field('video_experience_a', 'url')" autoplay loop playsinline muted> </div>
-    <div class="experience__two"> <video src="@field('video_experience_b', 'url')" autoplay loop playsinline muted> </div>
+    <div class="experience__one">
+        <video autoplay loop playsinline muted>
+            <source src="@field('video_experience_a', 'url')" type="video/mp4">
+        </video>      
+    </div>
+    <div class="experience__two">
+        <video autoplay loop playsinline muted>
+            <source src="@field('video_experience_b', 'url')" type="video/mp4">
+        </video>    
+    </div>
 </div>
 
 <div class="experience-wrapper">

@@ -1,6 +1,10 @@
 <div class="password-page">
     <div class="login--background">
-        <div class="login__background"><video src="@field('login_background', 'url')" autoplay loop playsinline muted></div>
+        <div class="login__background">
+            <video autoplay loop playsinline muted>
+                <source src="@field('login_background', 'url')" type="video/mp4">
+            </video> 
+        </div>
     </div>
 
     <section class="login--wrapper">

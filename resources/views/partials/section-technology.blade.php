@@ -1,5 +1,7 @@
 <div class="technology-background">
-    <video src="@field('technology_background', 'url')" autoplay loop playsinline muted>
+    <video autoplay loop playsinline muted>
+        <source src="@field('technology_background', 'url')" type="video/mp4">
+    </video> 
 </div>
 
 <div class="row expanded">
