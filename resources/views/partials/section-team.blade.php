@@ -22,8 +22,9 @@
                 @endfields
             </ul>
 
-            <button class="team__showmore-tab"><span>+</span>Show more</button>
-            @endfield
+            <?php  $count = count(get_field('team_members')); ?>
+            @if( $count > 4 ) <button class="team__showmore-tab"><span>+</span>Show more</button>  @endif
+            @endfield 
         </div>
     </div>
 </div>
