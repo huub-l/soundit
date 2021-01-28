@@ -21,6 +21,8 @@
                 </li>
                 @endfields
             </ul>
+
+            <button class="team__showmore-tab"><span>+</span>Show more</button>
             @endfield
         </div>
     </div>

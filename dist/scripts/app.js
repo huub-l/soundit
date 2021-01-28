@@ -907,7 +907,24 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
           }
 
           forward();
-          previous();
+          previous(); // Team ShowMore Accordion 
+
+          var teamShowmoreTab = document.querySelector('.team__showmore-tab');
+          teamShowmoreTab.addEventListener('click', function () {
+            members.forEach(function (member) {
+              member.classList.toggle('team__showmore');
+            });
+
+            if (teamShowmoreTab.innerHTML === '<span>+</span>Show more') {
+              teamShowmoreTab.innerHTML = '<span>-</span>Close';
+            } else {
+              teamShowmoreTab.innerHTML = '<span>+</span>Show more';
+            }
+
+            setTimeout(function () {
+              mainScroll.update();
+            }, 300);
+          });
         } // Text Animation
 
 

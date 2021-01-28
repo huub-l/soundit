@@ -249,6 +249,23 @@ export default class DefaultRenderer extends Highway.Renderer {
                     })
                 }
                 previous();
+
+                // Team ShowMore Accordion 
+
+                let teamShowmoreTab = document.querySelector('.team__showmore-tab');
+
+                teamShowmoreTab.addEventListener('click', function() {
+                    members.forEach(member => { member.classList.toggle('team__showmore') });
+
+                    if (teamShowmoreTab.innerHTML === '<span>+</span>Show more') {
+                        teamShowmoreTab.innerHTML = '<span>-</span>Close';
+                    } else {
+                        teamShowmoreTab.innerHTML = '<span>+</span>Show more';
+                    }
+
+                    setTimeout( function() { mainScroll.update() }, 300);
+                })
+
             }
 
 
