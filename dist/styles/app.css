@@ -4985,8 +4985,8 @@ h3 {
   display: inline-block;
 }
 .home--about .about-logo svg {
-  min-width: 100%;
-  width: 100%;
+  min-width: 100vw;
+  width: 100vw;
 }
 @media only screen and (min-width: 1023px) {
   .home--about .about-logo {
@@ -5514,28 +5514,37 @@ h3 {
     padding-bottom: 5.20833vw;
   }
 }
-.home--team .team-wrapper .team__nav {
+.home--team .team-wrapper p {
+  color: #343436;
+}
+.home--team .team-wrapper .team__header {
   margin-top: 14.28571vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 @media only screen and (min-width: 1023px) {
-  .home--team .team-wrapper .team__nav {
+  .home--team .team-wrapper .team__header {
     display: none;
   }
 }
-.home--team .team-wrapper .team__nav span {
+.home--team .team-wrapper .team__header .team__nav span {
   height: 3.80952vw;
   display: inline-block;
 }
-.home--team .team-wrapper .team__nav span svg {
+.home--team .team-wrapper .team__header .team__nav span svg {
   height: 100%;
   vertical-align: top;
 }
-.home--team .team-wrapper .team__nav span svg path {
+.home--team .team-wrapper .team__header .team__nav span svg path {
   stroke: #000000;
 }
-.home--team .team-wrapper .team__nav span:last-of-type {
+.home--team .team-wrapper .team__header .team__nav span:last-of-type {
   margin-left: 12px;
   transform: rotate(180deg);
+}
+.home--team .team-wrapper .team__header .team__index {
+  color: #343436;
 }
 .home--team .team-wrapper .team__members {
   margin-top: 5.71429vw;

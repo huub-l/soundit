@@ -122,8 +122,8 @@
         display: inline-block;
 
         svg {
-            min-width: 100%;
-            width: 100%;
+            min-width: 100vw;
+            width: 100vw;
         }
 
         @include min-screen($small) { margin-top: -12px; }
@@ -641,24 +641,35 @@
     }
 
     .team-wrapper {
-        .team__nav {
+        p { color: $grey; }
+
+        .team__header {
             @include vw('margin-top', 60, 420);
             @include min-screen($small) { display: none; }
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
 
-            span {
-                @include vw('height', 16, 420);
-                display: inline-block;
+            .team__nav {
+                span {
+                    @include vw('height', 16, 420);
+                    display: inline-block;
 
-                svg {
-                    height: 100%;
-                    vertical-align: top;
-                    path { stroke: $black; }
+                    svg {
+                        height: 100%;
+                        vertical-align: top;
+                        path { stroke: $black; }
+                    }
+
+                    &:last-of-type {
+                        margin-left: $unit-small;
+                        transform: rotate(180deg);
+                    }
                 }
+            }
 
-                &:last-of-type {
-                    margin-left: $unit-small;
-                    transform: rotate(180deg);
-                }
+            .team__index {
+                color: $grey;
             }
         }
 

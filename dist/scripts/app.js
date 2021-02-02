@@ -721,6 +721,9 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
         if (login) {
           document.body.style.height = '100vh';
           document.body.classList.add('no-scroll');
+          document.body.addEventListener('touchmove', function (e) {
+            e.preventDefault();
+          });
         } // Cursor 
 
 
@@ -758,6 +761,7 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
           var forward = function forward() {
             document.querySelector('.team-next').addEventListener('click', function () {
               var currentEl = document.querySelector('.active-member'),
+                  updateIndex = document.querySelector('.team__index span'),
                   nextEl;
 
               if (currentEl.dataset.row == membersIndex.length) {
@@ -768,6 +772,7 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
 
               currentEl.classList.remove('active-member');
               nextEl.classList.add('active-member');
+              updateIndex.innerHTML = nextEl.dataset.row;
               parentHeight();
             });
           };
@@ -775,6 +780,7 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
           var previous = function previous() {
             document.querySelector('.team-prev').addEventListener('click', function () {
               var currentEl = document.querySelector('.active-member'),
+                  updateIndex = document.querySelector('.team__index span'),
                   prevEl;
 
               if (currentEl.dataset.row == 1) {
@@ -785,6 +791,7 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
 
               currentEl.classList.remove('active-member');
               prevEl.classList.add('active-member');
+              updateIndex.innerHTML = prevEl.dataset.row;
               parentHeight();
             });
           }; // Froms

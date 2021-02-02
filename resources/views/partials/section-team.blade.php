@@ -6,9 +6,17 @@
             <p data-scroll data-scroll-call="revealOpacity">@field('team_text')</p>
 
             @hasfield('team_members')
-            <div class="team__nav">
-                <span class="team-prev">@include('svg.icon-arrow')</span>
-                <span class="team-next">@include('svg.icon-arrow')</span>
+            <?php  $count = count(get_field('team_members')); ?>
+
+            <div class="team__header">
+                <div class="team__nav">
+                    <span class="team-prev">@include('svg.icon-arrow')</span>
+                    <span class="team-next">@include('svg.icon-arrow')</span>
+                </div>
+
+                <div class="team__index">
+                    <span>{{ get_row_index() }}</span> / {{ $count }}
+                </div>
             </div>
 
             <ul class="team__members js-parent" data-scroll data-scroll-call="revealOpacity">
@@ -22,7 +30,6 @@
                 @endfields
             </ul>
 
-            <?php  $count = count(get_field('team_members')); ?>
             @if( $count > 4 ) <button class="team__showmore-tab"><span>+</span>Show more</button>  @endif
             @endfield 
         </div>
