@@ -721,9 +721,6 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
         if (login) {
           document.body.style.height = '100vh';
           document.body.classList.add('no-scroll');
-          document.body.addEventListener('touchmove', function (e) {
-            e.preventDefault();
-          });
         } // Cursor 
 
 

@@ -55,6 +55,8 @@ body {
   }  
 
   &.no-scroll { overflow: hidden; }
+
+  &.password-protected { #siteFooter { display: none; } }
 }
 
 ::selection {
