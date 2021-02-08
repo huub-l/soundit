@@ -21,7 +21,7 @@ export default class DefaultRenderer extends Highway.Renderer {
         this.loadScripts()
 
         this.MainController.init();
-
+            
         AssetLoader.load( { element: this.properties.view } ).then( () => {
 
             console.log('assets loaded')

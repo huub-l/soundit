@@ -20,9 +20,16 @@
     
                 @hasoption('social_links')
                 <ul class="nav-social">
-                    <span>@option('social_media_title')</span>
                     @fields('social_links', 'option')
+                        @if( get_sub_field('visibility') )
+                        <span>@option('social_media_title')</span>
+                        @endif
+                    @endfields
+                    
+                    @fields('social_links', 'option')
+                        @if( get_sub_field('visibility') )
                         <li> <a href="@sub('url')"><img src="@sub('icon', 'url')" alt="@sub('icon', 'alt')"></a> </li>
+                        @endif
                     @endfields
                 </ul>
                 @endoption

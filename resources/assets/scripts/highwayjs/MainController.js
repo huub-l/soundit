@@ -8,7 +8,7 @@ export default class MainController {
 			el: document.querySelector('[data-scroll-container]'),
 			smooth: true,
 			getDirection: true,
-		});
+		});	
 	}
 
 	updateScroll() {
