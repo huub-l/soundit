@@ -3320,6 +3320,12 @@ p {
   }
 }
 
+.fake-footer {
+  background: transparent !important;
+  pointer-events: none !important;
+  overflow: hidden;
+}
+
 audio,
 canvas,
 iframe,

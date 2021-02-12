@@ -62,6 +62,7 @@
             <div class="video-background"><img src="@field('video_three_background', 'url')" alt=""></div>
         </section>
     </div>
+
 @endsection
 
 @endif

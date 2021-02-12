@@ -835,9 +835,11 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
           if (window.matchMedia('(min-width: 1024px)').matches) {
             var footer = document.querySelector('#siteFooter'),
                 footerHeight = footer.offsetHeight,
-                main = document.querySelector('.grid-container');
-            main.style.padding = '0 0 ' + footerHeight + 'px';
-            mainScroll.update();
+                fakeFooter = document.querySelector('.fake-footer');
+            fakeFooter.style.height = '' + footerHeight + 'px';
+            setTimeout(function () {
+              mainScroll.update();
+            }, 200);
           }
 
           document.querySelectorAll('[data-anchor').forEach(function (anchor) {

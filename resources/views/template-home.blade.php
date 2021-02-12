@@ -53,6 +53,5 @@
         <section class="video--banner-three" id="video-three">
             <div class="video-background"><img src="@field('video_three_background', 'url')" alt=""></div>
         </section>
-
     </div>
 @endsection

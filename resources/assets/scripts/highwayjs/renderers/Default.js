@@ -30,7 +30,7 @@ export default class DefaultRenderer extends Highway.Renderer {
             let login = document.querySelector('.password-page');
 
             window.addEventListener('resize', function () { mainScroll.update() });
-
+        
             /**
              * Update Window Size
              */
@@ -131,10 +131,10 @@ export default class DefaultRenderer extends Highway.Renderer {
                 if (window.matchMedia('(min-width: 1024px)').matches) {
                     let footer = document.querySelector('#siteFooter'),
                         footerHeight = footer.offsetHeight,
-                        main = document.querySelector('.grid-container');
+                        fakeFooter = document.querySelector('.fake-footer');
 
-                    main.style.padding = '0 0 '+footerHeight+'px';
-                    mainScroll.update();
+                    fakeFooter.style.height = ''+footerHeight+'px';
+                    setTimeout(function() { mainScroll.update() }, 200);
                 }
 
                 document.querySelectorAll('[data-anchor').forEach(anchor => {
@@ -324,7 +324,6 @@ export default class DefaultRenderer extends Highway.Renderer {
     }
 
     onEnterCompleted() {
-
     }
 
     onLeave() {
