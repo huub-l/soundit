@@ -69,8 +69,17 @@
         .nav-social {
             @include vw('padding-top', 36, 420);
             @include vw('padding-bottom', 36, 420);
-           
-            @include min-screen($small) { padding: 0; }
+            width: 100%;
+            border-bottom: 1px solid #707070;
+            display: none; // if li < 0
+
+            &#show-socials { display: block; }
+
+            @include min-screen($small) {
+                padding: 0;
+                width: fit-content;
+                border-bottom: none;
+            }
 
             span {
                 display: block;
@@ -105,18 +114,13 @@
                     a { @include vw('padding-right', 8); }
                 }
             }
-
         }
     }
 
     .newsletter {
         @include vw('padding-top', 36, 420);
-        border-top: 1px solid #707070;
 
-        @include min-screen($small) {
-            padding: 0;
-            border: none;
-        }
+        @include min-screen($small) {  padding: 0; }
 
         form {
             label {

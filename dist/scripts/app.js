@@ -622,7 +622,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AssetLoader__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../AssetLoader */ "./resources/assets/scripts/highwayjs/AssetLoader.js");
 /* harmony import */ var _animations_PageLoader__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../animations/PageLoader */ "./resources/assets/scripts/highwayjs/animations/PageLoader.js");
 /* harmony import */ var _components_form__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/form */ "./resources/assets/scripts/components/form.js");
-/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
+/* harmony import */ var lottie_web__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lottie-web */ "./node_modules/lottie-web/build/player/lottie.js");
+/* harmony import */ var lottie_web__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(lottie_web__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
 
 
 
@@ -630,11 +632,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function _createSuper(Derived) {
-  return function () {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+  return function _createSuperInternal() {
     var Super = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4___default()(Derived),
         result;
 
-    if (_isNativeReflectConstruct()) {
+    if (hasNativeReflectConstruct) {
       var NewTarget = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4___default()(this).constructor;
 
       result = Reflect.construct(Super, arguments, NewTarget);
@@ -658,6 +662,7 @@ function _isNativeReflectConstruct() {
     return false;
   }
 }
+
 
 
 
@@ -721,8 +726,15 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
         if (login) {
           document.body.style.height = '100vh';
           document.body.classList.add('no-scroll');
-        } // Cursor 
+        } //Lottie
 
+
+        lottie_web__WEBPACK_IMPORTED_MODULE_10___default.a.loadAnimation({
+          container: document.getElementById('lottie-stadium'),
+          loop: true,
+          autoplay: true,
+          path: 'https://assets5.lottiefiles.com/packages/lf20_ih2jca47/data.json'
+        }); // Cursor 
 
         var cursor = document.querySelector('#cursor');
         var links = document.querySelectorAll('a, button, .triggers-hover');
@@ -946,7 +958,7 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
             case 'revealOpacity':
               if (!obj.el.classList.contains('animated')) {
                 var element = obj.el;
-                gsap__WEBPACK_IMPORTED_MODULE_10__["default"].from(element, {
+                gsap__WEBPACK_IMPORTED_MODULE_11__["default"].from(element, {
                   duration: 1.5,
                   y: 50,
                   opacity: 0,
@@ -960,12 +972,12 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
             case 'showVideo':
               var videoA = document.querySelector('.experience__one'),
                   videoB = document.querySelector('.experience__two');
-              gsap__WEBPACK_IMPORTED_MODULE_10__["default"].from(videoA, {
+              gsap__WEBPACK_IMPORTED_MODULE_11__["default"].from(videoA, {
                 duration: 6,
                 opacity: 1,
                 ease: 'power3.out'
               });
-              gsap__WEBPACK_IMPORTED_MODULE_10__["default"].from(videoB, {
+              gsap__WEBPACK_IMPORTED_MODULE_11__["default"].from(videoB, {
                 duration: 6,
                 opacity: 0,
                 ease: 'power3.out'

@@ -5,6 +5,7 @@ import AssetLoader from '../AssetLoader'
 import PageLoader from '../animations/PageLoader'
 import form from '../../components/form';
 
+import lottie from 'lottie-web';
 import gsap from "gsap";
 
 export default class DefaultRenderer extends Highway.Renderer {
@@ -51,6 +52,17 @@ export default class DefaultRenderer extends Highway.Renderer {
                 document.body.style.height = '100vh';
                 document.body.classList.add('no-scroll');
             }
+
+            //Lottie
+
+            lottie.loadAnimation({
+                container: document.getElementById('lottie-stadium'),
+                loop: true,
+                autoplay: true,
+                path: 'https://assets5.lottiefiles.com/packages/lf20_ih2jca47/data.json'
+            })
+
+            
  
             // Cursor 
             const cursor = document.querySelector('#cursor');
@@ -275,7 +287,6 @@ export default class DefaultRenderer extends Highway.Renderer {
 
                     setTimeout( function() { mainScroll.update() }, 300);
                 })
-
             }
 
 
