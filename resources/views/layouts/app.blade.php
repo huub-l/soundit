@@ -7,7 +7,6 @@
   <main class="grid-container" data-router-wrapper>
     <div data-router-view="{{ $templateName }}">
       @yield('content')
-      <div class="fake-footer"></div>
     </div>
   </main>
   
