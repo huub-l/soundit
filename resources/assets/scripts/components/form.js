@@ -4,7 +4,7 @@ export default function form(selector) {
   if( ! document.body.classList.contains('page-template-template-page') ) {
     let form = document.querySelector('[data-form="' + selector + '"]'),
       requiredFields = form.getElementsByClassName('required-field');
-      console.log('works')
+      // console.log('works')
 
     let postURL;
       switch (form.dataset.form) {
@@ -96,7 +96,7 @@ export default function form(selector) {
           .then(checkStatus)
           .then(parseJSON)
           .then(response => {
-            console.log(params)
+            // console.log(params)
             if (response.code === 'sent-with-success') {
               if (form.dataset.form == 'contact-form') {
                 document.querySelector('.contact-form .form-feedback').classList.add('success')

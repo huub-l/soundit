@@ -3321,6 +3321,7 @@ p {
 }
 
 .fake-footer {
+  width: 100%;
   background: transparent !important;
   pointer-events: none !important;
   overflow: hidden;

@@ -74,9 +74,9 @@ function form(selector) {
     };
 
     var _form = document.querySelector('[data-form="' + selector + '"]'),
-        requiredFields = _form.getElementsByClassName('required-field');
+        requiredFields = _form.getElementsByClassName('required-field'); // console.log('works')
 
-    console.log('works');
+
     var postURL;
 
     switch (_form.dataset.form) {
@@ -144,8 +144,7 @@ function form(selector) {
           method: 'POST',
           body: params
         }).then(_utils_api__WEBPACK_IMPORTED_MODULE_0__["checkStatus"]).then(_utils_api__WEBPACK_IMPORTED_MODULE_0__["parseJSON"]).then(function (response) {
-          console.log(params);
-
+          // console.log(params)
           if (response.code === 'sent-with-success') {
             if (_form.dataset.form == 'contact-form') {
               document.querySelector('.contact-form .form-feedback').classList.add('success');
@@ -695,17 +694,18 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
       _AssetLoader__WEBPACK_IMPORTED_MODULE_7__["default"].load({
         element: this.properties.view
       }).then(function () {
-        console.log('assets loaded');
-
+        // console.log('assets loaded')
         var mainScroll = _this2.MainController.getScroll();
 
         var login = document.querySelector('.password-page');
         window.addEventListener('resize', function () {
           mainScroll.update();
         });
-        /**
-         * Update Window Size
-         */
+
+        window.onload = function () {
+          mainScroll.update();
+        }; // Update Window Size
+
 
         var windowSize;
         windowSize = window.innerWidth;
@@ -795,8 +795,8 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
 
 
           Object(_components_form__WEBPACK_IMPORTED_MODULE_9__["default"])('contact-form');
-          Object(_components_form__WEBPACK_IMPORTED_MODULE_9__["default"])('newsletter');
-          console.log('this is the size' + windowSize); // Header fixed
+          Object(_components_form__WEBPACK_IMPORTED_MODULE_9__["default"])('newsletter'); // console.log('this is the size' + windowSize)
+          // Header fixed
 
           if (windowSize > 1023) {
             mainScroll.on('scroll', function (instance) {
@@ -839,7 +839,14 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
             fakeFooter.style.height = '' + footerHeight + 'px';
             setTimeout(function () {
               mainScroll.update();
-            }, 200);
+            }, 300);
+            window.addEventListener('resize', function () {
+              footerHeight = footer.offsetHeight;
+              fakeFooter.style.height = '' + footerHeight + 'px';
+              setTimeout(function () {
+                mainScroll.update();
+              }, 300);
+            });
           }
 
           document.querySelectorAll('[data-anchor').forEach(function (anchor) {
@@ -976,7 +983,7 @@ var DefaultRenderer = /*#__PURE__*/function (_Highway$Renderer) {
       this.loadScripts(true);
       this.onEnter();
       _AssetLoader__WEBPACK_IMPORTED_MODULE_7__["default"].loaded.then(function () {
-        console.log('loader');
+        // console.log('loader')
         _animations_PageLoader__WEBPACK_IMPORTED_MODULE_8__["default"].hide().then(function () {
           _this3.onEnterCompleted();
         });
