@@ -1,7 +1,6 @@
 .home-wrapper {
     position: relative;
     z-index: 11;
-    pointer-events: auto !important;
 }
 
 .home--hero {
@@ -81,7 +80,7 @@
             @include vw('padding-bottom', 300, 420);
          
             .heading-one {
-                max-width: 80%;
+                max-width: 90%;
                 margin: auto;
                 text-align: center;            
             }

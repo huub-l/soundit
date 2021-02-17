@@ -4882,7 +4882,6 @@ h3 {
 .home-wrapper {
   position: relative;
   z-index: 11;
-  pointer-events: auto !important;
 }
 
 .home--hero {
@@ -4973,7 +4972,7 @@ h3 {
   padding-bottom: 71.42857vw;
 }
 .home--hero .hero-wrapper .hero__title .heading-one {
-  max-width: 80%;
+  max-width: 90%;
   margin: auto;
   text-align: center;
 }

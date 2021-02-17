@@ -7,6 +7,7 @@ import form from '../../components/form';
 
 import lottie from 'lottie-web';
 import gsap from "gsap";
+import Swipable from '../Swipeable';
 
 export default class DefaultRenderer extends Highway.Renderer {
   constructor(properties) {
@@ -87,9 +88,14 @@ export default class DefaultRenderer extends Highway.Renderer {
 
             // Icon scroll to top
             let headerIcon = document.querySelector('.brand-icon'), 
+                footerIcon = document.querySelector('.footer-icon'),
                 hero = document.querySelector('.js-hero');
 
             headerIcon.addEventListener('click', function() {
+                mainScroll.scrollTo(hero);
+            })
+
+            footerIcon.addEventListener('click', function() {
                 mainScroll.scrollTo(hero);
             })
 
@@ -272,21 +278,33 @@ export default class DefaultRenderer extends Highway.Renderer {
                 }
                 previous();
 
+                parent.addEventListener('swiped-left', function() {
+                   console.log('swiped left')
+                   document.querySelector('.team-next').click();
+                });
 
+                parent.addEventListener('swiped-right', function() {
+                    console.log('swiped right')
+                    document.querySelector('.team-prev').click();
+                });
+
+        
                 // Team ShowMore Accordion 
                 let teamShowmoreTab = document.querySelector('.team__showmore-tab');
 
-                teamShowmoreTab.addEventListener('click', function() {
-                    members.forEach(member => { member.classList.toggle('team__showmore') });
+                if(teamShowmoreTab) {
+                    teamShowmoreTab.addEventListener('click', function() {
+                        members.forEach(member => { member.classList.toggle('team__showmore') });
 
-                    if (teamShowmoreTab.innerHTML === '<span>+</span>Show more') {
-                        teamShowmoreTab.innerHTML = '<span>-</span>Close';
-                    } else {
-                        teamShowmoreTab.innerHTML = '<span>+</span>Show more';
-                    }
+                        if (teamShowmoreTab.innerHTML === '<span>+</span>Show more') {
+                            teamShowmoreTab.innerHTML = '<span>-</span>Close';
+                        } else {
+                            teamShowmoreTab.innerHTML = '<span>+</span>Show more';
+                        }
 
-                    setTimeout( function() { mainScroll.update() }, 300);
-                })
+                        setTimeout( function() { mainScroll.update() }, 300);
+                    })
+                }
             }
 
 
