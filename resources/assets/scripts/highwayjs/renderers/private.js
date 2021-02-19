@@ -55,6 +55,11 @@ class Private extends DefaultRenderer {
       },
     });
 
+    if( ! document.body.classList.contains('password-protected') ) {
+      infographicsDesktop.update();
+      infographicsMobile.update();
+    };
+
     // ** on slideChange **
     infographicsDesktop.on('slideChangeTransitionEnd', function () {
       setTimeout(function() { 

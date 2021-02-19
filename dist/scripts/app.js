@@ -1213,11 +1213,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function _createSuper(Derived) {
-  return function () {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+  return function _createSuperInternal() {
     var Super = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(Derived),
         result;
 
-    if (_isNativeReflectConstruct()) {
+    if (hasNativeReflectConstruct) {
       var NewTarget = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(this).constructor;
 
       result = Reflect.construct(Super, arguments, NewTarget);
@@ -1302,7 +1304,14 @@ var Private = /*#__PURE__*/function (_DefaultRenderer) {
           nextEl: '.infographic-mobile .swiper-next',
           prevEl: '.infographic-mobile .swiper-prev'
         }
-      }); // ** on slideChange **
+      });
+
+      if (!document.body.classList.contains('password-protected')) {
+        infographicsDesktop.update();
+        infographicsMobile.update();
+      }
+
+      ; // ** on slideChange **
 
       infographicsDesktop.on('slideChangeTransitionEnd', function () {
         setTimeout(function () {
