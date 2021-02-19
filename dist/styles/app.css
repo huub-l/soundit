@@ -5095,14 +5095,12 @@ h3 {
   height: 100%;
 }
 .home--infographics .infographic__slideshow .swiper-container .swiper-slide {
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 .home--infographics .infographic__slideshow .swiper-container .swiper-slide .slide__wrapper {
   margin-bottom: 15vw;
-  max-height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -5117,10 +5115,12 @@ h3 {
 }
 .home--infographics .infographic__slideshow .swiper-container .swiper-slide .slide__wrapper .slide__image {
   width: 100%;
+  height: auto;
 }
 .home--infographics .infographic__slideshow .swiper-container .swiper-slide .slide__wrapper .slide__image img {
   height: auto;
   max-height: 100%;
+  width: 100%;
 }
 .home--infographics .infographic__slideshow .swiper-container .swiper-slide .slide__wrapper .slide__image img.img_desktop {
   display: none;

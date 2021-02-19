@@ -40,7 +40,7 @@ class Private extends DefaultRenderer {
       slidesPerView: 1,
       spaceBetween: 48, 
       autoHeight: true,
-
+      
       pagination: {
         el: '.infographic-mobile .swiper-pagination',
         clickable: true,
@@ -54,11 +54,6 @@ class Private extends DefaultRenderer {
         prevEl: '.infographic-mobile .swiper-prev',
       },
     });
-
-    if( ! document.body.classList.contains('password-protected') ) {
-      infographicsDesktop.update();
-      infographicsMobile.update();
-    };
 
     // ** on slideChange **
     infographicsDesktop.on('slideChangeTransitionEnd', function () {

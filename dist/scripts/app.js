@@ -1304,14 +1304,7 @@ var Private = /*#__PURE__*/function (_DefaultRenderer) {
           nextEl: '.infographic-mobile .swiper-next',
           prevEl: '.infographic-mobile .swiper-prev'
         }
-      });
-
-      if (!document.body.classList.contains('password-protected')) {
-        infographicsDesktop.update();
-        infographicsMobile.update();
-      }
-
-      ; // ** on slideChange **
+      }); // ** on slideChange **
 
       infographicsDesktop.on('slideChangeTransitionEnd', function () {
         setTimeout(function () {
