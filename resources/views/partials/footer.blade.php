@@ -1,7 +1,7 @@
 <footer id="siteFooter" >
     <div class="row expanded">
         <div class="small-10 small-offset-1 xxlarge-2 xxlarge-offset-0">
-            @include('svg.logo-icon')
+            <span class="footer-icon triggers-hover">@include('svg.logo-icon')</span>
         </div>
 
         <div class="small-10 small-offset-1 xxlarge-5 xxlarge-offset-0">
@@ -19,7 +19,13 @@
                 @endif
     
                 @hasoption('social_links')
-                <ul class="nav-social">
+                <ul class="nav-social"  
+                    @fields('social_links', 'option')
+                    @if( get_sub_field('visibility') )
+                        id="show-socials"
+                    @endif
+                    @endfields
+                >
                     @fields('social_links', 'option')
                         @if( get_sub_field('visibility') )
                         <span>@option('social_media_title')</span>

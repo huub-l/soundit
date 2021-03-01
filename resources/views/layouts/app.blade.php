@@ -8,8 +8,6 @@
     <div data-router-view="{{ $templateName }}">
       @yield('content')
     </div>
-
-    <div class="fake-footer"></div>
   </main>
   
 </div>

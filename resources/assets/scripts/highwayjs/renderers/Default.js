@@ -5,7 +5,9 @@ import AssetLoader from '../AssetLoader'
 import PageLoader from '../animations/PageLoader'
 import form from '../../components/form';
 
+import lottie from 'lottie-web';
 import gsap from "gsap";
+import Swipable from '../Swipeable';
 
 export default class DefaultRenderer extends Highway.Renderer {
   constructor(properties) {
@@ -19,23 +21,24 @@ export default class DefaultRenderer extends Highway.Renderer {
 
     onEnter() {
         this.loadScripts()
-
         this.MainController.init();
-            
-        AssetLoader.load( { element: this.properties.view } ).then( () => {
 
-            console.log('assets loaded')
+        AssetLoader.load( { element: this.properties.view } ).then( () => {
+            // console.log('assets loaded')
 
             let mainScroll = this.MainController.getScroll();
             let login = document.querySelector('.password-page');
 
             window.addEventListener('resize', function () { mainScroll.update() });
-        
-            /**
-             * Update Window Size
-             */
+
+            window.onload = function() {
+                mainScroll.update()
+            }
+ 
+            // Update Window Size
             let windowSize;
-            windowSize = window.innerWidth;
+                windowSize = window.innerWidth;
+
             window.onresize = function() {
                 windowSize = window.innerWidth;
             };
@@ -50,6 +53,17 @@ export default class DefaultRenderer extends Highway.Renderer {
                 document.body.style.height = '100vh';
                 document.body.classList.add('no-scroll');
             }
+
+            //Lottie
+
+            lottie.loadAnimation({
+                container: document.getElementById('lottie-stadium'),
+                loop: true,
+                autoplay: true,
+                path: 'https://assets5.lottiefiles.com/packages/lf20_ih2jca47/data.json'
+            })
+
+            
  
             // Cursor 
             const cursor = document.querySelector('#cursor');
@@ -73,11 +87,15 @@ export default class DefaultRenderer extends Highway.Renderer {
             });
 
             // Icon scroll to top
-
             let headerIcon = document.querySelector('.brand-icon'), 
+                footerIcon = document.querySelector('.footer-icon'),
                 hero = document.querySelector('.js-hero');
 
             headerIcon.addEventListener('click', function() {
+                mainScroll.scrollTo(hero);
+            })
+
+            footerIcon.addEventListener('click', function() {
                 mainScroll.scrollTo(hero);
             })
 
@@ -86,7 +104,7 @@ export default class DefaultRenderer extends Highway.Renderer {
                 form('contact-form')
                 form('newsletter')
 
-                console.log('this is the size' + windowSize)
+                // console.log('this is the size' + windowSize)
 
                 // Header fixed
                 if (windowSize > 1023) {
@@ -126,7 +144,6 @@ export default class DefaultRenderer extends Highway.Renderer {
                     })          
                 }
 
-
                 // Margin for footer
                 if (window.matchMedia('(min-width: 1024px)').matches) {
                     let footer = document.querySelector('#siteFooter'),
@@ -134,7 +151,14 @@ export default class DefaultRenderer extends Highway.Renderer {
                         fakeFooter = document.querySelector('.fake-footer');
 
                     fakeFooter.style.height = ''+footerHeight+'px';
-                    setTimeout(function() { mainScroll.update() }, 200);
+                    setTimeout(function() { mainScroll.update() }, 300);
+
+                    window.addEventListener('resize', function () {
+                        footerHeight = footer.offsetHeight;
+
+                        fakeFooter.style.height = ''+footerHeight+'px';
+                        setTimeout(function() { mainScroll.update() }, 300);
+                    });
                 }
 
                 document.querySelectorAll('[data-anchor').forEach(anchor => {
@@ -254,22 +278,33 @@ export default class DefaultRenderer extends Highway.Renderer {
                 }
                 previous();
 
-                // Team ShowMore Accordion 
+                parent.addEventListener('swiped-left', function() {
+                   console.log('swiped left')
+                   document.querySelector('.team-next').click();
+                });
 
+                parent.addEventListener('swiped-right', function() {
+                    console.log('swiped right')
+                    document.querySelector('.team-prev').click();
+                });
+
+        
+                // Team ShowMore Accordion 
                 let teamShowmoreTab = document.querySelector('.team__showmore-tab');
 
-                teamShowmoreTab.addEventListener('click', function() {
-                    members.forEach(member => { member.classList.toggle('team__showmore') });
+                if(teamShowmoreTab) {
+                    teamShowmoreTab.addEventListener('click', function() {
+                        members.forEach(member => { member.classList.toggle('team__showmore') });
 
-                    if (teamShowmoreTab.innerHTML === '<span>+</span>Show more') {
-                        teamShowmoreTab.innerHTML = '<span>-</span>Close';
-                    } else {
-                        teamShowmoreTab.innerHTML = '<span>+</span>Show more';
-                    }
+                        if (teamShowmoreTab.innerHTML === '<span>+</span>Show more') {
+                            teamShowmoreTab.innerHTML = '<span>-</span>Close';
+                        } else {
+                            teamShowmoreTab.innerHTML = '<span>+</span>Show more';
+                        }
 
-                    setTimeout( function() { mainScroll.update() }, 300);
-                })
-
+                        setTimeout( function() { mainScroll.update() }, 300);
+                    })
+                }
             }
 
 
@@ -316,7 +351,7 @@ export default class DefaultRenderer extends Highway.Renderer {
         this.loadScripts(true)
         this.onEnter()
         AssetLoader.loaded.then(() => {
-            console.log('loader')
+            // console.log('loader')
             PageLoader.hide().then( () => {
                 this.onEnterCompleted()
             })
@@ -339,7 +374,6 @@ export default class DefaultRenderer extends Highway.Renderer {
     }
 
     loadScripts( firstLoad ) {
-
         this.reloadScripts = [] // scripts to reload every time
 
         const scripts = this.properties.view.querySelectorAll('script')
@@ -364,7 +398,6 @@ export default class DefaultRenderer extends Highway.Renderer {
     }
 
     appendScript( src, filename, firstLoad ) {
-
         return new Promise((resolve, reject) => {
 
             if( !!document.querySelector(`[data-filename="${filename}"]`) ) return

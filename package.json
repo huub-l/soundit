@@ -49,6 +49,7 @@
     "@dogstudio/highway": "^2.2.1",
     "gsap": "./gsap-bonus.tgz",
     "locomotive-scroll": "https://github.com/locomotivemtl/locomotive-scroll.git#v4",
+    "lottie-web": "^5.7.6",
     "normalize-scss": "^7.0.1",
     "swiper": "^6.3.5",
     "whatwg-fetch": "^3.4.0"

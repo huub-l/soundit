@@ -1,6 +1,6 @@
 <header id="siteHeader">
   <a class="brand" href="{{ home_url('/') }}"> @include('svg.logo') </a>
-  <span class="brand-icon"> @include('svg.logo-icon') </span>
+  <span class="brand-icon triggers-hover"> @include('svg.logo-icon') </span>
 
   @if ($headerNav)
   <nav class="nav-header">

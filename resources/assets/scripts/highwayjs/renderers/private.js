@@ -40,7 +40,7 @@ class Private extends DefaultRenderer {
       slidesPerView: 1,
       spaceBetween: 48, 
       autoHeight: true,
-
+      
       pagination: {
         el: '.infographic-mobile .swiper-pagination',
         clickable: true,

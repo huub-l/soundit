@@ -22,4 +22,6 @@
             </div>
         </div>
     </section>
+
+    <div class="fake-footer"></div>
 @endsection
